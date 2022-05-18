@@ -52,6 +52,106 @@
 
             <!-- Topbar Navbar -->
             <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a
+                              class="nav-link dropdown-toggle"
+                              href="#"
+                              id="searchDropdown"
+                              role="button"
+                              data-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="false"
+                            >
+                              <i class="fas fa-search fa-fw"></i>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div
+                              class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                              aria-labelledby="searchDropdown"
+                            >
+                              <form class="form-inline mr-auto w-100 navbar-search">
+                                <div class="input-group">
+                                  <input
+                                    type="text"
+                                    class="form-control bg-light border-0 small"
+                                    placeholder="Search for..."
+                                    aria-label="Search"
+                                    aria-describedby="basic-addon2"
+                                  />
+                                  <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button">
+                                      <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                          </li>
+                          <!-- Nav Item - Alerts -->
+                          <li
+                            style="display: flex; align-items: center"
+                            class="nav-item dropdown no-arrow mx-1"
+                          >
+                            <button
+                              type="button"
+                              class="btn"
+                              data-toggle="modal"
+                              data-target=".bd-example-modal-lg"
+                              data-whatever="@mdo"
+                            >
+                              <i style="color: #26bac9" class="fas fa-bell fa-fw"></i>
+                            </button>
+                            <!-- Dropdown - Alerts -->
+                            <div
+                              class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                              aria-labelledby="alertsDropdown"
+                            >
+                              <h6 class="dropdown-header">Alerts Center</h6>
+                              <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="mr-3">
+                                  <div class="icon-circle bg-primary">
+                                    <i class="fas fa-file-alt text-white"></i>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div class="small text-gray-500">December 12, 2019</div>
+                                  <span class="font-weight-bold"
+                                    >A new monthly report is ready to download!</span
+                                  >
+                                </div>
+                              </a>
+                              <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="mr-3">
+                                  <div class="icon-circle bg-success">
+                                    <i class="fas fa-donate text-white"></i>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div class="small text-gray-500">December 7, 2019</div>
+                                  $290.29 has been deposited into your account!
+                                </div>
+                              </a>
+                              <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="mr-3">
+                                  <div class="icon-circle bg-warning">
+                                    <i class="fas fa-exclamation-triangle text-white"></i>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div class="small text-gray-500">December 2, 2019</div>
+                                  Spending Alert: We've noticed unusually high spending for
+                                  your account.
+                                </div>
+                              </a>
+                              <a
+                                class="dropdown-item text-center small text-gray-500"
+                                href="#"
+                                >Show All Alerts</a
+                              >
+                            </div>
+                          </li>
+                          <!-- Nav Item - Messages -->
+                          <div class="topbar-divider d-none d-sm-block"></div>
               <!-- Nav Item - User Information -->
               <li class="nav-item dropdown no-arrow">
                 <a
@@ -162,10 +262,103 @@
             </div>
           </div>
         </footer>
+
         <!-- End of Footer -->
       </div>
       <!-- End of Content Wrapper -->
     </div>
+
+      <div class="noti-create-wrapper">
+          <div
+            class="modal fade bd-example-modal-lg"
+            id="notifcation-modal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="myLargeModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">
+                    Tạo thông báo cho người dùng
+                  </h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="form-group">
+                      <label for="userID" class="col-form-label"
+                        >Mã Người dùng</label
+                      >
+                      <input type="text" class="form-control" id="userID" />
+                    </div>
+                    <div class="form-group">
+                      <label for="userID" class="col-form-label"
+                        >Địa chỉ Email</label
+                      >
+                      <input type="email" class="form-control" id="notiEmail" />
+                    </div>
+                    <div class="form-group">
+                      <label for="userID" class="col-form-label"
+                        >Tiêu đề thông báo</label
+                      >
+                      <input type="text" class="form-control" id="notiTitle" />
+                    </div>
+                    <div class="form-group">
+                      <label for="noti-content" class="col-form-label"
+                        >Nội dung thông báo:</label
+                      >
+                      <textarea
+                        class="form-control"
+                        rows="5"
+                        id="noti-content"
+                      ></textarea>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                  >
+                    Hủy
+                  </button>
+                  <button type="button" id="noti-submit" class="btn btn-primary">
+                    Gửi thông báo
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          <a class="scroll-to-top rounded" href="#page-top">
+              <i class="fas fa-angle-up"></i>
+            </a>
+
+    <script>
+          $(() => {
+            const notiContent = $("#noti-content");
+            const notiTitle = $("#notiTitle");
+            const notiEmail = $("#notiEmail");
+            const userID = $("#userID");
+            const submitBtn = $("#noti-submit");
+            submitBtn.click(() => {
+              console.log(notiContent.val());
+              console.log(userID.val());
+              console.log(notiTitle.val());
+              console.log(notiEmail.val());
+            });
+          });
+    </script>
     <!-- End of Page Wrapper -->
 </body>
 </html>
