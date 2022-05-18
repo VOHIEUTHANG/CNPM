@@ -198,20 +198,9 @@ Validator.isPrice = function (selector, message) {
   return {
     selector: selector,
     test: function (value) {
-      function isPositiveInteger(str) {
-        if (typeof str !== "string") {
-          return false;
-        }
-        const num = Number(str);
-        if (Number.isInteger(num) && num > 0) {
-          return true;
-        }
-        return false;
-      }
-
-      return isPositiveInteger(value) && Number(value) >= 100000
+      return Math.sign(Number(value)) === 1 && Number(value) >= 0.2
         ? undefined
-        : message || "Trường này phải là email";
+        : message || "Giá không hợp lệ";
     },
   };
 };
