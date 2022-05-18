@@ -19,7 +19,7 @@ public class BaiVietDao {
     public List<BaiVietEntity> getById(Long id) {
         try  {
 			session= HibernateUtil.getSessionFactory().openSession();
-            String hql="from BaiVietEntity where mabaiviet = "+String.valueOf(id);
+            String hql="from BaiVietEntity where mabaiviet = "+ String.valueOf(id);
             Query query =session.createQuery(hql);
             return query.list();
         }
@@ -48,6 +48,7 @@ public class BaiVietDao {
 		}
 		return 1;
 	}
+
     public Integer insertBaiViet (BaiVietEntity bv) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();

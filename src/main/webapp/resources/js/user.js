@@ -146,6 +146,7 @@ $(() => {
   })().run();
 });
 
+
 $(() => {
   const container = $(".manapost-container");
   $(".manapost-btn").click(() => {
@@ -179,5 +180,36 @@ $(() => {
   $("body").click((e) => {
     $(".mana-dropdown").hasClass("active") &&
       $(".mana-dropdown").removeClass("active");
+  });
+  $(".mana-item--hide").click(function (e) {
+    const ID = this.dataset.id;
+    const formData = new FormData();
+    formData.append('id',JSON.stringify({id:ID}));
+    $.ajax({
+      url: "../api/post-hide-post",
+      type: "POST",
+      data: formData,
+      enctype: "multipart/form-data",
+      processData: false,
+      contentType: false,
+      cache: false,
+      timeout: 600000,
+      success: function (data) {
+        toast({
+          title: "Thay đổi mật khẩu thành công!",
+          message: "Cập nhật mật khẩu trong cơ sở dữ liệu thành công !",
+          type: "success",
+          duration: 5000,
+        });
+      },
+      error: function () {
+        toast({
+          title: "Có lỗi gửi dữ liệu về server!",
+          message: "Vui lòng liên hệ quản trị viên để giải quyết!",
+          type: "error",
+          duration: 5000,
+        });
+      },
+    });
   });
 });

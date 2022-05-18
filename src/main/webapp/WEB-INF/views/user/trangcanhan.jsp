@@ -298,7 +298,7 @@
                                                                       </li>
                                                                       <c:choose >
                                                                       <c:when test="${post.isDisplay()}">
-                                                                       <li class="mana-item">
+                                                                       <li class="mana-item mana-item--hide" data-ID="${post.mabaiviet}">
                                                                          <span class="mana-hide-btn">
                                                                            <i class="fa-solid fa-eye-slash"></i>
                                                                            Ẩn

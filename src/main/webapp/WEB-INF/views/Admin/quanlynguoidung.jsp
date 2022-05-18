@@ -5,34 +5,38 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix = "c" %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-<title>Thống kê người dùng</title>
-<link
+    <title>Thống kê người dùng</title>
+    <link
       href="<c:url value= '/resources/vendor/fontawesome-free/css/all.min.css'/>"
       rel="stylesheet"
       type="text/css"
-    /> 
-<!-- Google Fonts -->
+    />
+    <!-- Google Fonts -->
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap");
     </style>
     <!-- Custom styles for this template-->
-    <link href="<c:url value='/resources/css/admin/sb-admin-2.css'/>" rel="stylesheet" />
-    <link rel="stylesheet" href="<c:url value='/resources/css/admin/main.css'/>" />
-</head>
-<body>
-<!-- Page Wrapper -->
+    <link
+      rel="stylesheet"
+      href="<c:url value='/resources/css/admin/sb-admin-2.css'/>"
+    />
+    <link
+      rel="stylesheet"
+      href="<c:url value='/resources/css/admin/main.css'/>"
+    />
+  </head>
+  <body>
+    <!-- Page Wrapper -->
     <div id="wrapper">
       <!-- Sidebar -->
-         <jsp:include page="../Admin/layout/menu.jsp" />
+      <jsp:include page="../Admin/layout/menu.jsp" />
 
       <!-- Content Wrapper -->
       <div id="content-wrapper" class="d-flex flex-column">
@@ -64,7 +68,8 @@
                   aria-expanded="false"
                 >
                   <span class="mr-2 d-none d-lg-inline text-gray-600 small"
-                    >Văn Châu</span>
+                    >Văn Châu</span
+                  >
                   <i class="fas fa-user-circle fa-2x text-gray-300"></i>
                 </a>
                 <!-- Dropdown - User Information -->
@@ -97,73 +102,79 @@
             </ul>
           </nav>
           <!-- End of Topbar -->
-<!-- Begin Page Content -->
+          <!-- Begin Page Content -->
           <div class="container-fluid">
-          <jsp:useBean id="nguoidung" scope="request"
-                        type="org.springframework.beans.support.PagedListHolder" /> 
-                        <c:url value="" var="pagedLink">
+                      <jsp:useBean
+                        id="nguoidung"
+                        scope="request"
+                        type="org.springframework.beans.support.PagedListHolder"
+                      />
+                      <c:url value="" var="pagedLink">
                         <c:param name="p" value="~" />
-                       </c:url>
-            <h1 class="h3 mb-4 text-gray-800">QUẢN LÝ TÀI KHOẢN</h1>
-            <!-- DataTales Example -->
-            <div class="card shadow mb-4">
-              <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">
-                  Thông tin tài khoản
-                </h6>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table
-                    class="table table-bordered"
-                    id="dataTable"
-                    width="100%"
-                    cellspacing="0"
-                  >
-                    <thead>
-                      <tr>
-                        <th>Tài khoản</th>
-                        <th>SĐT</th>
-                        <th>Email</th>
-                        <th>Địa chỉ</th>
-                        <th>Trạng thái</th>
-                        <th>Vai trò</th>
-                      </tr>
-                    </thead>
-                    <tfoot>
-                      <tr>
-                        <th>Tài khoản</th>
-                        <th>SĐT</th>
-                        <th>Email</th>
-                        <th>Địa chỉ</th>
-                        <th>Trạng thái</th>
-                        <th>Vai trò</th> 
-                      </tr>
-                    </tfoot>
-                    <tbody>
-                    	<c:forEach var="nd" items="${nguoidung.pageList}">
-		                      <tr>
-		                        <td>${nd.taikhoan.tenDN}</td>
-		                        <td>${nd.sdt}</td>
-		                        <td>${nd.email}</td>
-		                        <td>${nd.diachi}</td>
-		                        <td>${nd.taikhoan.tinhtrang}</td>
-		                        <td>${nd.taikhoan.quyen.tenquyen}</td>
-		                       
-		                      </tr>
-                      	</c:forEach>
-                    </tbody>
-                  </table>
-                  <tg:paging pagedListHolder="${nguoidung}"
-                  pagedLink="${pagedLink}" />
-                </div>
-              </div>
-            </div>
-          </div>
+                      </c:url>
+                      <h1 class="h3 mb-4 text-gray-800">QUẢN LÝ TÀI KHOẢN</h1>
+                      <!-- DataTales Example -->
+                      <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                          <h6 class="m-0 font-weight-bold text-primary">
+                            Thông tin tài khoản
+                          </h6>
+                        </div>
+                        <div class="card-body">
+                          <div class="table-responsive">
+                            <table
+                              class="table table-bordered"
+                              id="dataTable"
+                              width="100%"
+                              cellspacing="0"
+                            >
+                              <thead>
+                                <tr>
+                                  <th>Tài khoản</th>
+                                  <th>SĐT</th>
+                                  <th>Email</th>
+                                  <th>Địa chỉ</th>
+                                  <th>Trạng thái</th>
+                                  <th>Vai trò</th>
+                                </tr>
+                              </thead>
+                              <tfoot>
+                                <tr>
+                                  <th>Tài khoản</th>
+                                  <th>SĐT</th>
+                                  <th>Email</th>
+                                  <th>Địa chỉ</th>
+                                  <th>Trạng thái</th>
+                                  <th>Vai trò </th>
+                                </tr>
+                              </tfoot>
+                              <tbody>
+                                <c:forEach var="nd" items="${nguoidung.pageList}">
+                                  <tr>
+                                    <td>${nd.taikhoan.tenDN}</td>
+                                    <td>${nd.sdt}</td>
+                                    <td>${nd.email}</td>
+                                    <td>${nd.diachi}</td>
+                                    <td>${nd.taikhoan.tinhtrang}</td>
+                                    <td>${nd.taikhoan.quyen.tenquyen}</td>
+
+                                  </tr>
+
+                                </c:forEach>
+                              </tbody>
+                            </table>
+                            <tg:paging
+                              pagedListHolder="${nguoidung}"
+                              pagedLink="${pagedLink}"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
           <!-- /.container-fluid -->
         </div>
         <!-- End of Main Content -->
- <!-- Footer -->
+        <!-- Footer -->
         <footer class="sticky-footer bg-white">
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
@@ -176,7 +187,5 @@
       <!-- End of Content Wrapper -->
     </div>
     <!-- End of Page Wrapper -->
-
-    
-</body>
+  </body>
 </html>

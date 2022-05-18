@@ -33,6 +33,7 @@ public class BaiVietController {
         if(tk != null) {
             model.addAttribute("user",tk.getNguoidung());
         }
+
         List<BaiVietEntity> b = bVietDao.getById(id);
         model.addAttribute("baiviet",b.get(0));
         return "Posts/chitiet";

@@ -1,4 +1,5 @@
 package ptithcm.controller;
+import com.nimbusds.oauth2.sdk.Response;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -234,6 +235,7 @@ public class AjaxAPIController {
         return req.getParameter("password").toString();
     }
 
+
     @RequestMapping(value = "/post-user-signup", method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
     @ResponseBody
     public String getAccountInfo(HttpServletRequest req) throws IOException {
@@ -264,6 +266,21 @@ public class AjaxAPIController {
         user.setTenND(currUser.getTenND());
         return user;
     }
+
+    @RequestMapping(value = "/post-hide-post", method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
+    @ResponseBody
+    public String setHide(HttpServletRequest req) throws IOException {
+        JSONObject data= new JSONObject(req.getParameter("id"));
+        List<BaiVietEntity> postList =new ArrayList<>();
+        String ID = data.getString("id");
+        BaiVietDao bvD =new BaiVietDao();
+        postList = bvD.getById(Long.parseLong(ID));
+        for(BaiVietEntity post: postList){
+            System.out.println(post.getMabaiviet());
+        }
+        return ID;
+    }
+
 
 }
 

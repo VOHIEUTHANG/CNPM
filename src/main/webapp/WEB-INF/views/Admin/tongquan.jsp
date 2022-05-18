@@ -25,7 +25,7 @@
       @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap");
     </style>
     <!-- Custom styles for this template-->
-    <link href="<c:url value='/resources/css/admin/sb-admin-2.css'/>" rel="stylesheet" />
+    <link rel="stylesheet" href="<c:url value='/resources/css/admin/sb-admin-2.css'/>"  />
     <link rel="stylesheet" href="<c:url value='/resources/css/admin/main.css'/>" />
 
 </head>

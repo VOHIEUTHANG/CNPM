@@ -236,42 +236,44 @@
                         </div>
                         <ul class="post-list">
                             <c:forEach var="item" items="${baiviet.pageList}">
-                                <li class="post-item">
-                                    <div class="post-img">
-                                        <a href="../baiviet/chitiet/${item.mabaiviet}">
-                                            <img src="<c:url value='/${item.getAnh().iterator().next().getLinkanh()}'/>" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="post-content">
-                                        <a href="../baiviet/chitiet/${item.mabaiviet}" class="post-title">
-                                        ${item.tieude}
-                                        </a>
-                                        <div class="post-area">
-                                            <i class="fa-solid fa-chart-area"></i>
-                                            <span class="post-area-value">${item.dientich} m²</span>
-                                        </div>
-                                        <div class="post-location">
-                                            <i class="fa-solid fa-map-location-dot"></i>
-                                            <span class="post-location-value">
-                                            ${item.diachi} ${item.chitietbaiviet.tinhtp}/${item.chitietbaiviet.quanhuyen}/${item.chitietbaiviet.phuongxa}
-                                            </span>
-                                        </div>
-                                        <div class="post-price">
-                                            <span class="post-price-value">${item.gia} triệu/tháng</span>
-                                        </div>
-                                        <div class="post-lessor">
-                                            <a href=>
-                                                <div class="pl-info">
-                                                    <div class="pl-img">
-                                                        <img src="${item.nguoidung.linkanhdaidien}" alt="hình đại diện">
-                                                    </div>
-                                                    <span>${item.nguoidung.tenND}</span>
-                                                </div>
-                                            </a>
-                                            <button class="button">Gọi ${item.nguoidung.sdt}</button>
-                                        </div>
-                                    </div>
-                                </li>
+                                <c:if test="${item.isDisplay()}">
+                                 <li class="post-item">
+                                     <div class="post-img">
+                                         <a href="../baiviet/chitiet/${item.mabaiviet}">
+                                             <img src="<c:url value='/${item.getAnh().iterator().next().getLinkanh()}'/>" alt="">
+                                         </a>
+                                     </div>
+                                     <div class="post-content">
+                                         <a href="../baiviet/chitiet/${item.mabaiviet}" class="post-title">
+                                         ${item.tieude}
+                                         </a>
+                                         <div class="post-area">
+                                             <i class="fa-solid fa-chart-area"></i>
+                                             <span class="post-area-value">${item.dientich} m²</span>
+                                         </div>
+                                         <div class="post-location">
+                                             <i class="fa-solid fa-map-location-dot"></i>
+                                             <span class="post-location-value">
+                                             ${item.diachi} ${item.chitietbaiviet.tinhtp}/${item.chitietbaiviet.quanhuyen}/${item.chitietbaiviet.phuongxa}
+                                             </span>
+                                         </div>
+                                         <div class="post-price">
+                                             <span class="post-price-value">${item.gia} triệu/tháng</span>
+                                         </div>
+                                         <div class="post-lessor">
+                                             <a href=>
+                                                 <div class="pl-info">
+                                                     <div class="pl-img">
+                                                         <img src="${item.nguoidung.linkanhdaidien}" alt="hình đại diện">
+                                                     </div>
+                                                     <span>${item.nguoidung.tenND}</span>
+                                                 </div>
+                                             </a>
+                                             <button class="button">Gọi ${item.nguoidung.sdt}</button>
+                                         </div>
+                                     </div>
+                                 </li>
+                                </c:if>
                             </c:forEach>
                         </ul>
                     </div>
@@ -422,6 +424,12 @@
     <script src="<c:url value='/resources/js/global.js'/>"></script>
     <script src="<c:url value='/resources/js/signedIn.js'/>"></script>
     <script src="<c:url value='/resources/js/main.js'/>"></script>
+    <script>
+        if($(".post-item").length === 0){
+        const span = document.createElement('span');
+        $(".post-list").text("Hiện tại không có bài viết nào để hiển thị !");
+        }
+    </script>
 
 
 </body>
