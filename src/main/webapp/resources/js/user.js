@@ -162,10 +162,16 @@ $(() => {
     container.removeClass("active");
   });
 
-  $(".mana-btn").click((e) => {
-    e.stopPropagation();
-    $(".mana-dropdown").toggleClass("active");
+  $(".mana-btn").click(function(e){
+      e.stopPropagation();
+      const dropdown = $(this).siblings('.mana-dropdown');
+      const array = [...$(".mana-dropdown")];
+      array.forEach(item=>{
+       this.dataset.id == item.dataset.id || item.classList.remove('active');
+      })
+      dropdown && dropdown.toggleClass("active")
   });
+
   $(".mana-dropdown").click((e) => {
     e.stopPropagation();
   });

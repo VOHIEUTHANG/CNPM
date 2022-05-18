@@ -147,4 +147,8 @@ public class BaiVietEntity {
 	public void setNguoidung(NguoiDungEntity nguoidung) {
 		this.nguoidung = nguoidung;
 	}
+	public boolean isDisplay(){
+		return !this.an && this.tinhtrang;
+	}
+
 }

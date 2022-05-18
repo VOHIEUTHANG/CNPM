@@ -72,7 +72,7 @@
                         <span>Đổi mật khẩu</span>
                       </a>
                       <div class="separator"></div>
-                      <a href="#" class="acc-setting-item logout">
+                      <a href="../login" class="acc-setting-item logout">
                         <i class="fa-solid fa-right-from-bracket"></i>
                         <span>Đăng xuất</span>
                       </a>
@@ -217,7 +217,7 @@
                                                        </div>
                                                        <div class="w-100"></div>
                                                        <div class="col">
-                                                         <span class="spinner-border spinner-border-lg " style="color:#ccc"  role="status" aria-hidden="true"></span>
+                                                        <i class="fa-solid fa-spinner"></i>
                                                        Chưa duyệt: <span class="text-warning">${chuaduyet}</span>
                                                        </div>
                                                        <div class="col">
@@ -245,57 +245,84 @@
                                                         <thead class="table-light">
                                                             <tr>
                                                                 <th scope="col">Mã tin</th>
-                                                                <th scope="col">Ảnh đại diện</th>
+                                                                <th scope="col">Hình đại diện</th>
                                                                 <th scope="col">Tiêu đề</th>
                                                                 <th scope="col">Giá</th>
-                                                                <th scope="col">Ngày bắt đầu</th>
-                                                                <th scope="col">Ngày kết thúc</th>
+                                                                <th scope="col">Thời gian bắt đầu</th>
+                                                                <th scope="col">Thời gian kết thúc</th>
                                                                 <th scope="col">Trạng thái</th>
                                                                 <th scope="col">Chi tiết</th>
                                                               </tr>
                                                           </thead>
                                                           <tbody>
+                                                            <c:forEach var="post" items="${postList}">
                                                             <tr>
-                                                                <td>123</td>
-                                                                <td>
-                                                                    <div class="mana-img-wrapper">
-                                                                        <img src="https://images.wallpaperscraft.com/image/single/tokyo_night_city_skyscrapers_121628_1920x1080.jpg" alt="">
-                                                                        <div class="mana-zoom-img">
-                                                                            <img src="https://images.wallpaperscraft.com/image/single/tokyo_night_city_skyscrapers_121628_1920x1080.jpg" alt="">
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-                                                                <td>Cho thuê phòng trọ giá rẻ</td>
-                                                                <td>3 triệu</td>
-                                                                <td>20/03/2022</td>
-                                                                <td>20/03/2022</td>
-                                                                <td>
-                                                                    <p class="text-success">Hiển thị</p>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="mana-detail-wrapper">
-                                                                        <div class="mana-btn">
-                                                                            <i class="fa-solid fa-ellipsis"></i>
-                                                                        </div>
-                                                                        <div class="mana-dropdown">
-                                                                            <ul class="mana-list">
-                                                                                <li class="mana-item">
-                                                                                    <a href="#">
-                                                                                        Xem chi tiết</a>
-                                                                                </li>
-                                                                                <li class="mana-item">
-                                                                                    <span class="mana-hide-btn">
-                                                                                        <i class="fa-solid fa-eye-slash"></i>
-                                                                                        Ẩn</span>
-                                                                                </li>
-                                                                                <li class="mana-item">
-                                                                                    <span class="mana-modify-btn">Chỉnh sửa</span>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
+                                                              <td>${post.mabaiviet}</td>
+                                                              <td>
+                                                                <div class="mana-img-wrapper">
+                                                                  <img
+                                                                    src="<c:url value='/${post.getAnh()[0].linkanh}'/>"
+                                                                    alt=""
+                                                                  />
+                                                                  <div class="mana-zoom-img">
+                                                                    <img
+                                                                      src="<c:url value='/${post.getAnh()[0].linkanh}'/>"
+                                                                      alt=""
+                                                                    />
+                                                                  </div>
+                                                                </div>
+                                                              </td>
+                                                              <td>${post.tieude}</td>
+                                                              <td>${post.gia} triệu</td>
+                                                              <td>${post.chitietbaiviet.getStartDateFormated()}</td>
+                                                              <td>${post.chitietbaiviet.getEndDateFormated()}</td>
+                                                              <td>
+                                                                <c:choose>
+                                                                <c:when test="${post.isDisplay()}">
+                                                                <p class="text-success">Hiển thị</p>
+                                                                </c:when>
+                                                                <c:when test="${!post.isDisplay()}" >
+                                                                <p class="text-warning">Ẩn</p>
+                                                                </c:when>
+                                                                </c:choose>
+                                                              </td>
+                                                              <td>
+                                                                <div class="mana-detail-wrapper">
+                                                                  <div class="mana-btn" data-ID="${post.mabaiviet}">
+                                                                    <i class="fa-solid fa-ellipsis"></i>
+                                                                  </div>
+                                                                  <div class="mana-dropdown" data-ID="${post.mabaiviet}">
+                                                                    <ul class="mana-list">
+                                                                      <li class="mana-item">
+                                                                        <a target="_blank" href="../baiviet/chitiet/${post.mabaiviet}"> Xem chi tiết</a>
+                                                                      </li>
+                                                                      <c:choose >
+                                                                      <c:when test="${post.isDisplay()}">
+                                                                       <li class="mana-item">
+                                                                         <span class="mana-hide-btn">
+                                                                           <i class="fa-solid fa-eye-slash"></i>
+                                                                           Ẩn
+                                                                         </span>
+                                                                       </li>
+                                                                      </c:when>
+                                                                       <c:when test="${!post.isDisplay()}">
+                                                                        <li class="mana-item disable">
+                                                                          <span class="mana-hide-btn">
+                                                                            <i class="fa-solid fa-eye-slash"></i>
+                                                                            Ẩn
+                                                                          </span>
+                                                                        </li>
+                                                                       </c:when>
+                                                                      </c:choose>
+                                                                      <li class="mana-item">
+                                                                        <span class="mana-modify-btn">Chỉnh sửa</span>
+                                                                      </li>
+                                                                    </ul>
+                                                                  </div>
+                                                                </div>
+                                                              </td>
                                                             </tr>
+                                                            </c:forEach>
                                                           </tbody>
                                                       </table>
                                                 </div>

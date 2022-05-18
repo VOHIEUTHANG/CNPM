@@ -91,7 +91,7 @@
                          <a class="nav-link" href="#">Dịch vụ</a>
                        </li>
                        <li class="nav-item ">
-                         <a class="nav-link" href="../nguoidung/trangcanhan">Cá nhân</a>
+                         <a class="nav-link" href="../../nguoidung/trangcanhan">Cá nhân</a>
                        </li>
                      </ul>
                      <div class="post">

@@ -290,3 +290,13 @@ display:flex;
 flex-direction: column;
 align-items:center;
 }
+.mana-item.disable{
+opacity: 0.3;
+color: #ccc;
+cursor: default;
+user-select: none;
+}
+.mana-item.disable:hover{
+background-color: white;
+}
+
