@@ -217,7 +217,7 @@
                                                        </div>
                                                        <div class="w-100"></div>
                                                        <div class="col">
-                                                        <i class="fa-solid fa-spinner"></i>
+                                                         <span class="spinner-border spinner-border-lg " style="color:#ccc"  role="status" aria-hidden="true"></span>
                                                        Chưa duyệt: <span class="text-warning">${chuaduyet}</span>
                                                        </div>
                                                        <div class="col">
