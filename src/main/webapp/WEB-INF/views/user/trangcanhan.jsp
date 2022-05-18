@@ -199,50 +199,108 @@
                                         </div>
                                       </form>
                                     </div>
-                                  </div>
-                    <div class="tab-pane fade" id="account-post">
-                      <div class="card-body pb-2">
-                        <div class="table-responsive">
-                          <table class="table table-striped table-bordered">
-                            <thead class="table-light">
-                              <tr>
-                                <th scope="col">Mã tin</th>
-                                <th scope="col">Tiêu đề</th>
-                                <th scope="col">Ngày bắt đầu</th>
-                                <th scope="col">Ngày hết hạn</th>
-                                <th scope="col">Diện tích</th>
-                                <th scope="col">Trạng thái</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <c:forEach var="post" items="${postList}">
-                              <tr>
-                                <th scope="row">${post.mabaiviet}</th>
-                                <td>${post.tieude}</td>
-                                <td>${post.chitietbaiviet.getStartDateFormated()}</td>
-                                <td>${post.chitietbaiviet.getEndDateFormated()}</td>
-                                <td>${post.dientich} m<sup>2</sup></td>
-                                <td>
-                                  <c:choose>
-                                    <c:when test="${post.tinhtrang}"><p class="text-success">Đã duyệt</p></c:when>
-                                    <c:when test="${!post.tinhtrang}"><p class="text-warning">Chưa duyệt</p></c:when>
-                                  </c:choose>
-                                </td>
-                              </tr>
-                               </c:forEach>
-                            </tbody>
-                            <tfoot>
-                              <tr>
-                                <th scope="col">Mã tin</th>
-                                <th scope="col">Tiêu đề</th>
-                                <th scope="col">Giá</th>
-                                <th scope="col">Diện tích</th>
-                                <th scope="col">Chi tiết</th>
-                              </tr>
-                            </tfoot>
-                          </table>
                         </div>
-                      </div>
+                    <div class="tab-pane fade" id="account-post">
+                      <div class="mana-wrapper">
+                                             <div class="mana-heading">
+                                                 Thống kê số lượng
+                                             </div>
+                                             <div class="mana-statistical">
+                                                     <div class="row">
+                                                       <div class="col">
+                                                       <i class="fa-solid fa-boxes-packing"></i>
+                                                       Tổng tin: <span class="text-primary"> ${tatca}</span>
+                                                       </div>
+                                                       <div class="col">
+                                                       <i class="fa-solid fa-eye"></i>
+                                                       Đang hiển thị: <span class="text-success"> ${danghienthi}</span>
+                                                       </div>
+                                                       <div class="w-100"></div>
+                                                       <div class="col">
+                                                        <i class="fa-solid fa-spinner"></i>
+                                                       Chưa duyệt: <span class="text-warning">${chuaduyet}</span>
+                                                       </div>
+                                                       <div class="col">
+                                                        <i class="fa-solid fa-calendar-xmark"></i>
+                                                       Hết hạn: <span class="text-danger"> ${hethan}</span>
+                                                       </div>
+                                                     </div>
+                                                   </div>
+                                         </div>
+                                         <hr>
+                                <div class="mana-foot">
+                                <div class="manapost-btn button button--hl ">Quản lý chi tiết</div>
+                                </div>
+
+                                        <div class="manapost-container ">
+                                            <div class="mana-main">
+                                                <div class="man-close-btn">
+                                                    <i class="fa-solid fa-xmark"></i>
+                                                </div>
+                                                <h3 class="mana-heading">
+                                                    Quản lý tin đăng
+                                                </h3>
+                                                <div class="mana-body">
+                                                    <table class="table table--custom table-responsive-lg table-bordered table-hover">
+                                                        <thead class="table-light">
+                                                            <tr>
+                                                                <th scope="col">Mã tin</th>
+                                                                <th scope="col">Ảnh đại diện</th>
+                                                                <th scope="col">Tiêu đề</th>
+                                                                <th scope="col">Giá</th>
+                                                                <th scope="col">Ngày bắt đầu</th>
+                                                                <th scope="col">Ngày kết thúc</th>
+                                                                <th scope="col">Trạng thái</th>
+                                                                <th scope="col">Chi tiết</th>
+                                                              </tr>
+                                                          </thead>
+                                                          <tbody>
+                                                            <tr>
+                                                                <td>123</td>
+                                                                <td>
+                                                                    <div class="mana-img-wrapper">
+                                                                        <img src="https://images.wallpaperscraft.com/image/single/tokyo_night_city_skyscrapers_121628_1920x1080.jpg" alt="">
+                                                                        <div class="mana-zoom-img">
+                                                                            <img src="https://images.wallpaperscraft.com/image/single/tokyo_night_city_skyscrapers_121628_1920x1080.jpg" alt="">
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td>Cho thuê phòng trọ giá rẻ</td>
+                                                                <td>3 triệu</td>
+                                                                <td>20/03/2022</td>
+                                                                <td>20/03/2022</td>
+                                                                <td>
+                                                                    <p class="text-success">Hiển thị</p>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="mana-detail-wrapper">
+                                                                        <div class="mana-btn">
+                                                                            <i class="fa-solid fa-ellipsis"></i>
+                                                                        </div>
+                                                                        <div class="mana-dropdown">
+                                                                            <ul class="mana-list">
+                                                                                <li class="mana-item">
+                                                                                    <a href="#">
+                                                                                        Xem chi tiết</a>
+                                                                                </li>
+                                                                                <li class="mana-item">
+                                                                                    <span class="mana-hide-btn">
+                                                                                        <i class="fa-solid fa-eye-slash"></i>
+                                                                                        Ẩn</span>
+                                                                                </li>
+                                                                                <li class="mana-item">
+                                                                                    <span class="mana-modify-btn">Chỉnh sửa</span>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                          </tbody>
+                                                      </table>
+                                                </div>
+                                            </div>
+                                        </div>
                     </div>
                     <div class="tab-pane fade" id="account-feedback">
                       <div class="card-body pb-2">

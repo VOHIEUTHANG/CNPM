@@ -89,3 +89,204 @@ font-size:1.6rem;
   height: 100%;
   object-fit: cover;
 }
+
+.manapost-btn {
+margin: 20px auto;
+}
+.manapost-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index:1000;
+  transition: all 0.3s ease-in-out;
+  visibility: hidden;
+  opacity: 0;
+}
+.manapost-container.active {
+  visibility: visible;
+  opacity: 1;
+}
+.mana-main {
+  position: relative;
+  width: 90vw;
+  min-height: 70vh;
+  background-color: white;
+  box-shadow: 0 0 30px 30px rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
+  transition: all 0.3s ease-in-out;
+  padding: 30px 40px;
+  transform: translateY(-10%);
+  opacity: 0;
+}
+.manapost-container.active > .mana-main {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.man-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.man-close-btn > i {
+  color: rgb(131, 121, 121);
+  font-size: 2.6rem;
+  transition: all 0.3s ease;
+}
+.man-close-btn:hover > i {
+  color: rgb(234, 77, 77);
+}
+
+.mana-heading {
+  margin-bottom: 30px;
+  font-size: 2.4rem;
+  text-transform: uppercase;
+  text-align: center;
+}
+.mana-body {
+}
+
+.table--custom {
+  min-width: 1200px;
+}
+
+.table--custom thead th {
+  background: var(--primary-color);
+  color: white;
+}
+.table--custom tfoot th {
+  background: var(--primary-color);
+  color: white;
+}
+.mana-img-wrapper {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin: 10px auto;
+}
+.mana-img-wrapper:hover > .mana-zoom-img {
+  transform: translate(0, -50%);
+  visibility: visible;
+  opacity: 1;
+  cursor: zoom-in;
+}
+.mana-img-wrapper > img {
+  border-radius: 50%;
+}
+
+.mana-zoom-img > im {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.mana-zoom-img {
+  position: absolute;
+  top: 100%;
+  left: 130%;
+  border-radius: 12px;
+  transform: translate(-12%, -50%);
+  width: 400px;
+  height: 220px;
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.mana-zoom-img:hover > img {
+  transition: all 0.3s ease-in-out;
+  transform: scale(1.2);
+}
+
+.table td {
+  text-align: center;
+  vertical-align: middle;
+}
+th {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.mana-body {
+  min-height: 200px;
+  border-top: 1px solid rgb(230, 226, 226);
+  overflow-y: auto;
+  height: 50vh;
+}
+
+.mana-detail-wrapper {
+  position: relative;
+  display: inline-block;
+}
+.mana-btn {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+.mana-btn > i {
+  font-size: 2rem;
+}
+.mana-dropdown {
+  position: absolute;
+  top: 50%;
+  right: 0%;
+  transform: translateY(-50%);
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease-in-out;
+  padding: 10px 0;
+  opacity: 0;
+  visibility: hidden;
+}
+.mana-dropdown.active {
+  visibility: visible;
+  opacity: 1;
+  right: 100%;
+}
+.mana-list {
+}
+.mana-item {
+  padding: 4px 20px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.mana-item:hover {
+  background-color: rgb(206, 236, 239);
+}
+
+.mana-hide-btn {
+}
+.mana-modify-btn {
+}
+.col{
+text-align:center;
+margin: 10px 0;
+}
+#account-post{
+padding-left:30px;
+
+}
+
+.mana-foot{
+display:flex;
+flex-direction: column;
+align-items:center;
+}

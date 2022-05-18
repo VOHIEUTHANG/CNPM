@@ -145,3 +145,33 @@ $(() => {
     };
   })().run();
 });
+
+$(() => {
+  const container = $(".manapost-container");
+  $(".manapost-btn").click(() => {
+    container.addClass("active");
+  });
+  $(".man-close-btn").click((e) => {
+    e.stopPropagation();
+    container.removeClass("active");
+  });
+  $(".mana-main").mousedown((e) => {
+    e.stopPropagation();
+  });
+  container.mousedown(() => {
+    container.removeClass("active");
+  });
+
+  $(".mana-btn").click((e) => {
+    e.stopPropagation();
+    $(".mana-dropdown").toggleClass("active");
+  });
+  $(".mana-dropdown").click((e) => {
+    e.stopPropagation();
+  });
+
+  $("body").click((e) => {
+    $(".mana-dropdown").hasClass("active") &&
+      $(".mana-dropdown").removeClass("active");
+  });
+});
