@@ -169,7 +169,6 @@ public class AjaxAPIController {
             List <BaiVietEntity> postList =  bvD.getAll();
             System.out.println(postList.size());
             BaiVietEntity currentPost = postList.get(postList.size()-1);
-
             AnhDao anhDao =new AnhDao();
             ChiTietBaiVietDao ctbv= new ChiTietBaiVietDao();
 

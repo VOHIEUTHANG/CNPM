@@ -67,12 +67,12 @@
                         <i class="fa-solid fa-file-signature"></i>
                         <span>Góp Ý</span>
                       </a>
-                      <a href="#" class="acc-setting-item">
+                      <a href="<c:url value='/logout' />" class="acc-setting-item">
                         <i class="fa-solid fa-key"></i>
                         <span>Đổi mật khẩu</span>
                       </a>
                       <div class="separator"></div>
-                      <a href="../login" class="acc-setting-item logout">
+                      <a href="<c:url value='/logout' />" class="acc-setting-item logout">
                         <i class="fa-solid fa-right-from-bracket"></i>
                         <span>Đăng xuất</span>
                       </a>
