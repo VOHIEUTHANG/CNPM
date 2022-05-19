@@ -182,6 +182,7 @@ $(() => {
       $(".mana-dropdown").removeClass("active");
   });
   $(".mana-item--hide").click(function (e) {
+    const _this = this;
     const ID = this.dataset.id;
     const formData = new FormData();
     formData.append('id',JSON.stringify({id:ID}));
@@ -195,9 +196,25 @@ $(() => {
       cache: false,
       timeout: 600000,
       success: function (data) {
+      if(data==="1"){
+        $(".mana-dropdown").hasClass("active") &&
+        $(".mana-dropdown").removeClass("active");
+        const targetElement = $(`.text-success.targetElement_${_this.dataset.id}`);
+        console.log(targetElement);
+        targetElement.removeClass('text-success');
+        targetElement.addClass('text-warning');
+        targetElement.text("Ẩn");
+      }else{
+      toast({
+                title: "Có lỗi upadate table BaiViet trong cơ sở dữ liệu !",
+                message: "Vui lòng liên hệ quản trị viên để giải quyết!",
+                type: "error",
+                duration: 5000,
+              });
+      }
         toast({
-          title: "Thay đổi mật khẩu thành công!",
-          message: "Cập nhật mật khẩu trong cơ sở dữ liệu thành công !",
+          title: "Thành công !",
+          message: "Ẩn bài viết  thành công !",
           type: "success",
           duration: 5000,
         });
