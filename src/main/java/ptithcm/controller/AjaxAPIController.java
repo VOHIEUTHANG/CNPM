@@ -142,7 +142,6 @@ public class AjaxAPIController {
         String username= userService.currentUserName();
         TaiKhoanEntity tk= userDao.findByUserName(username);
         NguoiDungEntity currentUser = tk.getNguoidung();
-
         List<AnhEntity> anh =new ArrayList<>();
         JSONObject data= new JSONObject(req.getParameter("info"));
         BaiVietEntity bv =new BaiVietEntity();
@@ -214,7 +213,6 @@ public class AjaxAPIController {
         String address = data.getString("address");
         String phoneNumber = data.getString("phoneNumber");
         String email = data.getString("email");
-
         return req.getParameter("userInfo").toString();
     }
 
@@ -258,7 +256,6 @@ public class AjaxAPIController {
         String email = data.getString("email");
         String phoneNumber = data.getString("phoneNumber");
         String username = data.getString("username");
-
         System.out.println(fullName);
         System.out.println(password);
 
