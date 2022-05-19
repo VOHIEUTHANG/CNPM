@@ -363,7 +363,7 @@
                   <div class="dropdown-divider"></div>
                   <a
                     class="dropdown-item"
-                    href="#"
+                    href="<c:url value='/logout' />"
                     data-toggle="modal"
                     data-target="#logoutModal"
                   >

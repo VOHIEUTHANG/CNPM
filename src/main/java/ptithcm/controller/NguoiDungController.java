@@ -140,5 +140,10 @@ public class NguoiDungController {
 				return "1";
 		return "0";
 	}
+
+	@RequestMapping(value="/dangxuat",method=RequestMethod.GET)
+	public String dangxuat(){
+		return"Layout/logout";
+	}
 }
 

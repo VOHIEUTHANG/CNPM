@@ -37,8 +37,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .defaultSuccessUrl("/baiviet/index")
                     .permitAll() 
                     .and()
-                .logout() 
-                    .permitAll();
+                .logout()
+                .logoutSuccessUrl("/nguoidung/dangxuat")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .permitAll();
         // Cái dưới này liên quan đến chống tấn công csrf
         http.csrf().disable();
     }

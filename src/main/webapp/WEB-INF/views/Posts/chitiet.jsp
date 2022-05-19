@@ -67,7 +67,7 @@
                            <span>Đổi mật khẩu</span>
                          </a>
                          <div class="separator"></div>
-                         <a href="#" class="acc-setting-item logout">
+                         <a href="<c:url value='/logout' />" class="acc-setting-item logout">
                            <i class="fa-solid fa-right-from-bracket"></i>
                            <span>Đăng xuất</span>
                          </a>
