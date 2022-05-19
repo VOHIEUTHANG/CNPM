@@ -135,10 +135,10 @@ public class NguoiDungController {
 		TaiKhoanEntity tk= userDao.findByUserName(username);
 		BaiVietDao bv= new BaiVietDao();
 		BaiVietEntity bv1= bv.getById(mabaiviet).get(0);
-        if(tk.getNguoidung().getMaND()== bv1.getNguoidung().getMaND())
-		   if(bv.SetAn(bv1)) 
-	         return "1";
-		return "0";	
+		if(tk.getNguoidung().getMaND()== bv1.getNguoidung().getMaND())
+			if(bv.SetAn(bv1))
+				return "1";
+		return "0";
 	}
 }
 

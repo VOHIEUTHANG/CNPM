@@ -232,6 +232,8 @@
       </div>
       <!-- End of Content Wrapper -->
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="<c:url value='/resources/js/admin/global.js'/>"></script>
     <!-- End of Page Wrapper -->
 </body>
 </html>

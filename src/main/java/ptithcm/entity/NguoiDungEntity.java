@@ -32,7 +32,6 @@ public class NguoiDungEntity {
 	private String linkanhdaidien;
 	@Column(name="TenND")
 	private String tenND;
-
 	public String getTenND() {
 		return this.tenND;
 	}

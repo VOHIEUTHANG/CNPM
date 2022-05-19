@@ -55,7 +55,7 @@
             <!-- Topbar Navbar -->
             <ul class="navbar-nav ml-auto">
               <!-- Nav Item - User Information -->
-              <li class="nav-item dropdown no-arrow">
+              <li class="nav-item dropdown no-arrow admin_Control">
                 <a
                   class="nav-link dropdown-toggle"
                   href="#"

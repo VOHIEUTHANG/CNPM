@@ -1,5 +1,8 @@
 package ptithcm.controller;
 import com.nimbusds.oauth2.sdk.Response;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -27,6 +30,7 @@ import java.util.*;
 import java.util.UUID;
 
 
+import ptithcm.hibernate.HibernateUtil;
 import ptithcm.service.UserService;
 
 import javax.servlet.ServletContext;
@@ -42,7 +46,7 @@ public class AjaxAPIController {
     ServletContext context;
     @Autowired
     UserService userService ;
-
+    private Session session;
     public String getFileExtension(String fileName){
         String filelEx;
         int dotIndex = fileName.lastIndexOf(".");
@@ -166,42 +170,44 @@ public class AjaxAPIController {
         bv.setDientich(Integer.valueOf(data.getString("area")));
         Double roundPrice  = (double) Math.round( Float.valueOf(data.getString("price")) * 10) / 10;
         bv.setGia(Float.valueOf(String.valueOf(roundPrice)));
-        System.out.println("Price" + Float.valueOf(String.valueOf(roundPrice)));
         ct.setMota(data.getString("description"));
         ct.setPhuongxa(data.getString("wards"));
         ct.setQuanhuyen(data.getString("district"));
         ct.setTinhtp(data.getString("province"));
         Date date = new Date();
         Timestamp timestamp = new Timestamp(date.getTime());
+        Timestamp timestampEnd = new Timestamp(date.getTime());
         ct.setThoigianbatdau(timestamp);
-        System.out.println("Start time: " + timestamp);
         Calendar cal = Calendar.getInstance();
-        cal.setTime(timestamp);
+        cal.setTime(timestampEnd);
         cal.add(Calendar.DAY_OF_WEEK, 15);
-        timestamp.setTime(cal.getTime().getTime());
-        System.out.println("End time: " + timestamp);
-        ct.setThoigianketthuc(timestamp);
+        timestampEnd.setTime(cal.getTime().getTime());
+        ct.setThoigianketthuc(timestampEnd);
         bv.setNguoidung(currentUser);
-        bvD.insertBaiViet(bv);
+        int result = bvD.insertBaiViet(bv);
+        if(result == 1){
+            List <BaiVietEntity> postList =  bvD.getAll();
+            System.out.println(postList.size());
+            BaiVietEntity currentPost = postList.get(postList.size()-1);
 
-        List<BaiVietEntity> bvPhu = (List<BaiVietEntity>) tk.getNguoidung().getBaiviet();
+            AnhDao anhDao =new AnhDao();
+            ChiTietBaiVietDao ctbv= new ChiTietBaiVietDao();
 
-        for(MultipartFile file: files){
-            AnhEntity a = new AnhEntity();
-            a.setLinkanh("Storage/Images/"+ writeFile(file,"Images"));
-            a.setBaiviet(bvPhu.get(bvPhu.size()-1));
-            anh.add(a);
+            ct.setMabaiviet(currentPost.getMabaiviet());
+            ct.setBaiviet(currentPost);
+
+            for(MultipartFile file: files){
+                AnhEntity a = new AnhEntity();
+                a.setLinkanh("Storage/Images/"+ writeFile(file,"Images"));
+                a.setBaiviet(currentPost);
+                anhDao.Insert(a);
+                anh.add(a);
+            }
+            ctbv.Insert(ct);
+
+        }else{
+            System.out.println("Error !");
         }
-        ct.setBaiviet(bvPhu.get(bvPhu.size()-1));
-        ct.setMabaiviet(bvPhu.get(bvPhu.size()-1).getMabaiviet());
-
-        ChiTietBaiVietDao ctbv= new ChiTietBaiVietDao();
-        AnhDao anhDao =new AnhDao();
-        ctbv.Insert(ct);
-        for(AnhEntity a :anh){
-            anhDao.Insert(a);
-        }
-
         return data.toString();
     }
 
@@ -277,16 +283,39 @@ public class AjaxAPIController {
     @ResponseBody
     public String setHide(HttpServletRequest req) throws IOException {
         JSONObject data= new JSONObject(req.getParameter("id"));
-        List<BaiVietEntity> postList =new ArrayList<>();
+        NguoiDungDao userDao = new NguoiDungDao();
+        String username= userService.currentUserName();
+        TaiKhoanEntity tk= userDao.findByUserName(username);
+        BaiVietEntity post =new BaiVietEntity();
         String ID = data.getString("id");
         BaiVietDao bvD =new BaiVietDao();
-        postList = bvD.getById(Long.parseLong(ID));
-        for(BaiVietEntity post: postList){
-            System.out.println(post.getMabaiviet());
-        }
-        return ID;
+        post = bvD.getById(Long.parseLong(ID)).get(0);
+            if(tk.getNguoidung().getMaND()== post.getNguoidung().getMaND())
+                if(bvD.SetAn(post))
+                    return "1";
+            return "0";
     }
+    public Integer test(Long id){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t = session.beginTransaction();
+        int result =0;
+        try {
+            String hql = "select count (*) FROM BaiVietEntity where maND=:id ";
+            Query query = session.createQuery(hql);
+            query.setParameter("id", id);
+            result = query.getFirstResult();
+        }
+        catch (Exception e) {
+            t.rollback();
+            e.printStackTrace();
+            return 0;
+        }
+        finally {
+            session.close();
+            return result;
+        }
 
+    }
 
 }
 
