@@ -224,6 +224,11 @@
                                                         <i class="fa-solid fa-calendar-xmark"></i>
                                                        Hết hạn: <span class="text-danger"> ${hethan}</span>
                                                        </div>
+                                                        <div class="w-100"></div>
+                                                        <div class="col">
+                                                        <i class="fa-solid fa-eye-slash"></i>
+                                                        Ẩn : <span class="text-warning"> ${an}</span>
+                                                        </div>
                                                      </div>
                                                    </div>
                                          </div>
@@ -279,7 +284,7 @@
                                                               <td>
                                                                 <c:choose>
                                                                 <c:when test="${post.isDisplay()}">
-                                                                <p class="text-success">Hiển thị</p>
+                                                                <p class="text-success targetElement_${post.mabaiviet}" >Hiển thị</p>
                                                                 </c:when>
                                                                 <c:when test="${!post.isDisplay()}" >
                                                                 <p class="text-warning">Ẩn</p>

@@ -108,6 +108,7 @@ public class NguoiDungController {
 	int chuaduyet=0;
 	int danghienthi=0;
 	int hethan=0;
+	int an = 0;
 
 	Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
@@ -116,6 +117,7 @@ public class NguoiDungController {
 		if(i.isDisplay()) danghienthi++;
 		if(!i.getTinhtrang()) chuaduyet++;
 		if(i.getChitietbaiviet().getThoigianketthuc().compareTo(timestamp) < 0) hethan++;
+		if(i.getAn()) an++;
 
 	}
 
@@ -124,6 +126,7 @@ public class NguoiDungController {
 	model.addAttribute("chuaduyet",chuaduyet);
 	model.addAttribute("danghienthi",danghienthi);
 	model.addAttribute("hethan",hethan);
+	model.addAttribute("an",an);
        return "user/trangcanhan";
 	}
 
