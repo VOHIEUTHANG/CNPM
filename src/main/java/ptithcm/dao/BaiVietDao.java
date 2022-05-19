@@ -55,7 +55,6 @@ public class BaiVietDao {
 		try {
 			bv.setTinhtrang(Boolean.FALSE);
 			bv.setAn(Boolean.FALSE);
-			bv.setNguoidung(this.getNguoidung((long) 1));
 			session.save(bv);
 			t.commit();	
 		}

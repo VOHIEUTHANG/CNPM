@@ -267,19 +267,6 @@ prefix="form"%>
                       <span class="form-message"></span>
                     </div>
                     <div class="form-group">
-                      <label for="form-phone-number"
-                        >Số điện thoại liên hệ
-                        <span style="color: red">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        name="phoneNumber"
-                        class="form-control"
-                        id="form-phone-number"
-                      />
-                      <span class="form-message"></span>
-                    </div>
-                    <div class="form-group">
                       <label for="form-price"
                         >Giá cho thuê (lưu ý đơn vị là triệu VND)<span style="color: red">*</span>
                       </label>
@@ -422,6 +409,7 @@ prefix="form"%>
     ></script>
     <script src="<c:url value ='/resources/js/global.js'/>"></script>
     <script src="<c:url value ='/resources/js/validateLibrary.js'/>"></script>
+    <script src="<c:url value ='/resources/js/toast.js'/>"></script>
     <script src="<c:url value ='/resources/js/post.js'/>"></script>
     <script src="<c:url value='/resources/js/signedIn.js'/>"></script>
   </body>

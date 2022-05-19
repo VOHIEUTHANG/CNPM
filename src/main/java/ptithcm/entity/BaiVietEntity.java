@@ -151,4 +151,21 @@ public class BaiVietEntity {
 		return !this.an && this.tinhtrang;
 	}
 
+	@Override
+	public String toString() {
+		return  "BaiVietEntity{" +
+				"mabaiviet=" + mabaiviet +
+				", tieude='" + tieude + '\'' +
+				", gia=" + gia +
+				", diachi='" + diachi + '\'' +
+				", tinhtrang=" + tinhtrang +
+				", an=" + an +
+				", dientich=" + dientich +
+				", nguoidung=" + nguoidung +
+				", chitietbaiviet=" + chitietbaiviet +
+				", video=" + video +
+				", Anh=" + Anh +
+				", quangcao=" + quangcao +
+				'}';
+	}
 }

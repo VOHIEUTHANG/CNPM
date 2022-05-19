@@ -239,10 +239,6 @@ const dataFiles = [];
             "#form-area",
             "Diện tích của phòng phải là số dương và lớn hơn 10 !"
           ),
-          Validator.isPhoneNumber(
-            "#form-phone-number",
-            "Số điện thoại không hợp lệ, phải là số có 10 chữ số và bắt đầu bằng 0!"
-          ),
         ],
         onSubmit: function (data) {
           let URL = "../api/post-upload-no-video";
@@ -255,7 +251,6 @@ const dataFiles = [];
           dataText.street = $("#form-street").val();
           dataText.title = $("#form-title").val();
           dataText.description = $("#form-desc").val();
-          dataText.phoneNumber = $("#form-phone-number").val();
           dataText.price = $("#form-price").val();
           dataText.area = $("#form-area").val();
 

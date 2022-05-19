@@ -151,6 +151,11 @@ public class AjaxAPIController {
     @RequestMapping(value = "/post-upload-no-video", method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
     @ResponseBody
     public String Test(@RequestParam("images") MultipartFile[] files,HttpServletRequest req) throws IOException {
+        NguoiDungDao userDao = new NguoiDungDao();
+        String username= userService.currentUserName();
+        TaiKhoanEntity tk= userDao.findByUserName(username);
+        NguoiDungEntity currentUser = tk.getNguoidung();
+
         List<AnhEntity> anh =new ArrayList<>();
         JSONObject data= new JSONObject(req.getParameter("info"));
         BaiVietEntity bv =new BaiVietEntity();
@@ -161,6 +166,7 @@ public class AjaxAPIController {
         bv.setDientich(Integer.valueOf(data.getString("area")));
         Double roundPrice  = (double) Math.round( Float.valueOf(data.getString("price")) * 10) / 10;
         bv.setGia(Float.valueOf(String.valueOf(roundPrice)));
+        System.out.println("Price" + Float.valueOf(String.valueOf(roundPrice)));
         ct.setMota(data.getString("description"));
         ct.setPhuongxa(data.getString("wards"));
         ct.setQuanhuyen(data.getString("district"));
@@ -175,13 +181,13 @@ public class AjaxAPIController {
         timestamp.setTime(cal.getTime().getTime());
         System.out.println("End time: " + timestamp);
         ct.setThoigianketthuc(timestamp);
+        bv.setNguoidung(currentUser);
         bvD.insertBaiViet(bv);
-        NguoiDungDao userDao = new NguoiDungDao();
-        String username= userService.currentUserName();
-        TaiKhoanEntity tk= userDao.findByUserName(username);
+
         List<BaiVietEntity> bvPhu = (List<BaiVietEntity>) tk.getNguoidung().getBaiviet();
+
         for(MultipartFile file: files){
-            AnhEntity a= new AnhEntity();
+            AnhEntity a = new AnhEntity();
             a.setLinkanh("Storage/Images/"+ writeFile(file,"Images"));
             a.setBaiviet(bvPhu.get(bvPhu.size()-1));
             anh.add(a);
@@ -191,7 +197,7 @@ public class AjaxAPIController {
 
         ChiTietBaiVietDao ctbv= new ChiTietBaiVietDao();
         AnhDao anhDao =new AnhDao();
-         ctbv.Insert(ct);
+        ctbv.Insert(ct);
         for(AnhEntity a :anh){
             anhDao.Insert(a);
         }

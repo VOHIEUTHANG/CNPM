@@ -128,4 +128,20 @@ public class NguoiDungEntity {
 	public void setGopy(Collection<GopYEntity> gopy) {
 		this.gopy = gopy;
 	}
+
+	@Override
+	public String toString() {
+		return "NguoiDungEntity{" +
+				"maND=" + maND +
+				", sdt='" + sdt + '\'' +
+				", email='" + email + '\'' +
+				", diachi='" + diachi + '\'' +
+				", linkanhdaidien='" + linkanhdaidien + '\'' +
+				", tenND='" + tenND + '\'' +
+				", taikhoan=" + taikhoan +
+				", baiviet=" + baiviet +
+				", thongbao=" + thongbao +
+				", gopy=" + gopy +
+				'}';
+	}
 }
