@@ -114,7 +114,7 @@ public class NguoiDungController {
 		tatca++;
 		if(i.getTinhtrang()==true && i.getAn()==false && i.getChitietbaiviet().getThoigianketthuc().compareTo(timestamp)<=0) danghienthi++;
 		if(!i.getTinhtrang()) chuaduyet++;
-		if(i.getChitietbaiviet().getThoigianketthuc().compareTo(timestamp)>0) hethan++;
+		if(i.getChitietbaiviet().getThoigianketthuc().compareTo(timestamp) > 0) hethan++;
 
 	}
 
