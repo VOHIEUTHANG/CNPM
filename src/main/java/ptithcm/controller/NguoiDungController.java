@@ -108,13 +108,14 @@ public class NguoiDungController {
 	int chuaduyet=0;
 	int danghienthi=0;
 	int hethan=0;
+
 	Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
 	for(BaiVietEntity i: bviet){
 		tatca++;
-		if(i.getTinhtrang()==true && i.getAn()==false && i.getChitietbaiviet().getThoigianketthuc().compareTo(timestamp)<=0) danghienthi++;
+		if(i.isDisplay()) danghienthi++;
 		if(!i.getTinhtrang()) chuaduyet++;
-		if(i.getChitietbaiviet().getThoigianketthuc().compareTo(timestamp) > 0) hethan++;
+		if(i.getChitietbaiviet().getThoigianketthuc().compareTo(timestamp) < 0) hethan++;
 
 	}
 
