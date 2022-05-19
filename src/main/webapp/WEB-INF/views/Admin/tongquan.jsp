@@ -12,6 +12,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
+    <link rel="icon" href="<c:url value='/resources/assets/images/Logo-icon.png'/>">
     <meta name="description" content="" />
     <meta name="author" content="" />
 <title>Thống kê</title>

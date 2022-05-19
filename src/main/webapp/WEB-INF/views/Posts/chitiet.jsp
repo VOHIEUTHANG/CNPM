@@ -6,7 +6,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="<c:url value='/resources/assets/images/short-icon.png'/> ">
+    <link rel="icon" href="<c:url value='/resources/assets/images/Logo-icon.png'/>">
+
     <!-- fontawesome -->
     <script src="https://kit.fontawesome.com/11a1459669.js" crossorigin="anonymous"></script>
     <!-- css external links-->
@@ -170,7 +171,7 @@
                                     <div class="die-address">
                                         <i class="fa-solid fa-location-dot"></i>
                                         <div class="die-value">
-                                            ${baiviet.diachi}, ${baiviet.chitietbaiviet.tinhtp}, ${baiviet.chitietbaiviet.quanhuyen}, ${baiviet.chitietbaiviet.phuongxa}
+                                            ${baiviet.diachi},${baiviet.chitietbaiviet.phuongxa}, ${baiviet.chitietbaiviet.quanhuyen} , ${baiviet.chitietbaiviet.tinhtp}
                                         </div>
                                     </div>
                                     <div class="die-time">
@@ -184,9 +185,9 @@
                                     <h3 class="did-title">
                                         Thông tin mô tả
                                     </h3>
-                                    <span>
+                                    <div id= "description">
                                        ${baiviet.chitietbaiviet.getMota()}
-                                    </span>
+                                    </div>
                                 </div>
                                 <div class="di-report">
                                     <i class="fa-solid fa-flag"></i>
@@ -323,6 +324,12 @@
     <script src="<c:url value='/resources/js/global.js'/>"></script>
     <script src="<c:url value='/resources/js/detail.js'/>"></script>
     <script src="<c:url value='/resources/js/signedIn.js'/>"></script>
+    <script>
+
+    let st = document.getElementById("description").innerText;
+    st.replaceAll('^&*','\n');
+    document.getElementById("description").innerHTML=st;
+    </script>
 </body>
 
 </html>

@@ -7,7 +7,7 @@ prefix="c"%> <%@ taglib prefix="tg" tagdir="/WEB-INF/tags"%>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="../assets/images/short-icon.PNG" />
+    <link rel="icon" href="<c:url value='/resources/assets/images/Logo-icon.png'/>">
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
