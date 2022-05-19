@@ -67,90 +67,70 @@ public class AjaxAPIController {
         return "/user/signup-page";
     }
 
-//    @RequestMapping(value = "/post-upload", method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
-//    @ResponseBody
-//    public String Test(@RequestParam("images") MultipartFile[] files,@RequestParam("video") MultipartFile video,HttpServletRequest req) {
-//        List<AnhEntity> anh =new ArrayList<AnhEntity>();
-//        VideoEntity v =new VideoEntity();
-//        Collection<VideoEntity> listVi = new ArrayList<>();
-//        for(MultipartFile file: files) {
-//           AnhEntity a =new AnhEntity();
-//            try {
-//                a.setLinkanh(writeFile(file, "Images/posts"));
-//                anh.add(a);
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
-//    public String getPostInfo(@RequestParam("images") MultipartFile[] files,@RequestParam("video") MultipartFile video,HttpServletRequest req) throws IOException {
-//        for(MultipartFile file: files){
-//            writeFile(file,"Images");
-//        }
-//        try {
-//            v.setLinkvideo(writeFile(video, "Videos"));
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//    public String getPostInfo(@RequestParam("images") MultipartFile[] files,@RequestParam("video") MultipartFile video,HttpServletRequest req) throws IOException {
-//        for(MultipartFile file: files){
-//            writeFile(file,"Images");
-//        }
-//        writeFile(video, "Videos");
-//        return req.getParameter("info").toString();
-//    }
+    @RequestMapping(value = "/post-upload", method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
+    @ResponseBody
+    public String getThongTin(@RequestParam("images") MultipartFile[] files,@RequestParam("video") MultipartFile video,HttpServletRequest req) throws IOException {JSONObject data= new JSONObject(req.getParameter("info"));
+        NguoiDungDao userDao = new NguoiDungDao();
+        String username= userService.currentUserName();
+        TaiKhoanEntity tk= userDao.findByUserName(username);
+        NguoiDungEntity currentUser = tk.getNguoidung();
 
-//    @RequestMapping(value = "/post-upload", method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
-//    @ResponseBody
-//    public String getThongTin(@RequestParam("images") MultipartFile[] files,@RequestParam("video") MultipartFile video,HttpServletRequest req) throws IOException {
-//        List<AnhEntity> anh =new ArrayList<>();
-//        VideoEntity v= new VideoEntity();
-//        JSONObject data= new JSONObject(req.getParameter("info"));
-//        BaiVietEntity bv =new BaiVietEntity();
-//        ChiTietBaiVietEntity ct= new ChiTietBaiVietEntity();
-//        BaiVietDao bvD =new BaiVietDao();
-//        bv.setTieude(data.getString("title"));
-//        bv.setDiachi(data.getString("street"));
-//        bv.setDientich(Float.valueOf(data.getString("area")));
-//        bv.setGia(Float.valueOf(data.getString("price")));
-//        ct.setMota(data.getString("description"));
-//        ct.setPhuongxa(data.getString("wards"));
-//        ct.setQuanhuyen(data.getString("district"));
-//        ct.setTinhtp(data.getString("province"));
-//        Date date = new Date();
-//        Timestamp timestamp = new Timestamp(date.getTime());
-//        ct.setThoigianbatdau(timestamp);
-//        Calendar cal = Calendar.getInstance();
-//        cal.setTime(timestamp);
-//        cal.add(Calendar.DAY_OF_WEEK, 15);
-//        timestamp.setTime(cal.getTime().getTime());
-//        ct.setThoigianketthuc(timestamp);
-//        bvD.insertBaiViet(bv);
-//        NguoiDungDao userDao = new NguoiDungDao();
-//        String username= userService.currentUserName();
-//        TaiKhoanEntity tk= userDao.findByUserName(username);
-//        List<BaiVietEntity> bvPhu = (List<BaiVietEntity>) tk.getNguoidung().getBaiviet();
-//        for(MultipartFile file: files) {
-//            AnhEntity a = new AnhEntity();
-//
-//            writeFile(file, "Images");
-//            a.setLinkanh("Storage/images");
-//            a.setBaiviet(bvPhu.get(bvPhu.size() - 1));
-//            anh.add(a);
-//
-//        }
-//            v.setLinkvideo("Storages/Videos"+writeFile(video, "Videos"));
-//            v.setBaiviet(bvPhu.get(bvPhu.size()-1));
-//
-//        ct.setMabaiviet(bvPhu.get(bvPhu.size()-1).getMabaiviet());
-//        ChiTietBaiVietDao ctbv= new ChiTietBaiVietDao();
-//        AnhDao anhDao =new AnhDao();
-//        VideoDao videoDao =new VideoDao();
-//        ctbv.Insert(ct);
-//        videoDao.Insert(v);
-//        for(AnhEntity a :anh){
-//            anhDao.Insert(a);
-//        }
-//
-//        return data.toString();
-//    }
+        List<AnhEntity> anh =new ArrayList<>();
+        BaiVietEntity bv =new BaiVietEntity();
+        ChiTietBaiVietEntity ct= new ChiTietBaiVietEntity();
+        BaiVietDao bvD =new BaiVietDao();
+        bv.setTieude(data.getString("title"));
+        bv.setDiachi(data.getString("street"));
+        bv.setDientich(Integer.valueOf(data.getString("area")));
+        Double roundPrice  = (double) Math.round( Float.valueOf(data.getString("price")) * 10) / 10;
+        bv.setGia(Float.valueOf(String.valueOf(roundPrice)));
+        ct.setMota(data.getString("description"));
+        ct.setPhuongxa(data.getString("wards"));
+        ct.setQuanhuyen(data.getString("district"));
+        ct.setTinhtp(data.getString("province"));
+        Date date = new Date();
+        Timestamp timestamp = new Timestamp(date.getTime());
+        Timestamp timestampEnd = new Timestamp(date.getTime());
+        ct.setThoigianbatdau(timestamp);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(timestampEnd);
+        cal.add(Calendar.DAY_OF_WEEK, 15);
+        timestampEnd.setTime(cal.getTime().getTime());
+        ct.setThoigianketthuc(timestampEnd);
+        bv.setNguoidung(currentUser);
+        int result = bvD.insertBaiViet(bv);
+        if(result == 1){
+            List <BaiVietEntity> postList =  bvD.getAll();
+            System.out.println(postList.size());
+            BaiVietEntity currentPost = postList.get(postList.size()-1);
+
+            AnhDao anhDao =new AnhDao();
+            VideoDao videoDao = new VideoDao();
+            ChiTietBaiVietDao ctbv= new ChiTietBaiVietDao();
+
+            ct.setMabaiviet(currentPost.getMabaiviet());
+            ct.setBaiviet(currentPost);
+
+            for(MultipartFile file: files){
+                AnhEntity a = new AnhEntity();
+                a.setLinkanh("Storage/Images/"+ writeFile(file,"Images"));
+                a.setBaiviet(currentPost);
+                anhDao.Insert(a);
+                anh.add(a);
+            }
+            VideoEntity vd = new VideoEntity();
+            vd.setBaiviet(currentPost);
+            vd.setLinkvideo("Storage/Videos/"+ writeFile(video,"Videos"));
+
+            videoDao.Insert(vd);
+            ctbv.Insert(ct);
+
+        }else{
+            System.out.println("Error !");
+        }
+
+        return data.toString();
+    }
 
     @RequestMapping(value = "/post-upload-no-video", method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
     @ResponseBody
