@@ -26,6 +26,14 @@
 
         <body id="app">
           <div id="toast"></div>
+          <div id="myCustomToast">
+                <div class="custom-toast-content">
+                  <h3 class="heading">Chuyển hướng trang trong</h3>
+                  <div class="body">
+                    <div class="text-center">5</div>
+                  </div>
+                </div>
+              </div>
           <header id="header">
             <div class="header-wrapper">
               <div class="header-login">
@@ -179,7 +187,7 @@
                                       <form action="" id="form-changePassword">
                                         <div class="form-group">
                                           <label class="form-label">Mật khẩu hiện tại</label>
-                                          <input type="currentPassword" name="password" class="form-control" />
+                                          <input type="password" name="password" class="form-control" />
                                           <span class="form-message"></span>
                                         </div>
                                         <div class="form-group">

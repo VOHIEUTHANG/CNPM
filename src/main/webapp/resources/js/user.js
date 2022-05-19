@@ -110,12 +110,53 @@ $(() => {
                     cache: false,
                     timeout: 600000,
                     success: function (data) {
-                      toast({
-                        title: "Thay đổi mật khẩu thành công!",
-                        message: "Cập nhật mật khẩu trong cơ sở dữ liệu thành công !",
-                        type: "success",
-                        duration: 5000,
-                      });
+                     switch (data) {
+                       case "1":
+                             toast({
+                               title: "Cập nhật mật khẩu thành công!",
+                               message: "Cập nhật mật khẩu thành công, vui lòng đăng nhập lại !",
+                               type: "success",
+                               duration: 2000,
+                             });
+                             setTimeout(() => {
+                               const text = $(".custom-toast-content > .body > .text-center");
+                               $("#myCustomToast").addClass("active");
+                               function timeout(time = 5) {
+                                 const IntervalID = setInterval(() => {
+                                   text.text(--time);
+                                   if (time === 0) {
+                                     clearInterval(IntervalID);
+                                     window.location = "../login";
+                                   }
+                                 }, 1000);
+                               }
+                               timeout(5);
+                             }, 2000);
+                         break;
+                       case "0":
+                         toast({
+                           title: "Có lỗi xảy ra !",
+                           message: "Mật khẩu không trùng khớp !",
+                           type: "error",
+                           duration: 5000,
+                         });
+                         break;
+                       case "-1":
+                         toast({
+                           title: "Mật khẩu cũ và mật khẩu mới hoàn toàn trùng khớp !",
+                           message: "Vui lòng nhập mật khẩu mới khác mật khẩu cũ để thay đổi !",
+                           type: "warning",
+                           duration: 5000,
+                         });
+                         break;
+                       default:
+                         toast({
+                           title: "Dữ liệu trả về không thể xác nhận !",
+                           message: "Liên hệ quản trị viên để vá lỗi !",
+                           type: "warning",
+                           duration: 5000,
+                         });
+                     }
                     },
                     error: function () {
                       toast({
