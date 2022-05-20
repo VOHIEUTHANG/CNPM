@@ -109,7 +109,8 @@
 .di-description{
     border-top: 1px solid rgb(239, 230, 230);
     margin: 20px 0;
-    padding: 10px 0;
+    padding: 20px 0;
+    border-bottom: 1px solid rgb(239, 230, 230);
 }
 .did-title{
     margin-bottom: 10px;

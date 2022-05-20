@@ -248,13 +248,18 @@ const dataFiles = [];
           const imageFiles = imageInput[0].files;
           const videoFile = videoInput[0].files[0];
 
+          let desc = $("#form-desc").val();
+
+          desc = desc.replaceAll("\n","//#");
+
           dataText.street = $("#form-street").val();
           dataText.title = $("#form-title").val();
-          dataText.description = $("#form-desc").val();
+          dataText.description = desc;
           dataText.price = $("#form-price").val();
           dataText.area = $("#form-area").val();
 
           formData.append("info", JSON.stringify(dataText));
+          console.log(dataText);
 
           for (let imageFile of imageFiles) {
             formData.append("images", imageFile);
@@ -329,3 +334,6 @@ const dataFiles = [];
     },
   };
 })().run();
+
+
+

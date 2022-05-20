@@ -46,7 +46,7 @@
                            <span>${user.tenND}</span>
                          </div>
                          <div class="acc-avatar">
-                           <img src="${user.linkanhdaidien}" alt="avatar" />
+                           <img src="../${user.linkanhdaidien}" alt="avatar" />
                          </div>
                        </div>
                        <div class="acc-setting">
@@ -191,11 +191,11 @@
                                     <h3 class="did-title">
                                         Thông tin mô tả
                                     </h3>
-                                    <div id= "description">
+                                    <div id= "description" style="line-height: 2;">
                                        ${baiviet.chitietbaiviet.getMota()}
                                     </div>
                                 </div>
-                                <div class="di-report">
+                                <div class="di-report" style="margin-top: 30px;">
                                     <i class="fa-solid fa-flag"></i>
                                     <span>Báo cáo bài viêt</span>
                                 </div>
@@ -274,7 +274,7 @@
                         <div class="main-sidebar">
                             <div class="ms-section owner-post">
                                 <div class="op-avatar">
-                                    <img src="${baiviet.nguoidung.linkanhdaidien}" alt="">
+                                    <img src="../${baiviet.nguoidung.linkanhdaidien}" alt="">
                                 </div>
                                 <h3 class="op-name">${baiviet.nguoidung.tenND}</h3>
                                 <a href="tel:+${baiviet.nguoidung.sdt}" class="btn-phone-link">
@@ -331,9 +331,11 @@
     <script src="<c:url value='/resources/js/detail.js'/>"></script>
     <script src="<c:url value='/resources/js/signedIn.js'/>"></script>
     <script>
-    let st = document.getElementById("description").innerText;
-    st.replaceAll('^&*','\n');
-    document.getElementById("description").innerHTML=st;
+    let rawText = $("#description").text().trim();
+     rawText = rawText.replaceAll("//#//#","//#");
+    rawText = rawText.replaceAll("//#","<br>");
+     $("#description").html(rawText);
+     console.log(rawText);
     </script>
 </body>
 
