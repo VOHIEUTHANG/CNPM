@@ -64,6 +64,17 @@ public class NguoiDungController {
 		model.addAttribute("user",tk.getNguoidung());
 		return "Posts/DangBai";
 	}
+
+	@RequestMapping("/update-post")
+	public String getPostUpdate(ModelMap model)
+	{
+		NguoiDungDao userDao = new NguoiDungDao();
+		String username= userService.currentUserName();
+		TaiKhoanEntity tk= userDao.findByUserName(username);
+		model.addAttribute("user",tk.getNguoidung());
+		return "Posts/UpdatePost";
+	}
+
     @RequestMapping(value = "/addnew", method = RequestMethod.GET)
 	public @ResponseBody String dangbai (HttpServletRequest request)
 	{
