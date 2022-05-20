@@ -1,5 +1,4 @@
 package ptithcm.controller;
-import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.ServletRequest;
@@ -39,10 +38,11 @@ public class BaiVietController {
 
         List<BaiVietEntity> b = bVietDao.getById(id);
         model.addAttribute("baiviet",b.get(0));
-        Collection<VideoEntity> videos = b.get(0).getVideo();
-        if(videos.size() > 0){
-            model.addAttribute("video", videos.iterator().next());
+
+        if(b.get(0).getVideo().size()>0){
+            model.addAttribute("video",b.get(0).getVideo().iterator().next());
         }
+
         return "Posts/chitiet";
     }
     @RequestMapping("/index")

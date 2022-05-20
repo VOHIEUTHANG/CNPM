@@ -306,7 +306,7 @@ prefix="form"%>
                               id="fileUpload"
                               multiple
                               accept=".jpg, .png"
-                              data-max_length="20"
+                              data-max_length="6"
                               class="upload__inputfile"
                             />
                           </label>
