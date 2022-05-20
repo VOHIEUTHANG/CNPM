@@ -74,6 +74,7 @@ public class NguoiDungController {
 		NguoiDungDao userDao = new NguoiDungDao();
 		BaiVietDao bVietDao =new BaiVietDao();
 		String username= userService.currentUserName();
+
 		TaiKhoanEntity tk = userDao.findByUserName(username);
 		if(tk != null) {
 			model.addAttribute("user",tk.getNguoidung());
@@ -159,8 +160,6 @@ public class NguoiDungController {
 	model.addAttribute("an",an);
        return "user/trangcanhan";
 	}
-
-
 
 	@RequestMapping(value="/dangxuat",method=RequestMethod.GET)
 	public String dangxuat(){

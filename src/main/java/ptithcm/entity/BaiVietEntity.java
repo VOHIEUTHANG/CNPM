@@ -29,8 +29,6 @@ public class BaiVietEntity {
 	@Column(name = "DienTich")
 	private Integer dientich;
 
-	
-
 	public int getDientich() {
 		return this.dientich;
 	}
