@@ -273,28 +273,20 @@ const dataText = {
           const imageFiles = imageInput[0].files;
           const videoFile = videoInput[0].files[0];
 
-        let imageFileList = new DataTransfer();
-
-        imgArray.forEach(file=>{
-            imageFileList.items.add(file);
-        })
-
-          let desc = $("#form-desc").val();
-
+          let desc = $("#form-desc").val().trim();
           desc = desc.replaceAll("\n","//#");
 
           dataText.street = $("#form-street").val();
-          dataText.title = $("#form-title").val();
+          dataText.title = $("#form-title").val().trim().replaceAll('\n',' ');
           dataText.description = desc;
           dataText.price = $("#form-price").val();
           dataText.area = $("#form-area").val();
 
           formData.append("info", JSON.stringify(dataText));
 
-
-          for (let imageFile of imageFiles) {
-            formData.append("images", imageFiles);
-          }
+          imgArray.forEach(file=>{
+          formData.append("images", file);
+          })
 
           if (videoFile) {
             formData.append("video", videoFile);
