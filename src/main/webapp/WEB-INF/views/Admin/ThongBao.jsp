@@ -242,7 +242,7 @@
 								<td>${tb.matb}</td>
 								<td>${tb.thoigian}</td>
 								<td>${tb.noidung}</td>
-								<td>${tb.nguoidung.taikhoan.tenDN}</td>
+								<td>${tb.nguoidung.email}</td>
 							</tr>
 						</c:forEach>
                     </tbody>
@@ -279,10 +279,10 @@
             aria-hidden="true"
           >
             <div class="modal-dialog modal-lg" role="document">
-              <div class="modal-content">
+              <form class="modal-content" action="ThongBao.html" method="post">
                 <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel">
-                    Tạo thông báo cho người dùng
+                   Gửi thông báo cho người dùng
                   </h5>
                   <button
                     type="button"
@@ -294,36 +294,34 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form>
+                  <div >
                     <div class="form-group">
-                      <label for="userID" class="col-form-label"
-                        >Mã Người dùng</label
-                      >
-                      <input type="text" class="form-control" id="userID" />
+                      <label for="userID" class="col-form-label">
+                      Địa chỉ email người gửi</label>
+                      <input type="text" class="form-control" name = "from" id="userID" />
                     </div>
                     <div class="form-group">
-                      <label for="userID" class="col-form-label"
-                        >Địa chỉ Email</label
-                      >
-                      <input type="email" class="form-control" id="notiEmail" />
+                      <label for="userID" class="col-form-label">
+                        Địa chỉ email người nhận</label> 
+                      <input type="email" name="to" class="form-control" id="notiEmail" />
                     </div>
                     <div class="form-group">
-                      <label for="userID" class="col-form-label"
-                        >Tiêu đề thông báo</label
-                      >
-                      <input type="text" class="form-control" id="notiTitle" />
+                      <label for="userID" class="col-form-label">
+                        Tiêu đề thông báo</label>
+                      <input type="text" name="subject" class="form-control" id="notiTitle" lang="vi" />
                     </div>
                     <div class="form-group">
-                      <label for="noti-content" class="col-form-label"
-                        >Nội dung thông báo:</label
-                      >
+                      <label for="noti-content" class="col-form-label">
+                        Nội dung thông báo:</label>
                       <textarea
                         class="form-control"
                         rows="5"
                         id="noti-content"
+                        name="body"
+                        lang="vi"
                       ></textarea>
                     </div>
-                  </form>
+                  </div>
                 </div>
                 <div class="modal-footer">
                   <button
@@ -333,11 +331,12 @@
                   >
                     Hủy
                   </button>
-                  <button type="button" id="noti-submit" class="btn btn-primary">
+                  <a href="../admin/ThongBao.htm?guiMail">
+                  <button type="submit" name ="guiMail"id="noti-submit" class="btn btn-primary">
                     Gửi thông báo
                   </button>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>

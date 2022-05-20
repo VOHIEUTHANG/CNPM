@@ -21,8 +21,23 @@ public class BaiVietDao {
 		finally{
 		session.close();
 	}
+	}
 
-    }
+	public List < BaiVietEntity > getAllForParticularUser(String id)
+	{
+		try { session = HibernateUtil.getSessionFactory().openSession();
+			String hql = "FROM BaiVietEntity B WHERE B.MaND = NguoiDungEntity." + id;
+			return session.createQuery(hql, BaiVietEntity.class).list();
+		}
+		catch(Exception e){
+			return null;
+		}
+		finally{
+			session.close();
+		}
+
+	}
+
     public List<BaiVietEntity> getById(Long id) {
         try  {
 			session= HibernateUtil.getSessionFactory().openSession();

@@ -36,9 +36,9 @@ prefix="form"%>
       @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap");
     </style>
     <!-- BOOSTRAP-->
-    <title>ĐĂNG TIN</title>
+    <title>Cập nhật bài viết</title>
   </head>
-  <body id="app">
+  <body id="app" load="documentLoaded()">
     <div id="toast"></div>
     <header id="header">
       <div class="header-wrapper">
@@ -67,7 +67,7 @@ prefix="form"%>
                   <span>${user.tenND}</span>
                 </div>
                 <div class="acc-avatar">
-                  <img src="${user.linkanhdaidien}" alt="avatar" />
+                  <img src="../${user.linkanhdaidien}" alt="avatar" />
                 </div>
               </div>
               <div class="acc-setting">
@@ -89,7 +89,10 @@ prefix="form"%>
                   <span>Đổi mật khẩu</span>
                 </a>
                 <div class="separator"></div>
-                <a href="<c:url value='/logout' />" class="acc-setting-item logout">
+                <a
+                  href="<c:url value='/logout' />"
+                  class="acc-setting-item logout"
+                >
                   <i class="fa-solid fa-right-from-bracket"></i>
                   <span>Đăng xuất</span>
                 </a>
@@ -101,7 +104,7 @@ prefix="form"%>
           <nav class="navigation">
             <ul class="nav-list">
               <li class="nav-item">
-                <a class="nav-link" href="../baiviet/index">Trang chủ</a>
+                <a class="nav-link" href="../../baiviet/index">Trang chủ</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Khám phá</a>
@@ -113,12 +116,16 @@ prefix="form"%>
                 <a class="nav-link" href="#">Dịch vụ</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="../nguoidung/trangcanhan">Cá nhân</a>
+                <a class="nav-link" href="../../nguoidung/trangcanhan"
+                  >Cá nhân</a
+                >
               </li>
             </ul>
             <div class="post">
-              <i class="fa-solid fa-pen-to-square"></i>
-              <span>Đăng tin</span>
+              <a href="../../nguoidung/dangbai">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <span>Đăng tin</span>
+              </a>
             </div>
           </nav>
         </div>
@@ -180,13 +187,13 @@ prefix="form"%>
             </a>
             /
             <a href="#" class="mb-detail">
-              <span>Chỉnh sửa bài viết</span>
+              <span>Cập nhật bài viết</span>
             </a>
           </div>
           <div class="main-content">
             <div class="left-content">
               <div class="container">
-                <p class="h1 text-center form-title">Chỉnh sửa bài viết</p>
+                <p class="h1 text-center form-title">Cập nhật bài viết</p>
 
                 <div class="section">
                   <form id="info-form" enctype="multipart/form-data">
@@ -194,11 +201,13 @@ prefix="form"%>
                     <hr />
                     <div class="form-group">
                       <label for="form-province"
+
                         >Tỉnh thành Phố <span style="color: red">*</span>
                       </label>
                       <select
                         name="province"
                         class="form-control"
+                         data-value = "${post.chitietbaiviet.tinhtp}"
                         id="form-province"
                       ></select>
                       <span class="form-message"></span>
@@ -210,6 +219,7 @@ prefix="form"%>
                       <select
                         name="district"
                         class="form-control"
+                        data-value = "${post.chitietbaiviet.quanhuyen}"
                         id="form-district"
                       >
                         <option value="">Chọn Quận Huyện</option>
@@ -222,6 +232,7 @@ prefix="form"%>
                       </label>
                       <select
                         name="wards"
+                        data-value = "${post.chitietbaiviet.phuongxa}"
                         class="form-control"
                         id="form-commue"
                       >
@@ -237,6 +248,7 @@ prefix="form"%>
                         class="form-control"
                         id="form-street"
                         placeholder="Ví dụ: 14/1c đường 359"
+                        value= "${post.diachi}"
                       />
                       <span class="form-message"></span>
                     </div>
@@ -250,6 +262,7 @@ prefix="form"%>
                         name="title"
                         type="text"
                         class="form-control"
+                        value="${post.tieude}"
                         id="form-title"
                       />
                       <span class="form-message"></span>
@@ -268,11 +281,15 @@ prefix="form"%>
                     </div>
                     <div class="form-group">
                       <label for="form-price"
-                        >Giá cho thuê (lưu ý đơn vị là triệu VND)<span style="color: red">*</span>
+                        >Giá cho thuê (lưu ý đơn vị là triệu VND)<span
+                          style="color: red"
+                          >*</span
+                        >
                       </label>
                       <input
                         name="price"
                         type="text"
+                        value = "${post.gia}"
                         class="form-control"
                         id="form-price"
                         placeholder="Đơn vị: triệu VND"
@@ -285,6 +302,7 @@ prefix="form"%>
                       </label>
                       <input
                         name="area"
+                         value = "${post.dientich}"
                         type="text"
                         class="form-control"
                         id="form-area"
@@ -306,12 +324,20 @@ prefix="form"%>
                               id="fileUpload"
                               multiple
                               accept=".jpg, .png"
-                              data-max_length="20"
+                              data-max_length="6"
                               class="upload__inputfile"
                             />
                           </label>
                         </div>
-                        <div class="upload__img-wrap"></div>
+                        <div class="upload__img-wrap">
+                        <c:forEach var="image" items="${images}">
+                            <div class="upload__img-box dataFill" >
+                              <div style="background-image: url(../../${image.linkanh})" class="img-bg">
+                                <div class="upload__img-close"></div>
+                              </div>
+                            </div>
+                        </c:forEach>
+                        </div>
                         <span class="form-message imageMessage"></span>
                       </div>
                     </div>
@@ -330,10 +356,7 @@ prefix="form"%>
                               type="file"
                               id="video_input"
                               accept="video/mp4,video/x-m4v,video/*"
-                              data-max_length="20"
-                              class="upload__inputfile"
-                              multiple
-                              data-max_length="20"
+                              class="upload_videoFile"
                             />
                           </label>
                         </div>
@@ -357,7 +380,6 @@ prefix="form"%>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </main>
@@ -372,7 +394,20 @@ prefix="form"%>
     <script src="<c:url value ='/resources/js/global.js'/>"></script>
     <script src="<c:url value ='/resources/js/validateLibrary.js'/>"></script>
     <script src="<c:url value ='/resources/js/toast.js'/>"></script>
-    <script src="<c:url value ='/resources/js/post.js'/>"></script>
+    <script src="<c:url value ='/resources/js/update.js'/>"></script>
     <script src="<c:url value='/resources/js/signedIn.js'/>"></script>
+    <script>
+        $(()=>{
+            const imageLength = $('.upload__img-box.dataFill').length;
+            const videoURL = "${video.linkvideo}";
+            if(videoURL){
+                $("#video-tag").attr('src',`../../${videoURL}`);
+            }
+            initialText = "${post.chitietbaiviet.mota}".replaceAll('//#','\n');
+            $("#form-desc").text(initialText);
+
+
+        })
+    </script>
   </body>
 </html>

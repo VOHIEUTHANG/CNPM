@@ -104,8 +104,8 @@ public class AjaxAPIController {
         bv.setNguoidung(currentUser);
         int result = bvD.insertBaiViet(bv);
         if(result == 1){
-            List <BaiVietEntity> postList =  bvD.getAll();
-            System.out.println(postList.size());
+            List <BaiVietEntity> postList =  bvD.getAllForParticularUser(currentUser.getMaND().toString());
+
             BaiVietEntity currentPost = postList.get(postList.size()-1);
 
             AnhDao anhDao =new AnhDao();
@@ -130,7 +130,8 @@ public class AjaxAPIController {
             ctbv.Insert(ct);
 
         }else{
-            System.out.println("Error !");
+            System.out.println("Lỗi insert bài viết mới !");
+            return "0";
         }
 
         return data.toString();

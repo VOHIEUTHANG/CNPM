@@ -335,7 +335,6 @@
      rawText = rawText.replaceAll("//#//#","//#");
     rawText = rawText.replaceAll("//#","<br>");
      $("#description").html(rawText);
-     console.log(rawText);
     </script>
 </body>
 

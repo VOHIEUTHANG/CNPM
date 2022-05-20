@@ -329,11 +329,8 @@ prefix="form"%>
                             <input
                               type="file"
                               id="video_input"
+                               class="upload_videoFile"
                               accept="video/mp4,video/x-m4v,video/*"
-                              data-max_length="20"
-                              class="upload__inputfile"
-                              multiple
-                              data-max_length="20"
                             />
                           </label>
                         </div>
