@@ -257,7 +257,7 @@ public class AjaxAPIController {
         String username = data.getString("username");
         System.out.println(fullName);
         System.out.println(password);
-        return req.getParameter("account-info").toString();
+        return data.toString();
     }
 
     @GetMapping("/user-data")

@@ -43,7 +43,7 @@ prefix="c"%> <%@ taglib prefix="tg" tagdir="/WEB-INF/tags"%>
       >
         <div class="sign">
           <div class="form">
-            <form action="" id="signup-form">
+            <form  id="signup-form">
               <h2>Đăng Ký</h2>
               <div class="form-group">
                 <input
@@ -142,6 +142,7 @@ prefix="c"%> <%@ taglib prefix="tg" tagdir="/WEB-INF/tags"%>
           ),
         ],
         onSubmit: function (userInfo) {
+          e.preventDefault();
           const formData = new FormData();
           formData.append("account-info", JSON.stringify(userInfo));
           console.log(userInfo);

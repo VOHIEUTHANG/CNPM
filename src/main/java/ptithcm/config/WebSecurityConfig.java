@@ -25,11 +25,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.addFilterBefore(new EncodingFilter(), ChannelProcessingFilter.class);
 
-        // nhá»¯ng link cÃ³ báº¯t Ä‘áº§u báº±ng /nguoidung báº¯t Ä‘Äƒng nháº­p quyá»�n USER hay ADMIN Ä‘á»�u dc
+
         http.authorizeRequests().antMatchers("/nguoidung/**").hasAnyAuthority("USER","ADMIN");
-        // Nhá»¯ng link cÃ³ /baiviet khÃ´ng cáº§n Ä‘Äƒng nháº­p
+
         http.authorizeRequests().antMatchers("/baiviet/**","/resources/**","/Storage/**","/mail/**").permitAll();
-        //Nhá»¯ng link cÃ³ /admin báº¯t buá»™c pháº£i cÃ³ quyá»�n admin
         http.authorizeRequests().antMatchers("/admin/**").hasAuthority("ADMIN");
         //Những người quyền User mà vào trang Admin sẽ đẩy qua page 403
         http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
