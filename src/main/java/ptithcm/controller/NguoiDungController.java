@@ -130,20 +130,7 @@ public class NguoiDungController {
        return "user/trangcanhan";
 	}
 
-	@RequestMapping(value = "/setan",method=RequestMethod.GET)
-	public @ResponseBody String SetAn(HttpServletRequest request){
-		Long mabaiviet= Long.parseLong(request.getParameter("mabaiviet"));
-	    System.out.println(mabaiviet);
-		NguoiDungDao userDao = new NguoiDungDao();
-		String username= userService.currentUserName();
-		TaiKhoanEntity tk= userDao.findByUserName(username);
-		BaiVietDao bv= new BaiVietDao();
-		BaiVietEntity bv1= bv.getById(mabaiviet).get(0);
-		if(tk.getNguoidung().getMaND()== bv1.getNguoidung().getMaND())
-			if(bv.SetAn(bv1))
-				return "1";
-		return "0";
-	}
+
 
 	@RequestMapping(value="/dangxuat",method=RequestMethod.GET)
 	public String dangxuat(){

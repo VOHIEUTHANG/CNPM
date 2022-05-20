@@ -6,7 +6,6 @@ public class User {
     private String diachi;
     private String linkanhdaidien;
     private String tenND;
-
     public User() {
 
     }

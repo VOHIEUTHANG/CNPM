@@ -62,7 +62,7 @@ public class AjaxAPIController {
         return uniqueKey.toString()+fileExtension;
     }
 
-    @RequestMapping("/formDagnKy")
+    @RequestMapping("/dangky")
     public String getForm(){
         return "/user/signup-page";
     }
@@ -198,7 +198,6 @@ public class AjaxAPIController {
         String address = data.getString("address");
         String phoneNumber = data.getString("phoneNumber");
         String email = data.getString("email");
-
          return req.getParameter("userInfo").toString();
     }
 
@@ -236,7 +235,6 @@ public class AjaxAPIController {
         String username = data.getString("username");
         System.out.println(fullName);
         System.out.println(password);
-
         return req.getParameter("account-info").toString();
     }
 
