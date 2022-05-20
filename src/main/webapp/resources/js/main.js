@@ -77,8 +77,8 @@ function closeAllSelect(elmnt) {
 
 document.addEventListener("click", closeAllSelect);
 
-loginHandler = ()=>{
-     const loginForm = document.querySelector(".form-login");
+$(()=>{
+const loginForm = document.querySelector(".form-login");
       const loginBtn = document.querySelector(".btn-login");
       const loginCloseBtn = document.querySelector(".btn-close");
       const loginOverlay = document.querySelector(".overlay-login");
@@ -114,5 +114,5 @@ loginHandler = ()=>{
       formSign.onclick = (e) => {
         e.stopPropagation();
       };
-}
+})
 

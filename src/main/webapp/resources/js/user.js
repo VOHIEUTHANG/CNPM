@@ -51,13 +51,38 @@ $(() => {
               contentType: false,
               cache: false,
               timeout: 600000,
-              success: function (data) {
-                toast({
-                  title: "Cập nhật thông tin thành công!",
-                  message: "Thông tin đã được cập nhật thành công !",
-                  type: "success",
-                  duration: 5000,
-                });
+              success: function (response) {
+                if (response === "1") {
+                       toast({
+                         title: "Cập nhật thành công !",
+                         message: "Thông tin của bạn đã được cập nhật thành công !",
+                         type: "success",
+                         duration: 5000,
+                       });
+                     } else if (response.startsWith("../Storage/Images/")) {
+                       toast({
+                         title: "Cập nhật thành công !",
+                         message: "Thông tin của bạn đã được cập nhật thành công !",
+                         type: "success",
+                         duration: 5000,
+                       });
+                       $(".acc-avatar > img").attr("src", response);
+                     } else if (response === "0") {
+                       toast({
+                         title: "Có lỗi xảy ra !",
+                         message: "Có lỗi xảy ra khi cập nhật thông tin dưới cơ sở dữ liệu !",
+                         type: "error",
+                         duration: 5000,
+                       });
+                     } else {
+                       toast({
+                         title: "Có lỗi xảy ra !",
+                         message:
+                           "Phản hồi trả về từ server không xác định, liên hệ quản trị viên để giải quyết !",
+                         type: "error",
+                         duration: 5000,
+                       });
+                     }
               },
               error: function () {
                 toast({
@@ -110,12 +135,53 @@ $(() => {
                     cache: false,
                     timeout: 600000,
                     success: function (data) {
-                      toast({
-                        title: "Thay đổi mật khẩu thành công!",
-                        message: "Cập nhật mật khẩu trong cơ sở dữ liệu thành công !",
-                        type: "success",
-                        duration: 5000,
-                      });
+                     switch (data) {
+                       case "1":
+                             toast({
+                               title: "Cập nhật mật khẩu thành công!",
+                               message: "Cập nhật mật khẩu thành công, vui lòng đăng nhập lại !",
+                               type: "success",
+                               duration: 2000,
+                             });
+                             setTimeout(() => {
+                               const text = $(".custom-toast-content > .body > .text-center");
+                               $("#myCustomToast").addClass("active");
+                               function timeout(time = 5) {
+                                 const IntervalID = setInterval(() => {
+                                   text.text(--time);
+                                   if (time === 0) {
+                                     clearInterval(IntervalID);
+                                     window.location = "../login";
+                                   }
+                                 }, 1000);
+                               }
+                               timeout(5);
+                             }, 2000);
+                         break;
+                       case "0":
+                         toast({
+                           title: "Có lỗi xảy ra !",
+                           message: "Mật khẩu không trùng khớp !",
+                           type: "error",
+                           duration: 5000,
+                         });
+                         break;
+                       case "-1":
+                         toast({
+                           title: "Mật khẩu cũ và mật khẩu mới hoàn toàn trùng khớp !",
+                           message: "Vui lòng nhập mật khẩu mới khác mật khẩu cũ để thay đổi !",
+                           type: "warning",
+                           duration: 5000,
+                         });
+                         break;
+                       default:
+                         toast({
+                           title: "Dữ liệu trả về không thể xác nhận !",
+                           message: "Liên hệ quản trị viên để vá lỗi !",
+                           type: "warning",
+                           duration: 5000,
+                         });
+                     }
                     },
                     error: function () {
                       toast({
@@ -182,6 +248,7 @@ $(() => {
       $(".mana-dropdown").removeClass("active");
   });
   $(".mana-item--hide").click(function (e) {
+    const _this = this;
     const ID = this.dataset.id;
     const formData = new FormData();
     formData.append('id',JSON.stringify({id:ID}));
@@ -195,9 +262,25 @@ $(() => {
       cache: false,
       timeout: 600000,
       success: function (data) {
+      if(data==="1"){
+        $(".mana-dropdown").hasClass("active") &&
+        $(".mana-dropdown").removeClass("active");
+        const targetElement = $(`.text-success.targetElement_${_this.dataset.id}`);
+        console.log(targetElement);
+        targetElement.removeClass('text-success');
+        targetElement.addClass('text-warning');
+        targetElement.text("Ẩn");
+      }else{
+      toast({
+                title: "Có lỗi upadate table BaiViet trong cơ sở dữ liệu !",
+                message: "Vui lòng liên hệ quản trị viên để giải quyết!",
+                type: "error",
+                duration: 5000,
+              });
+      }
         toast({
-          title: "Thay đổi mật khẩu thành công!",
-          message: "Cập nhật mật khẩu trong cơ sở dữ liệu thành công !",
+          title: "Thành công !",
+          message: "Ẩn bài viết  thành công !",
           type: "success",
           duration: 5000,
         });

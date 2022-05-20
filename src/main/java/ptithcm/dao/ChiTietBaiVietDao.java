@@ -9,8 +9,9 @@ import ptithcm.hibernate.HibernateUtil;
 import java.util.List;
 
 public class ChiTietBaiVietDao {
+    Session session;
     public  Integer Insert(ChiTietBaiVietEntity bv){
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();
         try {
             session.save(bv);

@@ -12,7 +12,7 @@
     <script src="https://kit.fontawesome.com/11a1459669.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
     <!-- css external links-->
-   
+
     <!-- google fonts -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
@@ -21,6 +21,6 @@
     <title>ĐĂNG TIN</title>
 </head>
 <body>
-      Dax guiwer mail
+      đã gửi mail
 </body>
 </html>

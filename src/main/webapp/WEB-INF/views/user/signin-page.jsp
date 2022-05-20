@@ -8,7 +8,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="../assets/images/short-icon.PNG" />
+    <link rel="icon" href="<c:url value='/resources/assets/images/Logo-icon.png'/>">
     <!-- fontawesome -->
     <script
       src="https://kit.fontawesome.com/11a1459669.js"

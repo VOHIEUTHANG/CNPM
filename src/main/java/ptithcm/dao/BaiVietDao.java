@@ -12,9 +12,16 @@ import ptithcm.hibernate.HibernateUtil;
 public class BaiVietDao {
 	Session session ;
     public List < BaiVietEntity > getAll() {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try { session = HibernateUtil.getSessionFactory().openSession();
             return session.createQuery("from BaiVietEntity", BaiVietEntity.class).list();
         }
+		catch(Exception e){
+		return null;
+	}
+		finally{
+		session.close();
+	}
+
     }
     public List<BaiVietEntity> getById(Long id) {
         try  {
@@ -69,12 +76,20 @@ public class BaiVietDao {
 		return 1;
 	}
 	public NguoiDungEntity getNguoidung(Long id) { 
-	Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+	try {session = HibernateUtil.getSessionFactory().getCurrentSession();
 	session.beginTransaction();
 	String hql = "FROM NguoiDungEntity where maND =:id";
 	Query query = session.createQuery(hql); query.setParameter("id", id); 
 	NguoiDungEntity list = (NguoiDungEntity) query.list().get(0); 
-	return list; }
+	return list;
+
+	}
+		catch(Exception e){
+		return null;
+	}
+		finally{
+		session.close();
+	}}
 	public boolean SetAn(BaiVietEntity bv){
 		session= HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();

@@ -12,6 +12,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
+    <link rel="icon" href="<c:url value='/resources/assets/images/Logo-icon.png'/>">
     <meta name="description" content="" />
     <meta name="author" content="" />
 <title>Thống kê </title>
@@ -88,7 +89,7 @@
                   <div class="dropdown-divider"></div>
                   <a
                     class="dropdown-item"
-                    href="#"
+                    href="<c:url value='/logout' />"
                     data-toggle="modal"
                     data-target="#logoutModal"
                   >

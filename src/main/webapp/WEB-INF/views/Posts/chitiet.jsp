@@ -6,7 +6,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="<c:url value='/resources/assets/images/short-icon.png'/> ">
+    <link rel="icon" href="<c:url value='/resources/assets/images/Logo-icon.png'/>">
+
     <!-- fontawesome -->
     <script src="https://kit.fontawesome.com/11a1459669.js" crossorigin="anonymous"></script>
     <!-- css external links-->
@@ -45,7 +46,7 @@
                            <span>${user.tenND}</span>
                          </div>
                          <div class="acc-avatar">
-                           <img src="${user.linkanhdaidien}" alt="avatar" />
+                           <img src="../${user.linkanhdaidien}" alt="avatar" />
                          </div>
                        </div>
                        <div class="acc-setting">
@@ -67,7 +68,7 @@
                            <span>Đổi mật khẩu</span>
                          </a>
                          <div class="separator"></div>
-                         <a href="#" class="acc-setting-item logout">
+                         <a href="<c:url value='/logout' />" class="acc-setting-item logout">
                            <i class="fa-solid fa-right-from-bracket"></i>
                            <span>Đăng xuất</span>
                          </a>
@@ -133,12 +134,18 @@
                             <div class="detail-post">
                                 <div class="dp-view">
                                     <ul class="dp-list">
+                                    <c:if test="${video != null}">
+                                        <li class="dp-item">
+                                                                                    <video class="video-item" controls src="<c:url value='/${video.linkvideo}'/>"
+                                                                                        alt="">
+                                                                                </li>
+                                    </c:if>
                                      <c:forEach var="item" items="${baiviet.getAnh()}">
                                         <li class="dp-item">
                                             <img src="<c:url value='/${item.getLinkanh()}'/>"
                                                 alt="">
                                         </li>
-                                        </c:forEach>
+                                     </c:forEach>
                                     </ul>
                                 </div>
                                 <div class="dp-control">
@@ -170,7 +177,7 @@
                                     <div class="die-address">
                                         <i class="fa-solid fa-location-dot"></i>
                                         <div class="die-value">
-                                            ${baiviet.diachi}, ${baiviet.chitietbaiviet.tinhtp}, ${baiviet.chitietbaiviet.quanhuyen}, ${baiviet.chitietbaiviet.phuongxa}
+                                            ${baiviet.diachi},${baiviet.chitietbaiviet.phuongxa}, ${baiviet.chitietbaiviet.quanhuyen} , ${baiviet.chitietbaiviet.tinhtp}
                                         </div>
                                     </div>
                                     <div class="die-time">
@@ -184,11 +191,11 @@
                                     <h3 class="did-title">
                                         Thông tin mô tả
                                     </h3>
-                                    <span>
+                                    <div id= "description" style="line-height: 2;">
                                        ${baiviet.chitietbaiviet.getMota()}
-                                    </span>
+                                    </div>
                                 </div>
-                                <div class="di-report">
+                                <div class="di-report" style="margin-top: 30px;">
                                     <i class="fa-solid fa-flag"></i>
                                     <span>Báo cáo bài viêt</span>
                                 </div>
@@ -267,7 +274,7 @@
                         <div class="main-sidebar">
                             <div class="ms-section owner-post">
                                 <div class="op-avatar">
-                                    <img src="${baiviet.nguoidung.linkanhdaidien}" alt="">
+                                    <img src="../${baiviet.nguoidung.linkanhdaidien}" alt="">
                                 </div>
                                 <h3 class="op-name">${baiviet.nguoidung.tenND}</h3>
                                 <a href="tel:+${baiviet.nguoidung.sdt}" class="btn-phone-link">
@@ -323,6 +330,13 @@
     <script src="<c:url value='/resources/js/global.js'/>"></script>
     <script src="<c:url value='/resources/js/detail.js'/>"></script>
     <script src="<c:url value='/resources/js/signedIn.js'/>"></script>
+    <script>
+    let rawText = $("#description").text().trim();
+     rawText = rawText.replaceAll("//#//#","//#");
+    rawText = rawText.replaceAll("//#","<br>");
+     $("#description").html(rawText);
+     console.log(rawText);
+    </script>
 </body>
 
 </html>

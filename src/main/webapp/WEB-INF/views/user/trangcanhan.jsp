@@ -26,6 +26,14 @@
 
         <body id="app">
           <div id="toast"></div>
+          <div id="myCustomToast">
+                <div class="custom-toast-content">
+                  <h3 class="heading">Chuyển hướng trang trong</h3>
+                  <div class="body">
+                    <div class="text-center">5</div>
+                  </div>
+                </div>
+              </div>
           <header id="header">
             <div class="header-wrapper">
               <div class="header-login">
@@ -72,7 +80,7 @@
                         <span>Đổi mật khẩu</span>
                       </a>
                       <div class="separator"></div>
-                      <a href="../login" class="acc-setting-item logout">
+                      <a href="<c:url value='/logout' />" class="acc-setting-item logout">
                         <i class="fa-solid fa-right-from-bracket"></i>
                         <span>Đăng xuất</span>
                       </a>
@@ -134,7 +142,7 @@
                         <label class="btn upload-avatar">
                           <i class="fa-solid fa-upload"></i>
                           <span>Tải ảnh</span>
-                          <input type="file" class="account-settings-fileinput">
+                          <input type="file" class="account-settings-fileinput" accept=".jpg, .png">
                       </div>
                       <hr class="border-light m-0">
                       <div class="card-body">
@@ -179,7 +187,7 @@
                                       <form action="" id="form-changePassword">
                                         <div class="form-group">
                                           <label class="form-label">Mật khẩu hiện tại</label>
-                                          <input type="currentPassword" name="password" class="form-control" />
+                                          <input type="password" name="password" class="form-control" />
                                           <span class="form-message"></span>
                                         </div>
                                         <div class="form-group">
@@ -224,6 +232,11 @@
                                                         <i class="fa-solid fa-calendar-xmark"></i>
                                                        Hết hạn: <span class="text-danger"> ${hethan}</span>
                                                        </div>
+                                                        <div class="w-100"></div>
+                                                        <div class="col">
+                                                        <i class="fa-solid fa-eye-slash"></i>
+                                                        Ẩn : <span class="text-warning"> ${an}</span>
+                                                        </div>
                                                      </div>
                                                    </div>
                                          </div>
@@ -279,7 +292,7 @@
                                                               <td>
                                                                 <c:choose>
                                                                 <c:when test="${post.isDisplay()}">
-                                                                <p class="text-success">Hiển thị</p>
+                                                                <p class="text-success targetElement_${post.mabaiviet}" >Hiển thị</p>
                                                                 </c:when>
                                                                 <c:when test="${!post.isDisplay()}" >
                                                                 <p class="text-warning">Ẩn</p>
@@ -315,7 +328,9 @@
                                                                        </c:when>
                                                                       </c:choose>
                                                                       <li class="mana-item">
-                                                                        <span class="mana-modify-btn">Chỉnh sửa</span>
+                                                                      <a href="./update-post">
+                                                                      <span class="mana-modify-btn">Chỉnh sửa</span>
+                                                                      </a>
                                                                       </li>
                                                                     </ul>
                                                                   </div>

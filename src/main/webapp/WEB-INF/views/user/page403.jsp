@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="<c:url value='/resources/assets/images/logo-icon.png'/>">
+    <link rel="icon" href="<c:url value='/resources/assets/images/Logo-icon.png'/>">
     <!-- fontawesome -->
     <script src="https://kit.fontawesome.com/11a1459669.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
@@ -22,6 +22,6 @@
 </head>
 <body>
       <h1>Cảnh báo: Bạn không có quyền truy cập vào địa chỉ này</h1>
-      <a href="./">Về trang chủ</a>
+      <a href="../">Về trang chủ</a>
 </body>
 </html>

@@ -89,7 +89,7 @@ prefix="form"%>
                   <span>Đổi mật khẩu</span>
                 </a>
                 <div class="separator"></div>
-                <a href="#" class="acc-setting-item logout">
+                <a href="<c:url value='/logout' />" class="acc-setting-item logout">
                   <i class="fa-solid fa-right-from-bracket"></i>
                   <span>Đăng xuất</span>
                 </a>
@@ -306,7 +306,7 @@ prefix="form"%>
                               id="fileUpload"
                               multiple
                               accept=".jpg, .png"
-                              data-max_length="20"
+                              data-max_length="6"
                               class="upload__inputfile"
                             />
                           </label>

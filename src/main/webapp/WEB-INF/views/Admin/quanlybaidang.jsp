@@ -14,6 +14,7 @@
     />
     <meta name="description" content="" />
     <meta name="author" content="" />
+    <link rel="icon" href="<c:url value='/resources/assets/images/Logo-icon.png'/>">
 <title>Thống kê bài đăng</title>
 <link
       href="<c:url value= '/resources/vendor/fontawesome-free/css/all.min.css'/>"
@@ -55,7 +56,7 @@
             <!-- Topbar Navbar -->
             <ul class="navbar-nav ml-auto">
               <!-- Nav Item - User Information -->
-              <li class="nav-item dropdown no-arrow">
+              <li class="nav-item dropdown no-arrow admin_Control">
                 <a
                   class="nav-link dropdown-toggle"
                   href="#"
@@ -86,7 +87,7 @@
                   <div class="dropdown-divider"></div>
                   <a
                     class="dropdown-item"
-                    href="#"
+                    href="<c:url value='/logout' />"
                     data-toggle="modal"
                     data-target="#logoutModal"
                   >

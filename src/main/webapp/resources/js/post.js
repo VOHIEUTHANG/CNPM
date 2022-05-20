@@ -4,7 +4,7 @@ const dataText = {
   district: "",
   wards: "",
 };
-const dataFiles = [];
+ var imgArray = [];
 (() => {
   return {
     getAddressHandler() {
@@ -64,21 +64,38 @@ const dataFiles = [];
     uploadImageFileHandler() {
       jQuery(document).ready(function () {
         var imgWrap = "";
-        var imgArray = [];
+        let isNotiCase1 = false;
+        let isNotiCase2 = false;
 
         $(".upload__inputfile").each(function () {
           $(this).on("change", function (e) {
             imgWrap = $(this).closest(".upload__box").find(".upload__img-wrap");
             var maxLength = $(this).attr("data-max_length");
-
             var files = e.target.files;
             var filesArr = Array.prototype.slice.call(files);
+
             filesArr.forEach(function (f, index) {
               if (!f.type.match("image.*")) {
+                toast({
+                  title: "Không đúng định dạng ảnh!",
+                  message: "Vui lòng chọn đúng định dạng! ",
+                  type: "error",
+                  duration: 5000,
+                });
                 return;
               }
 
               if (imgArray.length > maxLength) {
+                if(!isNotiCase1){
+                 isNotiCase1 = true;
+                 toast({
+                                        title: "Quá số lượng ảnh quy định (6 ảnh) !",
+                                        message: "Một bài đăng tối đa chỉ được phép có 6 ảnh !",
+                                        type: "error",
+                                        duration: 5000,
+                                 });
+
+                }
                 return false;
               } else {
                 var len = 0;
@@ -87,11 +104,19 @@ const dataFiles = [];
                     len++;
                   }
                 }
-                if (len > maxLength) {
+                if (len > maxLength-1) {
+                    if(!isNotiCase2){
+                    isNotiCase2 = true;
+                          toast({
+                               title: "Quá số lượng ảnh quy định (6 ảnh) !",
+                               message: "Một bài đăng tối đa chỉ được phép có 6 ảnh !",
+                               type: "error",
+                               duration: 5000,
+                          });
+                    }
                   return false;
                 } else {
                   imgArray.push(f);
-                  dataFiles.push(f);
                   var reader = new FileReader();
                   reader.onload = function (e) {
                     var html =
@@ -103,7 +128,6 @@ const dataFiles = [];
                       f.name +
                       "' class='img-bg'><div class='upload__img-close'></div></div></div>";
                     imgWrap.append(html);
-                    // iterator++;
                   };
                   reader.readAsDataURL(f);
                 }
@@ -119,6 +143,7 @@ const dataFiles = [];
           });
         });
         $("body").on("click", ".upload__img-close", function (e) {
+         console.log("imgArray",imgArray);
           var file = $(this).parent().data("file");
           for (var i = 0; i < imgArray.length; i++) {
             if (imgArray[i].name === file) {
@@ -248,17 +273,20 @@ const dataFiles = [];
           const imageFiles = imageInput[0].files;
           const videoFile = videoInput[0].files[0];
 
+          let desc = $("#form-desc").val().trim();
+          desc = desc.replaceAll("\n","//#");
+
           dataText.street = $("#form-street").val();
-          dataText.title = $("#form-title").val();
-          dataText.description = $("#form-desc").val();
+          dataText.title = $("#form-title").val().trim().replaceAll('\n',' ');
+          dataText.description = desc;
           dataText.price = $("#form-price").val();
           dataText.area = $("#form-area").val();
 
           formData.append("info", JSON.stringify(dataText));
 
-          for (let imageFile of imageFiles) {
-            formData.append("images", imageFile);
-          }
+          imgArray.forEach(file=>{
+          formData.append("images", file);
+          })
 
           if (videoFile) {
             formData.append("video", videoFile);
@@ -329,3 +357,8 @@ const dataFiles = [];
     },
   };
 })().run();
+
+
+
+
+

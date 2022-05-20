@@ -14,6 +14,7 @@
     />
     <meta name="description" content="" />
     <meta name="author" content="" />
+    <link rel="icon" href="<c:url value='/resources/assets/images/Logo-icon.png'/>">
 <title>Biểu đồ thống kê</title>
 <link
       href="<c:url value= '/resources/vendor/fontawesome-free/css/all.min.css'/>"
@@ -88,7 +89,7 @@
                   <div class="dropdown-divider"></div>
                   <a
                     class="dropdown-item"
-                    href="#"
+                    href="<c:url value='/logout' />"
                     data-toggle="modal"
                     data-target="#logoutModal"
                   >

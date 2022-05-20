@@ -121,7 +121,8 @@ public class BaiVietEntity {
 		return gia;
 	}
 	public void setGia(Float gia) {
-		this.gia = gia;
+		Double roundPrice  = (double) Math.round( Float.valueOf(gia * 10) / 10);
+		this.gia = Float.valueOf(String.valueOf(roundPrice));
 	}
 	public String getDiachi() {
 		return diachi;
@@ -161,11 +162,6 @@ public class BaiVietEntity {
 				", tinhtrang=" + tinhtrang +
 				", an=" + an +
 				", dientich=" + dientich +
-				", nguoidung=" + nguoidung +
-				", chitietbaiviet=" + chitietbaiviet +
-				", video=" + video +
-				", Anh=" + Anh +
-				", quangcao=" + quangcao +
 				'}';
 	}
 }

@@ -761,3 +761,12 @@
   margin-bottom: 20px;
   flex-direction: column;
 }
+
+
+.video-item{
+margin: 0 auto;
+ object-fit: cover;
+  max-height: 100%;
+  max-width: 100%;
+
+}

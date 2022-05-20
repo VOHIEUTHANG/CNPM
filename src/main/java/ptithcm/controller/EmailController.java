@@ -29,7 +29,7 @@ public class EmailController {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo("laiducmanh01@gmail.com");
         message.setSubject("demo");
-        message.setText("1 con vịt xòe ra 2 cái cánh");
+        message.setText("123");
         mailSender.send(message);
     }
     
