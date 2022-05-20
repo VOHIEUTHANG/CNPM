@@ -180,13 +180,13 @@ prefix="form"%>
             </a>
             /
             <a href="#" class="mb-detail">
-              <span>Đăng tin</span>
+              <span>Chỉnh sửa bài viết</span>
             </a>
           </div>
           <div class="main-content">
             <div class="left-content">
               <div class="container">
-                <p class="h1 text-center form-title">Đăng tin mới</p>
+                <p class="h1 text-center form-title">Chỉnh sửa bài viết</p>
 
                 <div class="section">
                   <form id="info-form" enctype="multipart/form-data">
@@ -306,7 +306,7 @@ prefix="form"%>
                               id="fileUpload"
                               multiple
                               accept=".jpg, .png"
-                              data-max_length="6"
+                              data-max_length="20"
                               class="upload__inputfile"
                             />
                           </label>
@@ -351,51 +351,13 @@ prefix="form"%>
                       type="submit"
                       class="button button--submit button--hl"
                     >
-                      Đăng tin
+                      LƯU THAY ĐỔI
                     </button>
                   </form>
                 </div>
               </div>
             </div>
-            <div class="right-content">
-              <div class="posting-instructions">
-                <div class="posting-instructions_header">
-                  HƯỚNG DẪN ĐĂNG TIN
-                </div>
-                <div class="posting-instructions_body">
-                  <ul>
-                    <li>
-                      <strong
-                        >Thông tin có dấu <span class="red_require">*</span> là
-                        bắt buộc.</strong
-                      >
-                    </li>
-                    <li>
-                      <strong
-                        >Nội dung phải viết bằng tiếng Việt có dấu.</strong
-                      >
-                    </li>
-                    <li>
-                      <strong>Tiêu đề tin không dài quá 100 kí tự.</strong>
-                    </li>
-                    <li>
-                      Các bạn nên điền đầy đủ thông tin vào các mục để tin đăng
-                      có hiệu quả hơn.
-                    </li>
-                    <li>
-                      Để tăng độ tin cậy và tin rao được nhiều người quan tâm
-                      hơn, hãy sửa vị trí tin rao của bạn trên bản đồ bằng cách
-                      kéo icon tới đúng vị trí của tin rao.
-                    </li>
-                    <li>
-                      Tin đăng có hình ảnh rõ ràng sẽ được xem và gọi gấp nhiều
-                      lần so với tin rao không có ảnh. Hãy đăng ảnh để được giao
-                      dịch nhanh chóng!
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+
           </div>
         </div>
       </main>

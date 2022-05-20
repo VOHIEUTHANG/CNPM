@@ -18,6 +18,7 @@ import ptithcm.dao.NguoiDungDao;
 import ptithcm.entity.BaiVietEntity;
 import ptithcm.entity.NguoiDungEntity;
 import ptithcm.entity.TaiKhoanEntity;
+import ptithcm.entity.VideoEntity;
 import ptithcm.service.UserService;
 @Controller
 @RequestMapping("/baiviet")
@@ -30,12 +31,18 @@ public class BaiVietController {
         NguoiDungDao userDao = new NguoiDungDao();
         String username= userService.currentUserName();
         TaiKhoanEntity tk= userDao.findByUserName(username);
+
         if(tk != null) {
             model.addAttribute("user",tk.getNguoidung());
         }
 
         List<BaiVietEntity> b = bVietDao.getById(id);
         model.addAttribute("baiviet",b.get(0));
+
+        if(b.get(0).getVideo().size()>0){
+            model.addAttribute("video",b.get(0).getVideo().iterator().next());
+        }
+
         return "Posts/chitiet";
     }
     @RequestMapping("/index")

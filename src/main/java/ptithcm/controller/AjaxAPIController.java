@@ -195,13 +195,29 @@ public class AjaxAPIController {
     @RequestMapping(value = "/post-user-general", method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
     @ResponseBody
     public String getUserInfo(@RequestParam("avatar") MultipartFile imageFile,HttpServletRequest req) throws IOException {
-        String path = writeFile(imageFile,"Images");
+        NguoiDungDao userDao = new NguoiDungDao();
+        String username= userService.currentUserName();
+        TaiKhoanEntity tk= userDao.findByUserName(username);
+        NguoiDungEntity user = tk.getNguoidung();
+
+        String path = "../Storage/Images/" + writeFile(imageFile,"Images");
         JSONObject data= new JSONObject(req.getParameter("userInfo"));
         String fullName = data.getString("fullName");
         String address = data.getString("address");
         String phoneNumber = data.getString("phoneNumber");
         String email = data.getString("email");
-         return req.getParameter("userInfo").toString();
+
+        user.setDiachi(address);
+        user.setEmail(email);
+        user.setSdt(phoneNumber);
+        user.setLinkanhdaidien(path);
+        user.setTenND(fullName);
+        int result = userDao.updateUser(user);
+        if(result == 1){
+            return path;
+        }else {
+            return "0";
+        }
     }
 
     @RequestMapping(value = "/post-user-general-no-avatar", method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
@@ -212,7 +228,23 @@ public class AjaxAPIController {
         String address = data.getString("address");
         String phoneNumber = data.getString("phoneNumber");
         String email = data.getString("email");
-        return req.getParameter("userInfo").toString();
+
+        NguoiDungDao userDao = new NguoiDungDao();
+        String username= userService.currentUserName();
+        TaiKhoanEntity tk= userDao.findByUserName(username);
+        NguoiDungEntity user = tk.getNguoidung();
+
+        user.setDiachi(address);
+        user.setEmail(email);
+        user.setSdt(phoneNumber);
+        user.setTenND(fullName);
+
+        int result = userDao.updateUser(user);
+        if(result == 1){
+            return "1";
+        }else {
+            return "0";
+        }
     }
 
     @RequestMapping(value = "/post-user-change-password", method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")

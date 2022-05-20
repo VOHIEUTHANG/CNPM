@@ -7,6 +7,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import ptithcm.entity.BaiVietEntity;
+import ptithcm.entity.NguoiDungEntity;
 import ptithcm.entity.TaiKhoanEntity;
 import ptithcm.entity.TenQuyenEntity;
 import ptithcm.hibernate.HibernateUtil;
@@ -44,6 +45,25 @@ public class NguoiDungDao {
 		}
 		return 1;
 	}
+
+	public int updateUser(NguoiDungEntity user){
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction t = session.beginTransaction();
+		try {
+			session.update(user);
+			t.commit();
+			return 1;
+		}
+		catch (Exception e) {
+			t.rollback();
+			e.printStackTrace();
+			return 0;
+		}
+		finally {
+			session.close();
+		}
+	}
+
     public TenQuyenEntity getTenQuyen(Integer id) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
