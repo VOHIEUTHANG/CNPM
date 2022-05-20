@@ -15,9 +15,12 @@ public class MailConfig {
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
           
-        mailSender.setUsername("ducmanhlai22@gmail.com");
-        mailSender.setPassword("cvxqxbcklntoebgt");
+        mailSender.setUsername("timtro03@gmail.com");
+        mailSender.setPassword("garsowygoeggzaxj");
+        mailSender.setDefaultEncoding("UTF-8");
         Properties props = mailSender.getJavaMailProperties();
+        props.setProperty("mail.smtp.allow8bitmime", "true");
+        props.setProperty("mail.smtps.allow8bitmime", "true");
         props.put("mail.smtp.ssl.protocols", "TLSv1.2");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
