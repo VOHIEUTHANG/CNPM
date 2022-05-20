@@ -9,6 +9,8 @@
     inset: 0;
 }
 .dp-view{
+    position: relative;
+    z-index:10;
   height: 400px;
   overflow:hidden;
   border-radius: 4px;
@@ -64,6 +66,7 @@
     flex-shrink: 0;
     width: 100%;
     border-radius: 12px;
+    background-color: black;
 }
 .dp-item > img{
     max-width: 100%;

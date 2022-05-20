@@ -134,12 +134,18 @@
                             <div class="detail-post">
                                 <div class="dp-view">
                                     <ul class="dp-list">
+                                    <c:if test="${video != null}">
+                                        <li class="dp-item">
+                                                                                    <video class="video-item" controls src="<c:url value='/${video.linkvideo}'/>"
+                                                                                        alt="">
+                                                                                </li>
+                                    </c:if>
                                      <c:forEach var="item" items="${baiviet.getAnh()}">
                                         <li class="dp-item">
                                             <img src="<c:url value='/${item.getLinkanh()}'/>"
                                                 alt="">
                                         </li>
-                                        </c:forEach>
+                                     </c:forEach>
                                     </ul>
                                 </div>
                                 <div class="dp-control">
@@ -325,7 +331,6 @@
     <script src="<c:url value='/resources/js/detail.js'/>"></script>
     <script src="<c:url value='/resources/js/signedIn.js'/>"></script>
     <script>
-
     let st = document.getElementById("description").innerText;
     st.replaceAll('^&*','\n');
     document.getElementById("description").innerHTML=st;
