@@ -103,7 +103,7 @@ public class AjaxAPIController {
         bv.setNguoidung(currentUser);
         int result = bvD.insertBaiViet(bv);
         if(result == 1){
-            List <BaiVietEntity> postList =  bvD.getAll();
+            List <BaiVietEntity> postList =  bvD.getAllForParticularUser(currentUser.getMaND().toString());
 
             BaiVietEntity currentPost = postList.get(postList.size()-1);
 
