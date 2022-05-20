@@ -51,13 +51,30 @@ $(() => {
               contentType: false,
               cache: false,
               timeout: 600000,
-              success: function (data) {
-                toast({
-                  title: "Cập nhật thông tin thành công!",
-                  message: "Thông tin đã được cập nhật thành công !",
-                  type: "success",
-                  duration: 5000,
-                });
+              success: function (response) {
+                if (response === "1") {
+                        toast({
+                          title: "Cập nhật thành công !",
+                          message: "Thông tin của bạn đã được cập nhật thành công !",
+                          type: "success",
+                          duration: 5000,
+                        });
+                      } else if (response === "0") {
+                        toast({
+                          title: "Có lỗi xảy ra !",
+                          message: "Có lỗi xảy ra khi cập nhật thông tin dưới cơ sở dữ liệu !",
+                          type: "error",
+                          duration: 5000,
+                        });
+                      } else {
+                        toast({
+                          title: "Có lỗi xảy ra !",
+                          message:
+                            "Phản hồi trả về từ server không xác định, liên hệ quản trị viên để giải quyết !",
+                          type: "error",
+                          duration: 5000,
+                        });
+                      }
               },
               error: function () {
                 toast({

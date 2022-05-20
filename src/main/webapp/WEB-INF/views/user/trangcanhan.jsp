@@ -142,7 +142,7 @@
                         <label class="btn upload-avatar">
                           <i class="fa-solid fa-upload"></i>
                           <span>Tải ảnh</span>
-                          <input type="file" class="account-settings-fileinput">
+                          <input type="file" class="account-settings-fileinput" accept=".jpg, .png">
                       </div>
                       <hr class="border-light m-0">
                       <div class="card-body">
