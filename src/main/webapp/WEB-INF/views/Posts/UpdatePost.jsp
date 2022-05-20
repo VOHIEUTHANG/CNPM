@@ -36,7 +36,7 @@ prefix="form"%>
       @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap");
     </style>
     <!-- BOOSTRAP-->
-    <title>ĐĂNG TIN</title>
+    <title>Cập nhật bài viết</title>
   </head>
   <body id="app" load="documentLoaded()">
     <div id="toast"></div>
@@ -187,13 +187,13 @@ prefix="form"%>
             </a>
             /
             <a href="#" class="mb-detail">
-              <span>Chỉnh sửa bài viết</span>
+              <span>Cập nhật bài viết</span>
             </a>
           </div>
           <div class="main-content">
             <div class="left-content">
               <div class="container">
-                <p class="h1 text-center form-title">Chỉnh sửa bài viết</p>
+                <p class="h1 text-center form-title">Cập nhật bài viết</p>
 
                 <div class="section">
                   <form id="info-form" enctype="multipart/form-data">
