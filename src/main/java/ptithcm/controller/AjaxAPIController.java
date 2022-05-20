@@ -3,6 +3,7 @@ import com.nimbusds.oauth2.sdk.Response;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToFile;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -11,12 +12,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ptithcm.Object.User;
 import ptithcm.dao.*;
 import ptithcm.entity.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -216,11 +219,30 @@ public class AjaxAPIController {
     @ResponseBody
     public String getUserInfo(HttpServletRequest req) throws IOException {
         JSONObject data= new JSONObject(req.getParameter("password"));
+        NguoiDungDao userDao = new NguoiDungDao();
+        String username= userService.currentUserName();
+        TaiKhoanEntity tk= userDao.findByUserName(username);
+        TaiKhoanDao tkDao = new TaiKhoanDao();
+        String currentPassword = tk.getMatkhau();
+
         String password = data.getString("password");
         String newPassword = data.getString("newPassword");
+
         System.out.println(password);
         System.out.println(newPassword);
-        return req.getParameter("password").toString();
+
+            if(password.equals(newPassword)){
+                return "-1";
+            }else{
+                if(passwordEncoder.matches(password,currentPassword))
+                {
+                    tk.setMatkhau(passwordEncoder.encode(newPassword));
+                    tkDao.UpdateAccount(tk);
+                    return "1";
+                }else{
+                    return "0";
+                }
+            }
     }
 
 
