@@ -35,7 +35,7 @@
                        <button class="button btn-login">Đăng nhập</button>
                      </div>
                      <div class="acc-sign acc-component">
-                       <button class="button button--hl">Đăng ký</button>
+                        <a href="../../dangki"><button class="button button--hl">Đăng ký</button></a>
                      </div>
                      <div class="acc-search acc-component">
                        <i class="fa-solid fa-magnifying-glass"></i>

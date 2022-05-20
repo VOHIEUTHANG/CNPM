@@ -7,6 +7,7 @@ import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToFile;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -44,7 +45,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/api")
 public class AjaxAPIController {
     @Autowired
-    PasswordEncoder passwordEncoder;
+    BCryptPasswordEncoder passwordEncoder;
     @Autowired
     ServletContext context;
     @Autowired
@@ -173,10 +174,8 @@ public class AjaxAPIController {
             BaiVietEntity currentPost = postList.get(postList.size()-1);
             AnhDao anhDao =new AnhDao();
             ChiTietBaiVietDao ctbv= new ChiTietBaiVietDao();
-
             ct.setMabaiviet(currentPost.getMabaiviet());
             ct.setBaiviet(currentPost);
-
             for(MultipartFile file: files){
                 AnhEntity a = new AnhEntity();
                 a.setLinkanh("Storage/Images/"+ writeFile(file,"Images"));
@@ -199,7 +198,6 @@ public class AjaxAPIController {
         String username= userService.currentUserName();
         TaiKhoanEntity tk= userDao.findByUserName(username);
         NguoiDungEntity user = tk.getNguoidung();
-
         String path = "../Storage/Images/" + writeFile(imageFile,"Images");
         JSONObject data= new JSONObject(req.getParameter("userInfo"));
         String fullName = data.getString("fullName");
@@ -278,18 +276,12 @@ public class AjaxAPIController {
     }
 
 
-    @RequestMapping(value = "/post-user-signup", method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
+    @RequestMapping(value = "/user-signup", method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
     @ResponseBody
     public String getAccountInfo(HttpServletRequest req) throws IOException {
         JSONObject data= new JSONObject(req.getParameter("account-info"));
-        String fullName = data.getString("fullname");
-        String password = data.getString("password");
-        String email = data.getString("email");
-        String phoneNumber = data.getString("phoneNumber");
-        String username = data.getString("username");
-        System.out.println(fullName);
-        System.out.println(password);
-        return data.toString();
+        UserService se= new UserService();
+        return  se.Signup(data,  passwordEncoder);
     }
 
     @GetMapping("/user-data")
