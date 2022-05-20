@@ -28,35 +28,6 @@ public class NguoiDungController {
 	PasswordEncoder passwordEncoder;
 	@Autowired
 	UserService userService ;
-	@RequestMapping(value = "/dangky",method= RequestMethod.GET)
-	public String home () {
-		return "user/signup-page";
-	}
-	@RequestMapping(value = "/dangki", method = RequestMethod.POST)
-	public String dangki (
-	@RequestParam("username") String username,
-	@RequestParam("pass") String pass,
-	@RequestParam("confirmpass") String confirm,
-	@RequestParam("email") String email,
-	ModelMap model) {
-		if (pass.equals(confirm)&&!username.isEmpty()&&!pass.isEmpty()) {
-			TaiKhoanEntity tk =new TaiKhoanEntity(username,passwordEncoder.encode(pass),true);
-			NguoiDungDao nguoiDungDao = new NguoiDungDao();
-			Integer temp = nguoiDungDao.insertUser(tk);
-			if(temp == 2) {
-				model.addAttribute("mes","Tên đăng nhập đã bị trùng");
-			}
-			if(temp == 1 )
-			{ 
-				model.addAttribute("mes","Đăng kí thành công");
-		    }
-			else 
-			{
-				model.addAttribute("mes","Có lỗi khi đăng kí");
-			}
-		}
-		return "Posts/trangchu";
-	}
 
 	@RequestMapping("/dangbai")
 	public String dangbaiget(ModelMap model)

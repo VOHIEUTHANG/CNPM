@@ -3,6 +3,7 @@ package ptithcm.controller;
 import java.util.Date;
 import java.util.List;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
@@ -10,13 +11,17 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ptithcm.dao.BaiVietDao;
@@ -258,4 +263,41 @@ public class AdminController {
     	List<ThongBaoEntity> list = query.list();
     	return list;
 	}
+    
+   //Gửi thông báo cho người dùng qua email
+    @Autowired
+   
+    JavaMailSender mailer;
+    @RequestMapping(value ="ThongBao",method = RequestMethod.POST )
+    public String guiMail(HttpServletRequest request,ModelMap model,
+			@RequestParam("from") String from,
+			@RequestParam("to") String to,
+			@RequestParam("subject") String subject,
+			@RequestParam("body") String body) {
+    	System.out.println(subject);
+    	List<ThongBaoEntity> Thongbao = this.getThongBao();
+    	
+    	int page = ServletRequestUtils.getIntParameter(request, "p" , 0);
+    	PagedListHolder pagedListHolder = new PagedListHolder(Thongbao);
+    	pagedListHolder.setPage(page);
+    	pagedListHolder.setMaxLinkedPages(3);
+    	pagedListHolder.setPageSize(10);
+    	model.addAttribute("thongbao", pagedListHolder);
+    	try {
+    		MimeMessage mail= mailer.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(mail);
+			helper.setFrom(from, from);
+			helper.setTo(to);
+			helper.setReplyTo(from, from);
+			helper.setSubject(subject);
+			helper.setText(body, true);
+			mailer.send(mail);
+			model.addAttribute("message", "Gửi email thành công");
+    	}
+    	catch(Exception e) {
+    		model.addAttribute("message","Gửi email thất bại");
+    	}
+    	return "Admin/ThongBao";
+    }
+    
 }
