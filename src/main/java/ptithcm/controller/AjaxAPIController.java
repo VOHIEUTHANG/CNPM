@@ -214,7 +214,7 @@ public class AjaxAPIController {
         user.setTenND(fullName);
         int result = userDao.updateUser(user);
         if(result == 1){
-            return "1";
+            return path;
         }else {
             return "0";
         }
