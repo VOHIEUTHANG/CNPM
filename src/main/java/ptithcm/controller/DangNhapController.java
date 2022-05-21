@@ -15,6 +15,9 @@ public class DangNhapController {
     String CanhBao(){
         return "user/page403";
     }
-
+    @RequestMapping("/dangki")
+    String  dangki(){
+        return "user/signup-page";
+    }
 
 }

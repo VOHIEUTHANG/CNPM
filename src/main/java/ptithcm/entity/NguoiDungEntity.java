@@ -2,15 +2,7 @@ package ptithcm.entity;
 
 import java.util.Collection;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -19,7 +11,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Table(name = "NGUOIDUNG")
 public class NguoiDungEntity {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "MaND")
 	private Long maND;
 	@Column(name = "SDT")
@@ -30,6 +22,7 @@ public class NguoiDungEntity {
 	private String diachi;
 	@Column(name = "LinkAnhDaiDien")
 	private String linkanhdaidien;
+
 	@Column(name="TenND")
 	private String tenND;
 	public String getTenND() {

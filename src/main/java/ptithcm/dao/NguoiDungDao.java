@@ -24,16 +24,35 @@ public class NguoiDungDao {
         }
     }
 	//retrun 2 bị trùng tên đăng nhập ,1 thành công, 0 thất bại
-    public Integer insertUser (TaiKhoanEntity tk) {
+
+	public Integer insertTk (TaiKhoanEntity tk) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
 		if(this.findByUserName(tk.getTenDN())!=null)
-		 return 2;
+			return 2;
 		try {
 			tk.setTinhtrang(true);
 			tk.setQuyen(this.getTenQuyen(2));
 			session.save(tk);
-			t.commit();	
+			t.commit();
+		}
+		catch (Exception e) {
+			t.rollback();
+			e.printStackTrace();
+			return 0;
+		}
+		finally {
+			session.close();
+		}
+		return 1;
+	}
+	public Integer insert (NguoiDungEntity nguoiDung) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction t = session.beginTransaction();
+		try {
+
+			session.save(nguoiDung);
+			t.commit();
 		}
 		catch (Exception e) {
 			t.rollback();
@@ -99,11 +118,11 @@ public class NguoiDungDao {
   
 	}
 
-	public List<BaiVietEntity> getPostByID(String PostID){
+	public List<BaiVietEntity> getPostByID(String PostID) {
 		try {
-			session=HibernateUtil.getSessionFactory().getCurrentSession();
+			session = HibernateUtil.getSessionFactory().getCurrentSession();
 			session.beginTransaction();
-			String hql ="FROM BaiVietEntity where mabaiviet = " + PostID;
+			String hql = "FROM BaiVietEntity where mabaiviet = " + PostID;
 			Query query = session.createQuery(hql);
 			return (List<BaiVietEntity>) query.list();
 
@@ -111,9 +130,23 @@ public class NguoiDungDao {
 			System.out.println(e);
 			return null;
 		}
+	}
+
+	public Integer checkEmailSdt(String Email, String Sdt){
+		try {
+			session=HibernateUtil.getSessionFactory().getCurrentSession();
+			session.beginTransaction();
+			String hql ="FROM NguoiDungEntity as nguoidung where nguoidung.sdt=:sdt or nguoidung.email=:email";
+			Query query = session.createQuery(hql);
+			query.setParameter("sdt",Sdt);
+			query.setParameter("email",Email);
+			return query.list().isEmpty()? 1:2;
+		} catch (Exception e) {
+			System.out.println(e);
+			return 0;
+		}
 		finally{
 			session.close();
 		}
-
 	}
 }

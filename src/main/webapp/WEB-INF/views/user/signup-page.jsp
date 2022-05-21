@@ -43,7 +43,7 @@ prefix="c"%> <%@ taglib prefix="tg" tagdir="/WEB-INF/tags"%>
       >
         <div class="sign">
           <div class="form">
-            <form  id="signup-form">
+            <form  id="signup-form" >
               <h2>Đăng Ký</h2>
               <div class="form-group">
                 <input
@@ -75,10 +75,17 @@ prefix="c"%> <%@ taglib prefix="tg" tagdir="/WEB-INF/tags"%>
               <div class="form-group">
                 <input
                   type="text"
-                  id="username"
-                  name="username"
-                  placeholder="Tên đăng nhập"
+                  id="address"
+                  name="address"
+                  placeholder="Địa chỉ"
                 />
+                <div class="form-group">
+                  <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Tên đăng nhập"
+                  />
                 <span class="form-message"></span>
               </div>
               <div class="form-group">
@@ -106,7 +113,6 @@ prefix="c"%> <%@ taglib prefix="tg" tagdir="/WEB-INF/tags"%>
         </div>
       </div>
     </div>
-
      <script
           src="https://code.jquery.com/jquery-3.6.0.min.js"
           integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
@@ -142,12 +148,11 @@ prefix="c"%> <%@ taglib prefix="tg" tagdir="/WEB-INF/tags"%>
           ),
         ],
         onSubmit: function (userInfo) {
-          e.preventDefault();
           const formData = new FormData();
           formData.append("account-info", JSON.stringify(userInfo));
           console.log(userInfo);
           $.ajax({
-            url: "../api/post-user-signup",
+            url: "./api/user-signup",
             type: "POST",
             data: formData,
             enctype: "multipart/form-data",
@@ -159,15 +164,15 @@ prefix="c"%> <%@ taglib prefix="tg" tagdir="/WEB-INF/tags"%>
               console.log(data);
               toast({
                 title: "Đăng ký tài khoản thành công !",
-                message: "Vui lòng đăng nhập để sử dụng dịch vụ của trang web!",
+                message: data,
                 type: "success",
                 duration: 5000,
               });
             },
-            error: function () {
+            error: function (data) {
               toast({
                 title: "Có lỗi gửi dữ liệu về server!",
-                message: "Vui lòng liên hệ quản trị viên để giải quyết!",
+                message: data,
                 type: "error",
                 duration: 5000,
               });

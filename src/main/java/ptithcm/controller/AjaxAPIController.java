@@ -1,39 +1,25 @@
 package ptithcm.controller;
-import com.nimbusds.oauth2.sdk.Response;
-import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToFile;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ptithcm.Object.User;
 import ptithcm.dao.*;
 import ptithcm.entity.*;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
-
 import java.util.UUID;
 
 
-import ptithcm.hibernate.HibernateUtil;
 import ptithcm.service.UserService;
 
 import javax.servlet.ServletContext;
@@ -44,7 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/api")
 public class AjaxAPIController {
     @Autowired
-    PasswordEncoder passwordEncoder;
+    BCryptPasswordEncoder passwordEncoder;
     @Autowired
     ServletContext context;
     @Autowired
@@ -136,11 +122,6 @@ public class AjaxAPIController {
         return data.toString();
     }
 
-
-
-
-
-
     @RequestMapping(value = "/post-upload-no-video", method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
     @ResponseBody
     public String Test(@RequestParam("images") MultipartFile[] files,HttpServletRequest req) throws IOException {
@@ -174,15 +155,13 @@ public class AjaxAPIController {
         bv.setNguoidung(currentUser);
         int result = bvD.insertBaiViet(bv);
         if(result == 1){
-            List <BaiVietEntity> postList =  bvD.getAll();
+            List <BaiVietEntity> postList =  bvD.getAllForParticularUser(currentUser.getMaND().toString());
             System.out.println(postList.size());
             BaiVietEntity currentPost = postList.get(postList.size()-1);
             AnhDao anhDao =new AnhDao();
             ChiTietBaiVietDao ctbv= new ChiTietBaiVietDao();
-
             ct.setMabaiviet(currentPost.getMabaiviet());
             ct.setBaiviet(currentPost);
-
             for(MultipartFile file: files){
                 AnhEntity a = new AnhEntity();
                 a.setLinkanh("Storage/Images/"+ writeFile(file,"Images"));
@@ -349,7 +328,6 @@ public class AjaxAPIController {
         String username= userService.currentUserName();
         TaiKhoanEntity tk= userDao.findByUserName(username);
         NguoiDungEntity user = tk.getNguoidung();
-
         String path = "../Storage/Images/" + writeFile(imageFile,"Images");
         JSONObject data= new JSONObject(req.getParameter("userInfo"));
         String fullName = data.getString("fullName");
@@ -429,18 +407,12 @@ public class AjaxAPIController {
     }
 
 
-    @RequestMapping(value = "/post-user-signup", method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
+    @RequestMapping(value = "/user-signup", method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
     @ResponseBody
     public String getAccountInfo(HttpServletRequest req) throws IOException {
         JSONObject data= new JSONObject(req.getParameter("account-info"));
-        String fullName = data.getString("fullname");
-        String password = data.getString("password");
-        String email = data.getString("email");
-        String phoneNumber = data.getString("phoneNumber");
-        String username = data.getString("username");
-        System.out.println(fullName);
-        System.out.println(password);
-        return data.toString();
+        UserService se= new UserService();
+        return  se.Signup(data,  passwordEncoder);
     }
 
     @GetMapping("/user-data")
@@ -473,27 +445,6 @@ public class AjaxAPIController {
                 if(bvD.SetAn(post))
                     return "1";
             return "0";
-    }
-    public Integer test(Long id){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction t = session.beginTransaction();
-        int result =0;
-        try {
-            String hql = "select count (*) FROM BaiVietEntity where maND=:id ";
-            Query query = session.createQuery(hql);
-            query.setParameter("id", id);
-            result = query.getFirstResult();
-        }
-        catch (Exception e) {
-            t.rollback();
-            e.printStackTrace();
-            return 0;
-        }
-        finally {
-            session.close();
-            return result;
-        }
-
     }
 
 }
