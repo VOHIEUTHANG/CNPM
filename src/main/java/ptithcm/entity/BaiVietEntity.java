@@ -65,7 +65,7 @@ public class BaiVietEntity {
 		this.video = video;
 	}
 	
-	@OneToMany(mappedBy = "baiviet",cascade = {CascadeType.ALL},orphanRemoval = true)
+	@OneToMany(mappedBy = "baiviet",orphanRemoval = true)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private Collection<AnhEntity> Anh;
 
@@ -85,7 +85,6 @@ public class BaiVietEntity {
 		return this.quangcao;
 	}
 
-	
 	public BaiVietEntity(String tieude, Float gia, String khuvuc, String diachi,
 			 String linkanh, int dientich) {
 		super();

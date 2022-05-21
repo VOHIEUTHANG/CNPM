@@ -12,7 +12,8 @@ import ptithcm.hibernate.HibernateUtil;
 public class BaiVietDao {
 	Session session ;
     public List < BaiVietEntity > getAll() {
-        try { session = HibernateUtil.getSessionFactory().openSession();
+        try {
+			session = HibernateUtil.getSessionFactory().openSession();
             return session.createQuery("from BaiVietEntity", BaiVietEntity.class).list();
         }
 		catch(Exception e){
@@ -25,11 +26,14 @@ public class BaiVietDao {
 
 	public List < BaiVietEntity > getAllForParticularUser(String id)
 	{
-		try { session = HibernateUtil.getSessionFactory().openSession();
-			String hql = "FROM BaiVietEntity B WHERE B.MaND = NguoiDungEntity." + id;
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+			String hql = "FROM BaiVietEntity WHERE MaND = " + id;
+			System.out.println(hql);
 			return session.createQuery(hql, BaiVietEntity.class).list();
 		}
 		catch(Exception e){
+			System.out.println("Insert Post Failure !");
 			return null;
 		}
 		finally{
@@ -42,7 +46,7 @@ public class BaiVietDao {
         try  {
 			session= HibernateUtil.getSessionFactory().openSession();
             String hql="from BaiVietEntity where mabaiviet = "+ String.valueOf(id);
-            Query query =session.createQuery(hql);
+            Query query = session.createQuery(hql);
             return query.list();
         }
 		catch(Exception e){
@@ -54,7 +58,7 @@ public class BaiVietDao {
 		
     }
 	public  Integer UpdateBaiViet (BaiVietEntity bv) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
 		try {
 			session.update(bv);
@@ -91,7 +95,8 @@ public class BaiVietDao {
 		return 1;
 	}
 	public NguoiDungEntity getNguoidung(Long id) { 
-	try {session = HibernateUtil.getSessionFactory().getCurrentSession();
+	try {
+		session = HibernateUtil.getSessionFactory().getCurrentSession();
 	session.beginTransaction();
 	String hql = "FROM NguoiDungEntity where maND =:id";
 	Query query = session.createQuery(hql); query.setParameter("id", id); 

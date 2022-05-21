@@ -129,6 +129,7 @@ public class AjaxAPIController {
         String username= userService.currentUserName();
         TaiKhoanEntity tk= userDao.findByUserName(username);
         NguoiDungEntity currentUser = tk.getNguoidung();
+
         List<AnhEntity> anh =new ArrayList<>();
         JSONObject data= new JSONObject(req.getParameter("info"));
         BaiVietEntity bv =new BaiVietEntity();
@@ -156,7 +157,6 @@ public class AjaxAPIController {
         int result = bvD.insertBaiViet(bv);
         if(result == 1){
             List <BaiVietEntity> postList =  bvD.getAllForParticularUser(currentUser.getMaND().toString());
-            System.out.println(postList.size());
             BaiVietEntity currentPost = postList.get(postList.size()-1);
             AnhDao anhDao =new AnhDao();
             ChiTietBaiVietDao ctbv= new ChiTietBaiVietDao();
@@ -270,14 +270,18 @@ public class AjaxAPIController {
             @PathVariable("id") Long id
     ) throws IOException {
         JSONObject data = new JSONObject(req.getParameter("info"));
+
+
         BaiVietDao PostDao = new BaiVietDao();
-        ChiTietBaiVietDao PostDetailDao = new ChiTietBaiVietDao();
+//        ChiTietBaiVietDao PostDetailDao = new ChiTietBaiVietDao();
         NguoiDungDao userDao = new NguoiDungDao();
-        AnhDao imgDao = new AnhDao();
+//        AnhDao imgDao = new AnhDao();
+
         List<BaiVietEntity> listPost = userDao.getPostByID(id.toString());
         BaiVietEntity targetPost = listPost.get(0);
         String imageIDs = data.getString("imageIDs").trim();
         String imageIDList[] = imageIDs.split("_");
+
         if(targetPost != null){
             targetPost.setTieude(data.getString("title"));
             targetPost.setDiachi(data.getString("street"));
@@ -289,31 +293,35 @@ public class AjaxAPIController {
             targetPostDetail.setPhuongxa(data.getString("wards"));
             targetPostDetail.setQuanhuyen(data.getString("district"));
             targetPostDetail.setTinhtp(data.getString("province"));
+
+
             int updatePostResult = PostDao.UpdateBaiViet(targetPost);
             //  successfully update post will return 1
             if(updatePostResult == 1){
-                int updatePostDetailResult = PostDetailDao.Update(targetPostDetail);
-                Collection<AnhEntity> imageList = targetPost.getAnh();
-                ArrayList <AnhEntity> imageListCV= new ArrayList<>(imageList);
-                for(AnhEntity img:imageListCV){
-                    if(!Arrays.toString(imageIDList).contains(img.getMaanh().toString())){
-                        imgDao.Delete(img);
-                    }
-                }
-                if(files.length > 0){
-                    for(MultipartFile file: files){
-                        AnhEntity a = new AnhEntity();
-                        a.setLinkanh("Storage/Images/"+ writeFile(file,"Images"));
-                        a.setBaiviet(targetPost);
-                        imgDao.Insert(a);
-                     }
-                }
+//                int updatePostDetailResult = PostDetailDao.Update(targetPostDetail);
+//                System.out.println("Update Post Detail Result !" + updatePostDetailResult);
+//                Collection<AnhEntity> imageList = targetPost.getAnh();
+//                ArrayList <AnhEntity> imageListCV= new ArrayList<>(imageList);
+//                for(AnhEntity img:imageListCV){
+//                    if(!Arrays.toString(imageIDList).contains(img.getMaanh().toString())){
+//                        imgDao.Delete(img);
+//                    }
+//                }
+//                if(files.length > 0){
+//                    for(MultipartFile file: files){
+//                        AnhEntity a = new AnhEntity();
+//                        a.setLinkanh("Storage/Images/"+ writeFile(file,"Images"));
+//                        a.setBaiviet(targetPost);
+//                        imgDao.Insert(a);
+//                        System.out.println("Write image File");
+//                     }
+//                }
             }else{
                 System.out.println("Update Post failure !");
                 return "0";
             }
         }else{
-            System.out.println("Post has ID "+ id + " no exits !");
+            System.out.println("Post has ID "+ id + " not exits !");
             return "0";
         }
 
