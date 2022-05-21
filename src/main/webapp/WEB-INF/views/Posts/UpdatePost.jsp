@@ -361,7 +361,10 @@ prefix="form"%>
                           </label>
                         </div>
                         <div class="upload__video-wrap">
-                          <video id="video-tag" src="" controls></video>
+                          <c:choose>
+                          <c:when test="${video!=null}"><video id="video-tag" src="../../${video.linkvideo}" controls></video></c:when>
+                          <c:when test="${video==null}"><video id="video-tag" src="" controls></video></c:when>
+                          </c:choose>
                           <div class="video-placeholder">
                             <div class="video-icon">
                               <i class="fa-solid fa-film"></i>
@@ -399,10 +402,6 @@ prefix="form"%>
     <script>
         $(()=>{
 
-            const videoURL = "${video.linkvideo}";
-            if(videoURL){
-                $("#video-tag").attr('src',`../../${videoURL}`);
-            }
             initialText = "${post.chitietbaiviet.mota}".replaceAll('//#','\n');
             $("#form-desc").text(initialText);
 

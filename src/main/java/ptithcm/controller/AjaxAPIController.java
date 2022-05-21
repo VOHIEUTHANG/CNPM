@@ -271,51 +271,48 @@ public class AjaxAPIController {
     ) throws IOException {
         JSONObject data = new JSONObject(req.getParameter("info"));
 
-
         BaiVietDao PostDao = new BaiVietDao();
-//        ChiTietBaiVietDao PostDetailDao = new ChiTietBaiVietDao();
+        ChiTietBaiVietDao PostDetailDao = new ChiTietBaiVietDao();
         NguoiDungDao userDao = new NguoiDungDao();
-//        AnhDao imgDao = new AnhDao();
+        AnhDao imgDao = new AnhDao();
 
         List<BaiVietEntity> listPost = userDao.getPostByID(id.toString());
         BaiVietEntity targetPost = listPost.get(0);
         String imageIDs = data.getString("imageIDs").trim();
         String imageIDList[] = imageIDs.split("_");
-
-        if(targetPost != null){
+       if(targetPost != null){
             targetPost.setTieude(data.getString("title"));
             targetPost.setDiachi(data.getString("street"));
-            targetPost.setDientich(Integer.valueOf(data.getString("area")));
+            targetPost.setDientich((int)Float.parseFloat(data.getString("area")));
             Double roundPrice  = (double) Math.round( Float.valueOf(data.getString("price")) * 10) / 10;
             targetPost.setGia(Float.valueOf(String.valueOf(roundPrice)));
+            System.out.println(Float.valueOf(String.valueOf(roundPrice)));
             ChiTietBaiVietEntity targetPostDetail = targetPost.getChitietbaiviet();
             targetPostDetail.setMota(data.getString("description"));
             targetPostDetail.setPhuongxa(data.getString("wards"));
             targetPostDetail.setQuanhuyen(data.getString("district"));
             targetPostDetail.setTinhtp(data.getString("province"));
-
-
             int updatePostResult = PostDao.UpdateBaiViet(targetPost);
             //  successfully update post will return 1
             if(updatePostResult == 1){
-//                int updatePostDetailResult = PostDetailDao.Update(targetPostDetail);
-//                System.out.println("Update Post Detail Result !" + updatePostDetailResult);
-//                Collection<AnhEntity> imageList = targetPost.getAnh();
-//                ArrayList <AnhEntity> imageListCV= new ArrayList<>(imageList);
-//                for(AnhEntity img:imageListCV){
-//                    if(!Arrays.toString(imageIDList).contains(img.getMaanh().toString())){
-//                        imgDao.Delete(img);
-//                    }
-//                }
-//                if(files.length > 0){
-//                    for(MultipartFile file: files){
-//                        AnhEntity a = new AnhEntity();
-//                        a.setLinkanh("Storage/Images/"+ writeFile(file,"Images"));
-//                        a.setBaiviet(targetPost);
-//                        imgDao.Insert(a);
-//                        System.out.println("Write image File");
-//                     }
-//                }
+                int updatePostDetailResult = PostDetailDao.Update(targetPostDetail);
+                System.out.println("Update Post Detail Result !" + updatePostDetailResult);
+                Collection<AnhEntity> imageList = targetPost.getAnh();
+                ArrayList <AnhEntity> imageListCV= new ArrayList<>(imageList);
+                for(AnhEntity img:imageListCV){
+                    if(!Arrays.toString(imageIDList).contains(img.getMaanh().toString())){
+                        imgDao.Delete(img);
+                    }
+                }
+                if(files.length > 0){
+                    for(MultipartFile file: files){
+                        AnhEntity a = new AnhEntity();
+                        a.setLinkanh("Storage/Images/"+ writeFile(file,"Images"));
+                        a.setBaiviet(targetPost);
+                        imgDao.Insert(a);
+                        System.out.println("Write image File");
+                     }
+                }
             }else{
                 System.out.println("Update Post failure !");
                 return "0";

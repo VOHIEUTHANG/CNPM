@@ -34,6 +34,7 @@ public class ChiTietBaiVietDao {
         try {
             session.update(bv);
             t.commit();
+            return 1;
         }
         catch (Exception e) {
             t.rollback();
@@ -43,7 +44,6 @@ public class ChiTietBaiVietDao {
         finally {
             session.close();
         }
-        return 1;
     }
 
 }
