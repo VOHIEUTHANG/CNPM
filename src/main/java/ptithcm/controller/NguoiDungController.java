@@ -62,7 +62,7 @@ public class NguoiDungController {
 		if(images.size()>0){
 			model.addAttribute("images", images);
 		}
-
+		model.addAttribute("id",id);
 		return "Posts/UpdatePost";
 	}
 

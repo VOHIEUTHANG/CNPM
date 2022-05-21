@@ -293,7 +293,7 @@ const dataText = {
             URL = "../api/post-upload";
           }
 
-          if (!imageFiles.length) {
+          if (!imgArray.length) {
             $(".imageMessage").text(
               "Yêu cầu ít nhất 1 ảnh đại diện cho tin đăng!"
             );

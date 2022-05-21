@@ -98,4 +98,22 @@ public class NguoiDungDao {
 		}
   
 	}
+
+	public List<BaiVietEntity> getPostByID(String PostID){
+		try {
+			session=HibernateUtil.getSessionFactory().getCurrentSession();
+			session.beginTransaction();
+			String hql ="FROM BaiVietEntity where mabaiviet = " + PostID;
+			Query query = session.createQuery(hql);
+			return (List<BaiVietEntity>) query.list();
+
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		}
+		finally{
+			session.close();
+		}
+
+	}
 }

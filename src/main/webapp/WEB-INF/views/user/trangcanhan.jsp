@@ -328,7 +328,7 @@
                                                                        </c:when>
                                                                       </c:choose>
                                                                       <li class="mana-item">
-                                                                      <a href="./update-post">
+                                                                      <a href="./update-post/${post.mabaiviet}">
                                                                       <span class="mana-modify-btn">Chỉnh sửa</span>
                                                                       </a>
                                                                       </li>

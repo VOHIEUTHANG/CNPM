@@ -136,6 +136,11 @@ public class AjaxAPIController {
         return data.toString();
     }
 
+
+
+
+
+
     @RequestMapping(value = "/post-upload-no-video", method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
     @ResponseBody
     public String Test(@RequestParam("images") MultipartFile[] files,HttpServletRequest req) throws IOException {
@@ -193,6 +198,150 @@ public class AjaxAPIController {
         return data.toString();
     }
 
+    @RequestMapping(value = "/post-upload-update/{id}", method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
+    @ResponseBody
+    public String updatePost(
+            @RequestParam("images") MultipartFile[] files,
+            @RequestParam("video") MultipartFile video,
+            HttpServletRequest req,
+            @PathVariable("id") Long id
+    ) throws IOException {
+        JSONObject data = new JSONObject(req.getParameter("info"));
+
+        NguoiDungDao userDao = new NguoiDungDao();
+        String username = userService.currentUserName();
+        TaiKhoanEntity tk = userDao.findByUserName(username);
+        NguoiDungEntity currentUser = tk.getNguoidung();
+
+        List<AnhEntity> anh =new ArrayList<>();
+
+        List<BaiVietEntity> listPost = userDao.getPostByID(id.toString());
+
+        BaiVietEntity targetPost = listPost.get(0);
+
+        System.out.println(data.getString("imageIDs"));
+
+        System.out.println(targetPost.getMabaiviet());
+        System.out.println(targetPost.getDientich());
+        System.out.println(targetPost.getGia());
+        System.out.println(files.length);
+
+//        BaiVietEntity bv =new BaiVietEntity();
+//        ChiTietBaiVietEntity ct= new ChiTietBaiVietEntity();
+//        BaiVietDao bvD =new BaiVietDao();
+//
+//        bv.setTieude(data.getString("title"));
+//        bv.setDiachi(data.getString("street"));
+//        bv.setDientich(Integer.valueOf(data.getString("area")));
+//        Double roundPrice  = (double) Math.round( Float.valueOf(data.getString("price")) * 10) / 10;
+//        bv.setGia(Float.valueOf(String.valueOf(roundPrice)));
+//        ct.setMota(data.getString("description"));
+//        ct.setPhuongxa(data.getString("wards"));
+//        ct.setQuanhuyen(data.getString("district"));
+//        ct.setTinhtp(data.getString("province"));
+//        Date date = new Date();
+//        Timestamp timestamp = new Timestamp(date.getTime());
+//        Timestamp timestampEnd = new Timestamp(date.getTime());
+//        ct.setThoigianbatdau(timestamp);
+//        Calendar cal = Calendar.getInstance();
+//        cal.setTime(timestampEnd);
+//        cal.add(Calendar.DAY_OF_WEEK, 15);
+//        timestampEnd.setTime(cal.getTime().getTime());
+//        ct.setThoigianketthuc(timestampEnd);
+//        bv.setNguoidung(currentUser);
+//        int result = bvD.insertBaiViet(bv);
+//        if(result == 1){
+//            List <BaiVietEntity> postList =  bvD.getAllForParticularUser(currentUser.getMaND().toString());
+//
+//            BaiVietEntity currentPost = postList.get(postList.size()-1);
+//
+//            AnhDao anhDao =new AnhDao();
+//            VideoDao videoDao = new VideoDao();
+//            ChiTietBaiVietDao ctbv= new ChiTietBaiVietDao();
+//
+//            ct.setMabaiviet(currentPost.getMabaiviet());
+//            ct.setBaiviet(currentPost);
+//
+//            for(MultipartFile file: files){
+//                AnhEntity a = new AnhEntity();
+//                a.setLinkanh("Storage/Images/"+ writeFile(file,"Images"));
+//                a.setBaiviet(currentPost);
+//                anhDao.Insert(a);
+//                anh.add(a);
+//            }
+//            VideoEntity vd = new VideoEntity();
+//            vd.setBaiviet(currentPost);
+//            vd.setLinkvideo("Storage/Videos/"+ writeFile(video,"Videos"));
+//
+//            videoDao.Insert(vd);
+//            ctbv.Insert(ct);
+//
+//        }else{
+//            System.out.println("Lỗi insert bài viết mới !");
+//            return "0";
+//        }
+
+        return data.toString();
+    }
+    @RequestMapping(value = "/post-upload-update-no-video/{id}", method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
+    @ResponseBody
+    public String updatePostNoVideo(
+            @RequestParam("images") MultipartFile[] files,
+            HttpServletRequest req,
+            @PathVariable("id") Long id
+    ) throws IOException {
+        JSONObject data = new JSONObject(req.getParameter("info"));
+        BaiVietDao PostDao = new BaiVietDao();
+        ChiTietBaiVietDao PostDetailDao = new ChiTietBaiVietDao();
+        NguoiDungDao userDao = new NguoiDungDao();
+        AnhDao imgDao = new AnhDao();
+        List<BaiVietEntity> listPost = userDao.getPostByID(id.toString());
+        BaiVietEntity targetPost = listPost.get(0);
+        String imageIDs = data.getString("imageIDs").trim();
+        String imageIDList[] = imageIDs.split("_");
+        if(targetPost != null){
+            targetPost.setTieude(data.getString("title"));
+            targetPost.setDiachi(data.getString("street"));
+            targetPost.setDientich(Integer.valueOf(data.getString("area")));
+            Double roundPrice  = (double) Math.round( Float.valueOf(data.getString("price")) * 10) / 10;
+            targetPost.setGia(Float.valueOf(String.valueOf(roundPrice)));
+            ChiTietBaiVietEntity targetPostDetail = targetPost.getChitietbaiviet();
+            targetPostDetail.setMota(data.getString("description"));
+            targetPostDetail.setPhuongxa(data.getString("wards"));
+            targetPostDetail.setQuanhuyen(data.getString("district"));
+            targetPostDetail.setTinhtp(data.getString("province"));
+            int updatePostResult = PostDao.UpdateBaiViet(targetPost);
+            //  successfully update post will return 1
+            if(updatePostResult == 1){
+                int updatePostDetailResult = PostDetailDao.Update(targetPostDetail);
+                Collection<AnhEntity> imageList = targetPost.getAnh();
+                ArrayList <AnhEntity> imageListCV= new ArrayList<>(imageList);
+                for(AnhEntity img:imageListCV){
+                    if(!Arrays.toString(imageIDList).contains(img.getMaanh().toString())){
+                        imgDao.Delete(img);
+                    }
+                }
+                if(files.length > 0){
+                    for(MultipartFile file: files){
+                        AnhEntity a = new AnhEntity();
+                        a.setLinkanh("Storage/Images/"+ writeFile(file,"Images"));
+                        a.setBaiviet(targetPost);
+                        imgDao.Insert(a);
+                     }
+                }
+            }else{
+                System.out.println("Update Post failure !");
+                return "0";
+            }
+        }else{
+            System.out.println("Post has ID "+ id + " no exits !");
+            return "0";
+        }
+
+        return "1";
+    }
+
+
     @RequestMapping(value = "/post-user-general", method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
     @ResponseBody
     public String getUserInfo(@RequestParam("avatar") MultipartFile imageFile,HttpServletRequest req) throws IOException {
@@ -225,6 +374,7 @@ public class AjaxAPIController {
     @ResponseBody
     public  String getUserInfoNoAvatar(HttpServletRequest req){
         JSONObject data= new JSONObject(req.getParameter("userInfo"));
+
         String fullName = data.getString("fullName");
         String address = data.getString("address");
         String phoneNumber = data.getString("phoneNumber");

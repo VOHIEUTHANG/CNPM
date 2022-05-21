@@ -24,4 +24,21 @@ public class AnhDao {
         }
         return 1;
     }
+    public  Integer Delete(AnhEntity img){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t = session.beginTransaction();
+        try {
+            session.delete(img);
+            t.commit();
+        }
+        catch (Exception e) {
+            t.rollback();
+            e.printStackTrace();
+            return 0;
+        }
+        finally {
+            session.close();
+        }
+        return 1;
+    }
 }
