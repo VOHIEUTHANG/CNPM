@@ -327,7 +327,7 @@ myArray.forEach((item) => {
         onSubmit: function (data) {
           let ID = $(".main").attr("id");
           let URL = "../../api/post-upload-update-no-video/" + ID;
-          console.log(URL);
+
           const formData = new FormData();
           const imageInput = $("#fileUpload");
           const videoInput = $("#video_input");
@@ -356,7 +356,7 @@ myArray.forEach((item) => {
           dataText.imageIDs = imageIDs;
 
           formData.append("info", JSON.stringify(dataText));
-
+            console.log(videoFile);
           if (videoFile) {
             formData.append("video", videoFile);
             URL = "../../api/post-upload-update/" + ID;
@@ -372,6 +372,7 @@ myArray.forEach((item) => {
               duration: 5000,
             });
           } else {
+           console.log(URL);
             $.ajax({
               url: URL,
               type: "POST",

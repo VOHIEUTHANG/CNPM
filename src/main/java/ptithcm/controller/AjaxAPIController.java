@@ -236,11 +236,11 @@ public class AjaxAPIController {
                     if(deleteVideoResult == 1){
                         System.out.println("Delete video successfully !");
                     }
-                    VideoEntity v = new VideoEntity();
-                    v.setBaiviet(targetPost);
-                    v.setLinkvideo("Storage/Videos/"+ writeFile(video,"Videos"));
-                    if( videoDao.Insert(v) == 1) System.out.println("Insert new video Successfully !");
                 }
+                VideoEntity v = new VideoEntity();
+                v.setBaiviet(targetPost);
+                v.setLinkvideo("Storage/Videos/"+ writeFile(video,"Videos"));
+                if( videoDao.Insert(v) == 1) System.out.println("Insert new video Successfully !");
             }else{
                 System.out.println("Update Post failure !");
                 return "0";

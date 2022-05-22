@@ -73,6 +73,7 @@ public class BaiVietDao {
 		}
 		finally {
 			session.close();
+			System.out.println(" Update Post Finally!");
 		}
 	}
 

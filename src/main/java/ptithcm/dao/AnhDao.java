@@ -21,6 +21,7 @@ public class AnhDao {
         }
         finally {
             session.close();
+            System.out.println("Insert Image Finally!");
         }
         return 1;
     }

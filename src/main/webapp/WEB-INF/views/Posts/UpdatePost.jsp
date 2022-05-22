@@ -401,12 +401,16 @@ prefix="form"%>
     <script src="<c:url value='/resources/js/signedIn.js'/>"></script>
     <script>
         $(()=>{
-
             initialText = "${post.chitietbaiviet.mota}".replaceAll('//#','\n');
             $("#form-desc").text(initialText);
-
             const ID = "${id}";
             const main  = $('.main').attr('id',ID);
+            window.onload  = ()=>{
+            const videoURL = $("#video-tag").attr('src');
+            if(!videoURL){
+                $(".video-placeholder").css('z-index','1');
+            }
+            }
         })
     </script>
   </body>
