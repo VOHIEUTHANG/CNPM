@@ -62,20 +62,24 @@
                       </div>
                     </div>
                     <div class="acc-setting">
-                      <a href="#account-general" class="acc-setting-item">
+                      <a href="#" class="acc-setting-item tab1">
                         <i class="fa-solid fa-user"></i>
                         <span>Thông tin</span>
                       </a>
+                      <a href="../nguoidung/trangcanhan#account-post" class="acc-setting-item tab2">
+                                                                    <i class="fa-solid fa-paste"></i>
+                                                                    <span>Quản lý tin</span>
+                                                                  </a>
 
-                      <a href="#" class="acc-setting-item">
+                      <a href="#" class="acc-setting-item tab3">
                         <i class="fa-solid fa-bell"></i>
                         <span>Thông báo</span>
                       </a>
-                      <a href="#" class="acc-setting-item">
+                      <a href="#" class="acc-setting-item tab4">
                         <i class="fa-solid fa-file-signature"></i>
                         <span>Góp Ý</span>
                       </a>
-                      <a href="#" class="acc-setting-item">
+                      <a href="#" class="acc-setting-item tab5">
                         <i class="fa-solid fa-key"></i>
                         <span>Đổi mật khẩu</span>
                       </a>
