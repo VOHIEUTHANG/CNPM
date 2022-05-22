@@ -362,7 +362,7 @@ prefix="form"%>
                         </div>
                         <div class="upload__video-wrap">
                           <c:choose>
-                          <c:when test="${video!=null}"><video id="video-tag" src="../../${video.linkvideo}" controls></video></c:when>
+                          <c:when test="${video!=null}"><video id="video-tag" src="../../${video}" controls></video></c:when>
                           <c:when test="${video==null}"><video id="video-tag" src="" controls></video></c:when>
                           </c:choose>
                           <div class="video-placeholder">

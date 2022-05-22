@@ -1,8 +1,5 @@
 package ptithcm.controller;
-import java.io.IOException;
-import java.sql.Time;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +16,6 @@ import ptithcm.dao.NguoiDungDao;
 import ptithcm.entity.AnhEntity;
 import ptithcm.entity.BaiVietEntity;
 import ptithcm.entity.TaiKhoanEntity;
-import ptithcm.entity.VideoEntity;
 import ptithcm.service.UserService;
 @Controller
 @RequestMapping("/nguoidung")
@@ -53,11 +49,9 @@ public class NguoiDungController {
 		List<BaiVietEntity> b = bVietDao.getById(id);
 		if(b.size() > 0){
 			model.addAttribute("post",b.get(0));
+			model.addAttribute("video", b.get(0).getChitietbaiviet().getLinkVideo());
 		}
-		Collection<VideoEntity> videos = b.get(0).getVideo();
-		if(videos.size() > 0){
-			model.addAttribute("video", videos.iterator().next());
-		}
+
 		Collection<AnhEntity> images = b.get(0).getAnh();
 		if(images.size()>0){
 			model.addAttribute("images", images);

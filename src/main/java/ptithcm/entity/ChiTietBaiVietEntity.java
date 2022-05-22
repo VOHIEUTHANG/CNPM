@@ -29,6 +29,9 @@ public class ChiTietBaiVietEntity {
 	private String phuongxa;
 	@Column(name = "MoTa")
 	private String mota;
+
+	@Column(name="LinkVideo")
+	private  String linkVideo;
 	@Column(name = "ThoiGianBatDau")
 	private Timestamp thoigianbatdau;
 	@Column(name = "ThoiGianKetThuc")
@@ -57,6 +60,8 @@ public class ChiTietBaiVietEntity {
 	public void setPhuongxa(String phuongxa) {
 		this.phuongxa = phuongxa;
 	}
+	public String getLinkVideo(){return linkVideo;}
+	public void setLinkVideo(String linkVideo){this.linkVideo = linkVideo;}
 	public String getMota() {
 		return mota;
 	}

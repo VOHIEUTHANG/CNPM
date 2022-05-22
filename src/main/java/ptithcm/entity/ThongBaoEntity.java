@@ -28,6 +28,8 @@ public class ThongBaoEntity {
 	private Date thoigian;
 	@Column(name = "NoiDung")
 	private String noidung;
+	@Column(name = "TieuDe")
+	private String tieude;
 	
 	@ManyToOne
 	@JoinColumn(name = "MaND")
@@ -55,6 +57,14 @@ public class ThongBaoEntity {
 
 	public void setNoidung(String noidung) {
 		this.noidung = noidung;
+	}
+
+	public String getTieude() {
+		return tieude;
+	}
+
+	public void setTieude(String tieude) {
+		this.tieude = tieude;
 	}
 
 	public NguoiDungEntity getNguoidung() {

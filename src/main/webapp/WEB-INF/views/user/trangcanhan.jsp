@@ -247,7 +247,6 @@
                                 <div class="mana-foot">
                                 <div class="manapost-btn button button--hl ">Quản lý chi tiết</div>
                                 </div>
-
                                         <div class="manapost-container ">
                                             <div class="mana-main">
                                                 <div class="man-close-btn">
@@ -403,57 +402,51 @@
                       </div>
                     </div>
                     <div class="tab-pane fade" id="account-notifications">
-                      <div class="card-body pb-2">
-                        <div class="table-responsive">
-                          <table class="table table-striped table-bordered">
-                            <thead class="table-light">
-                              <tr>
-                                <th scope="col">Mã tin</th>
-                                <th scope="col">Tiêu đề</th>
-                                <th scope="col">Giá</th>
-                                <th scope="col">Diện tích</th>
-                                <th scope="col">Trạng thái</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <th scope="row">1</th>
-                                <td>Title</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>
-                                  <p class="text-danger">Chưa Duyệt</p>
-                                </td>
-                              </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                <td>
-                                  <p class="text-success">Đã xét duyệt</p>
-                                </td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                                <td>
-                                  <p class="text-success">Đã xét duyệt</p>
-                                </td>
-                              </tr>
-                            </tbody>
-                            <tfoot>
-                              <tr>
-                                <th scope="col">Mã tin</th>
-                                <th scope="col">Tiêu đề</th>
-                                <th scope="col">Giá</th>
-                                <th scope="col">Diện tích</th>
-                                <th scope="col">Chi tiết</th>
-                              </tr>
-                            </tfoot>
-                          </table>
+                      <div class="card-body ">
+                        <div class="accordion" id="accordionExample">
+                          <div class="card">
+                            <div class="card-header" id="headingOne">
+                              <h2 class="mb-0">
+                                <button class="btn btn-link btn-noti" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                  Đăng ký thành công tài khoản tại timtro.vn
+                                </button>
+                              </h2>
+                            </div>
+
+                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                              <div class="card-body">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card">
+                            <div class="card-header" id="headingTwo">
+                              <h2 class="mb-0">
+                                <button class="btn btn-link btn-noti " type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                  Bài viết có ID... đã được duyệt.
+                                </button>
+                              </h2>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                              <div class="card-body">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card">
+                            <div class="card-header" id="headingThree">
+                              <h2 class="mb-0">
+                                <button class="btn btn-link btn-noti " type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                  Bài viết có ID... đã hết hạn và sẽ bị ẩn khỏi trang web.
+                                </button>
+                              </h2>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                              <div class="card-body">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>

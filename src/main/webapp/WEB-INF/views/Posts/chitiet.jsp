@@ -137,11 +137,11 @@
                             <div class="detail-post">
                                 <div class="dp-view">
                                     <ul class="dp-list">
-                                    <c:if test="${video != null}">
+                                    <c:if test="${linkvideo != null}">
                                         <li class="dp-item">
-                                                                                    <video class="video-item" controls src="<c:url value='/${video.linkvideo}'/>"
-                                                                                        alt="">
-                                                                                </li>
+                                           <video class="video-item" controls src="<c:url value='/${linkvideo}'/>"
+                                            alt="">
+                                        </li>
                                     </c:if>
                                      <c:forEach var="item" items="${baiviet.getAnh()}">
                                         <li class="dp-item">

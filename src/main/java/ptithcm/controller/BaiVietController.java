@@ -1,13 +1,10 @@
 package ptithcm.controller;
 import java.util.List;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
-import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.ServletRequestUtils;
@@ -16,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ptithcm.dao.BaiVietDao;
 import ptithcm.dao.NguoiDungDao;
 import ptithcm.entity.BaiVietEntity;
-import ptithcm.entity.NguoiDungEntity;
 import ptithcm.entity.TaiKhoanEntity;
-import ptithcm.entity.VideoEntity;
 import ptithcm.service.UserService;
 @Controller
 @RequestMapping("/baiviet")
@@ -38,10 +33,7 @@ public class BaiVietController {
 
         List<BaiVietEntity> b = bVietDao.getById(id);
         model.addAttribute("baiviet",b.get(0));
-
-        if(b.get(0).getVideo().size()>0){
-            model.addAttribute("video",b.get(0).getVideo().iterator().next());
-        }
+        model.addAttribute("linkvideo",b.get(0).getChitietbaiviet().getLinkVideo());
 
         return "Posts/chitiet";
     }

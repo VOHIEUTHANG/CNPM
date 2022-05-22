@@ -16,7 +16,6 @@ import ptithcm.entity.QuangCaoEntity;
 import ptithcm.entity.TaiKhoanEntity;
 import ptithcm.entity.TenQuyenEntity;
 import ptithcm.entity.ThongBaoEntity;
-import ptithcm.entity.VideoEntity;
 
 public class HibernateUtil {
     private static SessionFactory sessionFactory;
@@ -47,7 +46,6 @@ public class HibernateUtil {
                 configuration.addAnnotatedClass(TaiKhoanEntity.class);
                 configuration.addAnnotatedClass(TenQuyenEntity.class);
                 configuration.addAnnotatedClass(ThongBaoEntity.class);
-                configuration.addAnnotatedClass(VideoEntity.class);
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties()).build();
 

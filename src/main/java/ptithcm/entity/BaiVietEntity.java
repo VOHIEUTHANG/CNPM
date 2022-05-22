@@ -54,19 +54,6 @@ public class BaiVietEntity {
 	
 	@OneToMany(mappedBy = "baiviet",cascade=CascadeType.ALL,orphanRemoval = true)
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@ElementCollection
-	private Collection<VideoEntity> video;
-
-	public Collection<VideoEntity> getVideo() {
-		return this.video;
-	}
-
-	public void setVideo(Collection<VideoEntity> video) {
-		this.video = video;
-	}
-	
-	@OneToMany(mappedBy = "baiviet",cascade=CascadeType.ALL,orphanRemoval = true)
-	@LazyCollection(LazyCollectionOption.FALSE)
 	private Collection<AnhEntity> Anh;
 
 	public Collection<AnhEntity> getAnh() {

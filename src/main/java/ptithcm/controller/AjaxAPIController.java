@@ -58,7 +58,12 @@ public class AjaxAPIController {
 
     @RequestMapping(value = "/post-upload", method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
     @ResponseBody
-    public String getThongTin(@RequestParam("images") MultipartFile[] files,@RequestParam("video") MultipartFile video,HttpServletRequest req) throws IOException {JSONObject data= new JSONObject(req.getParameter("info"));
+    public String getThongTin(
+            @RequestParam("images") MultipartFile[] files,
+            @RequestParam("video") MultipartFile video,
+            HttpServletRequest req
+    ) throws IOException {
+        JSONObject data= new JSONObject(req.getParameter("info"));
         NguoiDungDao userDao = new NguoiDungDao();
         String username= userService.currentUserName();
         TaiKhoanEntity tk= userDao.findByUserName(username);
@@ -77,6 +82,7 @@ public class AjaxAPIController {
         ct.setPhuongxa(data.getString("wards"));
         ct.setQuanhuyen(data.getString("district"));
         ct.setTinhtp(data.getString("province"));
+        ct.setLinkVideo("Storage/Videos/"+ writeFile(video,"Videos"));
         Date date = new Date();
         Timestamp timestamp = new Timestamp(date.getTime());
         Timestamp timestampEnd = new Timestamp(date.getTime());
@@ -94,7 +100,6 @@ public class AjaxAPIController {
             BaiVietEntity currentPost = postList.get(postList.size()-1);
 
             AnhDao anhDao =new AnhDao();
-            VideoDao videoDao = new VideoDao();
             ChiTietBaiVietDao ctbv= new ChiTietBaiVietDao();
 
             ct.setMabaiviet(currentPost.getMabaiviet());
@@ -107,11 +112,7 @@ public class AjaxAPIController {
                 anhDao.Insert(a);
                 anh.add(a);
             }
-            VideoEntity vd = new VideoEntity();
-            vd.setBaiviet(currentPost);
-            vd.setLinkvideo("Storage/Videos/"+ writeFile(video,"Videos"));
 
-            videoDao.Insert(vd);
             ctbv.Insert(ct);
 
         }else{
@@ -190,7 +191,6 @@ public class AjaxAPIController {
         ChiTietBaiVietDao PostDetailDao = new ChiTietBaiVietDao();
         NguoiDungDao userDao = new NguoiDungDao();
         AnhDao imgDao = new AnhDao();
-        VideoDao videoDao = new VideoDao();
 
         List<BaiVietEntity> listPost = userDao.getPostByID(id.toString());
         BaiVietEntity targetPost = listPost.get(0);
@@ -208,6 +208,7 @@ public class AjaxAPIController {
             targetPostDetail.setPhuongxa(data.getString("wards"));
             targetPostDetail.setQuanhuyen(data.getString("district"));
             targetPostDetail.setTinhtp(data.getString("province"));
+            targetPostDetail.setLinkVideo("Storage/Videos/"+ writeFile(video,"Videos"));
             int updatePostResult = PostDao.UpdateBaiViet(targetPost);
             //  successfully update post will return 1
             if(updatePostResult == 1){
@@ -229,18 +230,7 @@ public class AjaxAPIController {
                         System.out.println("Write image File");
                     }
                 }
-                Collection<VideoEntity> videoList =  targetPost.getVideo();
-                if(videoList.size() > 0){
-                    VideoEntity targetVideo = videoList.iterator().next();
-                    int deleteVideoResult = videoDao.DeleteVideo(targetVideo);
-                    if(deleteVideoResult == 1){
-                        System.out.println("Delete video successfully !");
-                    }
-                }
-                VideoEntity v = new VideoEntity();
-                v.setBaiviet(targetPost);
-                v.setLinkvideo("Storage/Videos/"+ writeFile(video,"Videos"));
-                if( videoDao.Insert(v) == 1) System.out.println("Insert new video Successfully !");
+
             }else{
                 System.out.println("Update Post failure !");
                 return "0";
