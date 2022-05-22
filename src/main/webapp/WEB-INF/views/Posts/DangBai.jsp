@@ -71,20 +71,24 @@ prefix="form"%>
                 </div>
               </div>
               <div class="acc-setting">
-                <a href="#account-general" class="acc-setting-item">
+                <a href="./trangcanhan#account-general" class="acc-setting-item">
                   <i class="fa-solid fa-user"></i>
                   <span>Thông tin</span>
                 </a>
+                 <a href="./trangcanhan#account-post" class="acc-setting-item">
+                    <i class="fa-solid fa-paste"></i>
+                    <span>Quản lý tin</span>
+                 </a>
 
-                <a href="#" class="acc-setting-item">
+                <a href="./trangcanhan#account-notifications" class="acc-setting-item">
                   <i class="fa-solid fa-bell"></i>
                   <span>Thông báo</span>
                 </a>
-                <a href="#" class="acc-setting-item">
+                <a href="./trangcanhan#account-feedback" class="acc-setting-item">
                   <i class="fa-solid fa-file-signature"></i>
                   <span>Góp Ý</span>
                 </a>
-                <a href="#" class="acc-setting-item">
+                <a href="./trangcanhan#account-change-password" class="acc-setting-item">
                   <i class="fa-solid fa-key"></i>
                   <span>Đổi mật khẩu</span>
                 </a>
@@ -336,7 +340,7 @@ prefix="form"%>
                         </div>
                         <div class="upload__video-wrap">
                           <video id="video-tag" src="" controls></video>
-                          <div class="video-placeholder">
+                          <div class="video-placeholder" style="z-index:0">
                             <div class="video-icon">
                               <i class="fa-solid fa-film"></i>
                             </div>

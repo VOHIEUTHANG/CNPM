@@ -57,9 +57,9 @@
                         <span>Thông tin</span>
                       </a>
                        <a href="../nguoidung/trangcanhan#account-post" class="acc-setting-item">
-                                              <i class="fa-solid fa-paste"></i>
-                                              <span>Quản lý tin</span>
-                                            </a>
+                           <i class="fa-solid fa-paste"></i>
+                           <span>Quản lý tin</span>
+                       </a>
                       <a href="../nguoidung/trangcanhan#account-notifications" class="acc-setting-item">
                         <i class="fa-solid fa-bell"></i>
                         <span>Thông báo</span>

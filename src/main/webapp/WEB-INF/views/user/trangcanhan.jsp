@@ -66,11 +66,10 @@
                         <i class="fa-solid fa-user"></i>
                         <span>Thông tin</span>
                       </a>
-                      <a href="../nguoidung/trangcanhan#account-post" class="acc-setting-item tab2">
-                                                                    <i class="fa-solid fa-paste"></i>
-                                                                    <span>Quản lý tin</span>
-                                                                  </a>
-
+                      <a href="#" class="acc-setting-item tab2">
+                          <i class="fa-solid fa-paste"></i>
+                          <span>Quản lý tin</span>
+                      </a>
                       <a href="#" class="acc-setting-item tab3">
                         <i class="fa-solid fa-bell"></i>
                         <span>Thông báo</span>
