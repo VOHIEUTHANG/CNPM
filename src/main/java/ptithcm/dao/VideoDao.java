@@ -24,4 +24,21 @@ public class VideoDao {
         }
         return 1;
     }
+    public  Integer DeleteVideo(VideoEntity bv){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t = session.beginTransaction();
+        try {
+            session.delete(bv);
+            t.commit();
+        }
+        catch (Exception e) {
+            t.rollback();
+            e.printStackTrace();
+            return 0;
+        }
+        finally {
+            session.close();
+        }
+        return 1;
+    }
 }

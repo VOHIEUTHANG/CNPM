@@ -186,26 +186,11 @@ public class AjaxAPIController {
             @PathVariable("id") Long id
     ) throws IOException {
         JSONObject data = new JSONObject(req.getParameter("info"));
-
-        NguoiDungDao userDao = new NguoiDungDao();
-        String username = userService.currentUserName();
-        TaiKhoanEntity tk = userDao.findByUserName(username);
-        NguoiDungEntity currentUser = tk.getNguoidung();
-
-        List<AnhEntity> anh =new ArrayList<>();
-
-        List<BaiVietEntity> listPost = userDao.getPostByID(id.toString());
-
-        BaiVietEntity targetPost = listPost.get(0);
-
-        System.out.println(data.getString("imageIDs"));
-
-        JSONObject data = new JSONObject(req.getParameter("info"));
-
         BaiVietDao PostDao = new BaiVietDao();
         ChiTietBaiVietDao PostDetailDao = new ChiTietBaiVietDao();
         NguoiDungDao userDao = new NguoiDungDao();
         AnhDao imgDao = new AnhDao();
+        VideoDao videoDao = new VideoDao();
 
         List<BaiVietEntity> listPost = userDao.getPostByID(id.toString());
         BaiVietEntity targetPost = listPost.get(0);
@@ -243,6 +228,18 @@ public class AjaxAPIController {
                         imgDao.Insert(a);
                         System.out.println("Write image File");
                     }
+                }
+                Collection<VideoEntity> videoList =  targetPost.getVideo();
+                if(videoList.size() > 0){
+                    VideoEntity targetVideo = videoList.iterator().next();
+                    int deleteVideoResult = videoDao.DeleteVideo(targetVideo);
+                    if(deleteVideoResult == 1){
+                        System.out.println("Delete video successfully !");
+                    }
+                    VideoEntity v = new VideoEntity();
+                    v.setBaiviet(targetPost);
+                    v.setLinkvideo("Storage/Videos/"+ writeFile(video,"Videos"));
+                    if( videoDao.Insert(v) == 1) System.out.println("Insert new video Successfully !");
                 }
             }else{
                 System.out.println("Update Post failure !");
