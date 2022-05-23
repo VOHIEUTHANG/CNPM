@@ -85,7 +85,8 @@ public class ChiTietBaiVietEntity {
 		int month = timeStamp.getMonth() + 1;
 		int year = timeStamp.getYear() + 1900;
 		int hours = timeStamp.getHours();
-		String formatedTime = hours + " giờ - "+ String.valueOf(date) + "/" + String.valueOf(month) + "/"+ String.valueOf(year);
+		int minutes = timeStamp.getMinutes();
+		String formatedTime = hours + ":" + minutes +" "+ String.valueOf(date) + "/" + String.valueOf(month) + "/"+ String.valueOf(year);
 		return formatedTime;
 	}
 	public String getEndDateFormated(){

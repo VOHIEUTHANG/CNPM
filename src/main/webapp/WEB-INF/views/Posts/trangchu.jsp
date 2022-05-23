@@ -262,7 +262,7 @@
                                              <span class="post-price-value">${item.gia} triệu/tháng</span>
                                          </div>
                                          <div class="post-lessor">
-                                             <a href=>
+                                             <a href= "../nguoidung/trangcanhan">
                                                  <div class="pl-info">
                                                      <div class="pl-img">
                                                          <img src="${item.nguoidung.linkanhdaidien}" alt="hình đại diện">
