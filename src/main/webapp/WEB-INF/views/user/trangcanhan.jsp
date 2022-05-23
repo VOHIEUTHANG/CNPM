@@ -131,9 +131,11 @@
                     <a class="list-group-item  active" data-toggle="list" href="#account-general">Thông tin cá nhân</a>
                     <a class="list-group-item " data-toggle="list" href="#account-post">Quản lý tin đăng</a>
                     <a class="list-group-item " style="position: relative" data-toggle="list" href="#account-notifications">Thông báo
+                       <c:if test="${notiCount > 0}">
                        <div class="noti-icon">
-                       4
+                          ${notiCount}
                        </div>
+                       </c:if>
                     </a>
                     <a class="list-group-item " data-toggle="list" href="#account-feedback">Góp ý</a>
                     <a class="list-group-item " data-toggle="list" href="#account-change-password">Đổi mật khẩu</a>
@@ -443,6 +445,10 @@
                     <div class="tab-pane fade" id="account-notifications">
                       <div class="card-body ">
                         <h3 style="margin-bottom: 30px;font-size: 2.4rem;text-transform: uppercase;text-align: center;">Thông báo </h3>
+                        <c:if test="${notiCount==0}">
+                        <img src="<c:url value='/resources/assets/images/NoNoti.png'/>" alt="Không có thông báo nào cả"/>
+                        <h3 style="margin: 20px 0;font-size: 2rem;text-align: center;">Bạn không có thông báo nào :( </h3>
+                        </c:if>
                         <div class="accordion" id="accordionExample">
                            <c:if test="${notiList != null}">
                              <c:forEach var="noti" items="${notiList}" varStatus="status">

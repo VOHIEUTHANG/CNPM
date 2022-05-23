@@ -104,6 +104,7 @@ public class NguoiDungController {
 	if(notiList.size() > 0){
 			model.addAttribute("notiList", notiList);
 		}
+	model.addAttribute("notiCount",notiList.size());
 	List<BaiVietEntity> bviet= (List<BaiVietEntity>) tk.getNguoidung().getBaiviet();
 	int tatca=0;
 	int chuaduyet=0;
