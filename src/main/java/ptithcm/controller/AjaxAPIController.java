@@ -336,10 +336,30 @@ public class AjaxAPIController {
     @RequestMapping(value = "/post-feedback", method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
     @ResponseBody
     public String getFeedback(HttpServletRequest req) throws IOException {
+        NguoiDungDao userDao = new NguoiDungDao();
+        String username= userService.currentUserName();
+        TaiKhoanEntity tk= userDao.findByUserName(username);
+        NguoiDungEntity user = tk.getNguoidung();
+
         JSONObject data= new JSONObject(req.getParameter("feedback"));
         String feedback = data.getString("feedbackContent");
+        String rating = data.getString("rating");
         System.out.println("Feedback " + feedback);
-        return "Response Content!";
+        System.out.println(rating);
+        GopYEntity feedbackObj = new GopYEntity();
+        feedbackObj.setNguoidung(user);
+        feedbackObj.setNoidung(feedback);
+        feedbackObj.setSosao(Integer.parseInt(rating));
+        Date date = new Date();
+        Timestamp timestamp = new Timestamp(date.getTime());
+        feedbackObj.setThoigian(timestamp);
+        GopYDao feedbackConnect = new GopYDao();
+        int InsertFBResult = feedbackConnect.InsertGY(feedbackObj);
+        if(InsertFBResult == 1){
+            System.out.println("Insert Feedback successfully !");
+            return "1";
+        }
+        return "0";
     }
 
     @RequestMapping(value = "/post-user-general-no-avatar", method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")

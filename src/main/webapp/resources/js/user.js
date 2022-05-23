@@ -369,31 +369,47 @@ $(() => {
             ),
           ],
           onSubmit: function (feedback) {
-            feedbackVal = feedback.feedbackContent.trim().replaceAll("\n","//#");
-            console.log(feedbackVal);
-//            const formData = new FormData();
-//            formData.append("feedback", JSON.stringify(feedbackContent));
-//            $.ajax({
-//              url: "../api/post-feedback",
-//              type: "POST",
-//              data: formData,
-//              enctype: "multipart/form-data",
-//              processData: false,
-//              contentType: false,
-//              cache: false,
-//              timeout: 600000,
-//              success: function (data) {
-//                console.log("Response", data);
-//              },
-//              error: function () {
-//                toast({
-//                  title: "Có lỗi gửi dữ liệu về server!",
-//                  message: "Vui lòng liên hệ quản trị viên để giải quyết!",
-//                  type: "error",
-//                  duration: 5000,
-//                });
-//              },
-//            });
+          delete feedback.rating;
+           const rating = $('.rating__input:checked').val();
+           feedbackVal = feedback.feedbackContent.trim().replaceAll("\n","//#");
+           feedback.rating = rating;
+            const formData = new FormData();
+            formData.append("feedback", JSON.stringify(feedback));
+            $.ajax({
+              url: "../api/post-feedback",
+              type: "POST",
+              data: formData,
+              enctype: "multipart/form-data",
+              processData: false,
+              contentType: false,
+              cache: false,
+              timeout: 600000,
+              success: function (res) {
+                if(res == 1){
+                  toast({
+                    title: "Thành công!",
+                    message: "Cảm ơn bạn đã đóng góp ý kiến, chúng tôi sẽ xem xét và cải thiện chất lượng website tốt hơn !",
+                    type: "success",
+                    duration: 5000,
+                  });
+                }else{
+                  toast({
+                    title: "Có lỗi gửi dữ liệu về server!",
+                    message: "Vui lòng liên hệ quản trị viên để giải quyết!",
+                    type: "error",
+                    duration: 5000,
+                  });
+                }
+              },
+              error: function () {
+                toast({
+                  title: "Có lỗi gửi dữ liệu về server!",
+                  message: "Vui lòng liên hệ quản trị viên để giải quyết!",
+                  type: "error",
+                  duration: 5000,
+                });
+              },
+            });
           },
           onFormInvalid() {
             toast({

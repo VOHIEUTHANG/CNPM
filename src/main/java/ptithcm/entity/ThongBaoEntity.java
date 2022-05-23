@@ -31,10 +31,8 @@ public class ThongBaoEntity {
 	private String noidung;
 	@Column(name = "TieuDe")
 	private String tieude;
-
 	@Column(name="DaDoc")
 	private Boolean dadoc;
-	
 	@ManyToOne
 	@JoinColumn(name = "MaND")
 	private NguoiDungEntity nguoidung;
