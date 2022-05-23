@@ -12,8 +12,9 @@ import ptithcm.hibernate.HibernateUtil;
 public class BaiVietDao {
 	Session session ;
     public List < BaiVietEntity > getAll() {
-        try { session = HibernateUtil.getSessionFactory().openSession();
-            return session.createQuery("from BaiVietEntity", BaiVietEntity.class).list();
+        try {
+			session = HibernateUtil.getSessionFactory().openSession();
+            return session.createQuery("from BaiVietEntity as Bv where Bv.tinhtrang=1 and Bv.an=0", BaiVietEntity.class).list();
         }
 		catch(Exception e){
 		return null;

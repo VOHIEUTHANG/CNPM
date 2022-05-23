@@ -122,7 +122,6 @@ public class NguoiDungController {
 		if(i.getAn()) an++;
 
 	}
-
 	model.addAttribute("tatca",tatca);
 	model.addAttribute("postList",bviet);
 	model.addAttribute("chuaduyet",chuaduyet);

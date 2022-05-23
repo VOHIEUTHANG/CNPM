@@ -41,7 +41,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
                 .permitAll();
-        // Cái dưới này liên quan đến chống tấn công csrf
         http.csrf().disable();
     }
     @Override
