@@ -4,7 +4,8 @@ const dataText = {
   district: "",
   wards: "",
 };
- var imgArray = [];
+ let imgArray = [];
+ let videoFile;
 (() => {
   return {
     getAddressHandler() {
@@ -157,6 +158,10 @@ const dataText = {
     },
     uploadVideoHandler() {
       const videoTag = $("#video-tag");
+      const closeVideoBtn = $('.close-video');
+      closeVideoBtn.click(()=>{
+        $(".video-placeholder").removeClass("hide");
+      })
       const videoInput = $("#video_input");
       videoInput.on("change", (e) => {
         videoTag.attr("src", URL.createObjectURL(event.target.files[0]));
@@ -288,10 +293,12 @@ const dataText = {
           formData.append("images", file);
           })
 
-          if (videoFile) {
+          if (videoFile && $(".video-placeholder").hasClass('hide')) {
             formData.append("video", videoFile);
             URL = "../api/post-upload";
           }
+
+
 
           if (!imgArray.length) {
             $(".imageMessage").text(
@@ -338,7 +345,7 @@ const dataText = {
                           $(".imageMessage").text(
                             "Yêu cầu ít nhất 1 ảnh đại diện cho tin đăng!"
                           );
-                          }
+           }
           toast({
             title: "Các trường dữ liệu nhập không hợp lệ!",
             message: "Vui lòng chỉnh sửa lại nội dung bài đăng !",

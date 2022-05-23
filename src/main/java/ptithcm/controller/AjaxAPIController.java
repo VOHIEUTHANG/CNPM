@@ -250,6 +250,8 @@ public class AjaxAPIController {
             @PathVariable("id") Long id
     ) throws IOException {
         JSONObject data = new JSONObject(req.getParameter("info"));
+        JSONObject isRemoveVideo = new JSONObject(req.getParameter("isRemoveVideo"));
+        String checkExitsVideo = isRemoveVideo.getString("isRemoveVideo");
 
         BaiVietDao PostDao = new BaiVietDao();
         ChiTietBaiVietDao PostDetailDao = new ChiTietBaiVietDao();
@@ -272,6 +274,9 @@ public class AjaxAPIController {
             targetPostDetail.setPhuongxa(data.getString("wards"));
             targetPostDetail.setQuanhuyen(data.getString("district"));
             targetPostDetail.setTinhtp(data.getString("province"));
+            if(Boolean.parseBoolean(checkExitsVideo)){
+                targetPostDetail.setLinkVideo(null);
+            }
             int updatePostResult = PostDao.UpdateBaiViet(targetPost);
             //  successfully update post will return 1
             if(updatePostResult == 1){
@@ -293,6 +298,9 @@ public class AjaxAPIController {
                         System.out.println("Write image File");
                      }
                 }
+
+
+
             }else{
                 System.out.println("Update Post failure !");
                 return "0";

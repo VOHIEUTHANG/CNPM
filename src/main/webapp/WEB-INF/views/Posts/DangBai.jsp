@@ -340,6 +340,11 @@ prefix="form"%>
                         </div>
                         <div class="upload__video-wrap">
                           <video id="video-tag" src="" controls></video>
+                          <div class="close-video">
+                          <button type="button" class="close" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                          </div>
                           <div class="video-placeholder" style="z-index:0">
                             <div class="video-icon">
                               <i class="fa-solid fa-film"></i>

@@ -216,12 +216,16 @@ myArray.forEach((item) => {
       });
     },
     uploadVideoHandler() {
-      const videoTag = $("#video-tag");
-      const videoInput = $("#video_input");
-      videoInput.on("change", (e) => {
-        videoTag.attr("src", URL.createObjectURL(event.target.files[0]));
-        $(".video-placeholder").addClass("hide");
-      });
+     const videoTag = $("#video-tag");
+          const closeVideoBtn = $('.close-video');
+          closeVideoBtn.click(()=>{
+            $(".video-placeholder").removeClass("hide");
+          })
+          const videoInput = $("#video_input");
+          videoInput.on("change", (e) => {
+            videoTag.attr("src", URL.createObjectURL(event.target.files[0]));
+            $(".video-placeholder").addClass("hide");
+          });
     },
     showFormSignInUpHandler() {
       const loginForm = document.querySelector(".form-login");
@@ -352,15 +356,22 @@ myArray.forEach((item) => {
             }
           });
 
+            if(!$(".video-placeholder").hasClass('hide')){
+              formData.append("isRemoveVideo",JSON.stringify({isRemoveVideo: "true"}));
+            }
+
           const imageIDs = IDImgList.join("_");
           dataText.imageIDs = imageIDs;
 
           formData.append("info", JSON.stringify(dataText));
             console.log(videoFile);
-          if (videoFile) {
+          if (videoFile && $(".video-placeholder").hasClass('hide')) {
             formData.append("video", videoFile);
             URL = "../../api/post-upload-update/" + ID;
           }
+
+
+
           if (!imgArray.length) {
             $(".imageMessage").text(
               "Yêu cầu ít nhất 1 ảnh đại diện cho tin đăng!"

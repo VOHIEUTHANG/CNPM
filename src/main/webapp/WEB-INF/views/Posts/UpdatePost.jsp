@@ -365,6 +365,9 @@ prefix="form"%>
                           <c:when test="${video!=null}"><video id="video-tag" src="../../${video}" controls></video></c:when>
                           <c:when test="${video==null}"><video id="video-tag" src="" controls></video></c:when>
                           </c:choose>
+                            <div class="close-video" style="cursor:pointer">
+                                      <i class="fa-solid fa-xmark" style="color:white;font-size:2.3rem"></i>
+                               </div>
                           <div class="video-placeholder">
                             <div class="video-icon">
                               <i class="fa-solid fa-film"></i>
@@ -407,8 +410,8 @@ prefix="form"%>
             const main  = $('.main').attr('id',ID);
             window.onload  = ()=>{
             const videoURL = $("#video-tag").attr('src');
-            if(!videoURL){
-                $(".video-placeholder").css('z-index','1');
+            if(videoURL){
+                $(".video-placeholder").addClass('hide');
             }
             }
         })
