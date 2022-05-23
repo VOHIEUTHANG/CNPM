@@ -333,6 +333,15 @@ public class AjaxAPIController {
         }
     }
 
+    @RequestMapping(value = "/post-feedback", method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
+    @ResponseBody
+    public String getFeedback(HttpServletRequest req) throws IOException {
+        JSONObject data= new JSONObject(req.getParameter("feedback"));
+        String feedback = data.getString("feedbackContent");
+        System.out.println("Feedback " + feedback);
+        return "Response Content!";
+    }
+
     @RequestMapping(value = "/post-user-general-no-avatar", method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
     @ResponseBody
     public  String getUserInfoNoAvatar(HttpServletRequest req){

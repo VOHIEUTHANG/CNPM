@@ -1,5 +1,6 @@
 package ptithcm.entity;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -79,5 +80,18 @@ public class ThongBaoEntity {
 	public void setNguoidung(NguoiDungEntity nguoidung) {
 		this.nguoidung = nguoidung;
 	}
-	
+
+	public String formatTime(Timestamp timeStamp){
+		int hours = timeStamp.getHours();
+		int minutes  = timeStamp.getNanos();
+		return String.valueOf(hours) + " giờ " + String.valueOf(minutes) + " phút";
+	}
+	public String formateDate(Timestamp timeStamp){
+		int date = timeStamp.getDate();
+		int month = timeStamp.getMonth() + 1;
+		int year = timeStamp.getYear() + 1900;
+		return String.valueOf(date) + "/" + String.valueOf(month) + "/"+ String.valueOf(year);
+	}
+
+
 }

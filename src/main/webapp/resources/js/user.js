@@ -298,63 +298,112 @@ $(() => {
         });
       },
       routerhandler() {
-    const currentHref = window.location.href;
-            const separatorIndex = currentHref.lastIndexOf("#");
-            const tabContent = currentHref.slice(separatorIndex);
-            const tabContentList = [
-              "#account-post",
-              "#account-notifications",
-              "#account-feedback",
-              "#account-change-password",
-            ];
-            switch (tabContent) {
-              case tabContentList[0]:
-                const tab1 = $(`a[href="${tabContentList[0]}"]`);
-                tab1[0].click();
-                break;
-              case tabContentList[1]:
-                const tab2 = $(`a[href="${tabContentList[1]}"]`);
-                tab2[0].click();
-                break;
-              case tabContentList[2]:
-                const tab3 = $(`a[href="${tabContentList[2]}"]`);
-                 tab3[0].click();
-                break;
-              case tabContentList[3]:
-                const tab4 = $(`a[href="${tabContentList[3]}"]`);
-                tab4[0].click();
-                break;
-              default:
-                console.log("No router supporting !");
-            }
-            const tabsList = [
-                {
-                    tabClass:'tab1',
-                    tabButton: '#account-general'
-                },
-                {
-                    tabClass:'tab2',
-                    tabButton: "#account-post"
-                },
-                {
-                    tabClass:'tab3',
-                    tabButton: "#account-notifications"
-                },
-                {
-                    tabClass:'tab4',
-                    tabButton: "#account-feedback"
-                },
-                {
-                    tabClass:'tab5',
-                    tabButton: "#account-change-password"
-                },
-
-            ];
-            tabsList.forEach((tab) => {
-              $(`.acc-setting-item.${tab.tabClass}`).click(() => {
-                $(`a[href="${tab.tabButton}"]`)[0].click();
-              });
+        const currentHref = window.location.href;
+        const separatorIndex = currentHref.lastIndexOf("#");
+        const tabContent = currentHref.slice(separatorIndex);
+        const tabContentList = [
+          "#account-post",
+          "#account-notifications",
+          "#account-feedback",
+          "#account-change-password",
+        ];
+        switch (tabContent) {
+          case tabContentList[0]:
+            const tab1 = $(`a[href="${tabContentList[0]}"]`);
+            tab1[0].click();
+            break;
+          case tabContentList[1]:
+            const tab2 = $(`a[href="${tabContentList[1]}"]`);
+            tab2[0].click();
+            break;
+          case tabContentList[2]:
+            const tab3 = $(`a[href="${tabContentList[2]}"]`);
+            tab3[0].click();
+            break;
+          case tabContentList[3]:
+            const tab4 = $(`a[href="${tabContentList[3]}"]`);
+            tab4[0].click();
+            break;
+          default:
+            console.log("No router supporting !");
+        }
+        const tabsList = [
+          {
+            tabClass: "tab1",
+            tabButton: "#account-general",
+          },
+          {
+            tabClass: "tab2",
+            tabButton: "#account-post",
+          },
+          {
+            tabClass: "tab3",
+            tabButton: "#account-notifications",
+          },
+          {
+            tabClass: "tab4",
+            tabButton: "#account-feedback",
+          },
+          {
+            tabClass: "tab5",
+            tabButton: "#account-change-password",
+          },
+        ];
+        tabsList.forEach((tab) => {
+          $(`.acc-setting-item.${tab.tabClass}`).click(() => {
+            $(`a[href="${tab.tabButton}"]`)[0].click();
+          });
+        });
+      },
+      feedbackHandler() {
+        const feddbackBtn = $("#submit-feedback");
+        Validator({
+          form: "#form-sendfeeback",
+          formGroupSelector: ".form-group",
+          errorSelector: ".form-message",
+          rules: [
+            Validator.minLength(
+              "#form-feedback",
+              10,
+              "Nội dung phải có ít nhất 10 ký tự !"
+            ),
+          ],
+          onSubmit: function (feedback) {
+            feedbackVal = feedback.feedbackContent.trim().replaceAll("\n","//#");
+            console.log(feedbackVal);
+//            const formData = new FormData();
+//            formData.append("feedback", JSON.stringify(feedbackContent));
+//            $.ajax({
+//              url: "../api/post-feedback",
+//              type: "POST",
+//              data: formData,
+//              enctype: "multipart/form-data",
+//              processData: false,
+//              contentType: false,
+//              cache: false,
+//              timeout: 600000,
+//              success: function (data) {
+//                console.log("Response", data);
+//              },
+//              error: function () {
+//                toast({
+//                  title: "Có lỗi gửi dữ liệu về server!",
+//                  message: "Vui lòng liên hệ quản trị viên để giải quyết!",
+//                  type: "error",
+//                  duration: 5000,
+//                });
+//              },
+//            });
+          },
+          onFormInvalid() {
+            toast({
+              title: "Các trường dữ liệu nhập không hợp lệ!",
+              message: "Vui lòng chỉnh sửa lại mật khẩu cho hợp lệ !",
+              type: "error",
+              duration: 5000,
             });
+          },
+        });
       },
       run() {
         this.uploadAvatarHandler();
@@ -363,6 +412,7 @@ $(() => {
         this.hidePostHandler();
         this.manaPostHandler();
         this.routerhandler();
+        this.feedbackHandler();
       },
     };
   })().run();

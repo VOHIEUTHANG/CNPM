@@ -354,9 +354,80 @@
                     <div class="tab-pane fade" id="account-feedback">
                       <div class="card-body pb-2">
                         <h3 style="margin-bottom: 30px;font-size: 2.4rem;text-transform: uppercase;text-align: center;">Đóng góp ý kiến </h3>
-                        <form action="" id="form-changePassword">
+                        <form action="" id="form-sendfeeback">
+                        <div id="full-stars-example">
+                              <div class="rating-group">
+                                <input
+                                  class="rating__input rating__input--none"
+                                  name="rating"
+                                  id="rating-none"
+                                  value="0"
+                                  type="radio"
+                                />
+                                <label aria-label="No rating" class="rating__label" for="rating-none"
+                                  ><i class="rating__icon rating__icon--none fa fa-ban"></i
+                                ></label>
+                                <label aria-label="1 star" class="rating__label" for="rating-1"
+                                  ><i class="rating__icon rating__icon--star fa fa-star"></i
+                                ></label>
+                                <input
+                                  class="rating__input"
+                                  name="rating"
+                                  id="rating-1"
+                                  value="1"
+                                  type="radio"
+                                />
+                                <label aria-label="2 stars" class="rating__label" for="rating-2"
+                                  ><i class="rating__icon rating__icon--star fa fa-star"></i
+                                ></label>
+                                <input
+                                  class="rating__input"
+                                  name="rating"
+                                  id="rating-2"
+                                  value="2"
+                                  type="radio"
+                                />
+                                <label aria-label="3 stars" class="rating__label" for="rating-3"
+                                  ><i class="rating__icon rating__icon--star fa fa-star"></i
+                                ></label>
+                                <input
+                                  class="rating__input"
+                                  name="rating"
+                                  id="rating-3"
+                                  value="3"
+                                  type="radio"
+                                  checked
+                                />
+                                <label aria-label="4 stars" class="rating__label" for="rating-4"
+                                  ><i class="rating__icon rating__icon--star fa fa-star"></i
+                                ></label>
+                                <input
+                                  class="rating__input"
+                                  name="rating"
+                                  id="rating-4"
+                                  value="4"
+                                  type="radio"
+                                />
+                                <label aria-label="5 stars" class="rating__label" for="rating-5"
+                                  ><i class="rating__icon rating__icon--star fa fa-star"></i
+                                ></label>
+                                <input
+                                  class="rating__input"
+                                  name="rating"
+                                  id="rating-5"
+                                  value="5"
+                                  type="radio"
+                                />
+                              </div>
+                              <p
+                                class="desc"
+                                style="margin-bottom: 2rem; font-family: sans-serif; font-size: 1.5rem"
+                              >
+                                Đánh giá trang web
+                              </p>
+                            </div>
                           <div class="form-group">
-                            <label class="form-label">Nhập nội dung đóng góp ý kiến</label>
+                            <label class="form-label" style="margin-bottom: 20px;text-align:center;">Nhập nội dung đóng góp ý kiến</label>
                             <textarea class="form-control" id="form-feedback" name="feedbackContent" rows="7"></textarea>
                             <span class="form-message"></span>
                           </div>
@@ -373,47 +444,34 @@
                       <div class="card-body ">
                         <h3 style="margin-bottom: 30px;font-size: 2.4rem;text-transform: uppercase;text-align: center;">Thông báo </h3>
                         <div class="accordion" id="accordionExample">
-                          <div class="card">
-                            <div class="card-header" id="headingOne">
-                              <h2 class="mb-0">
-                                <button class="btn btn-link btn-noti" style="text-align:left;" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                  Đăng ký thành công tài khoản tại timtro.vn Đăng ký thành công tài khoản tại timtro.vn Đăng ký thành công tài khoản tại timtro.vn
-                                </button>
-                              </h2>
-                              <div class="time-label">
-                              <span>12 giờ 30 phút</span>
-                              <span>30/6/2021</span>
-                              </div>
-                              <div class="title-full">
-                                   Đăng ký thành công tài khoản tại timtro.vn Đăng ký thành công tài khoản tại timtro.vn Đăng ký thành công tài khoản tại timtro.vn
-                              </div>
-                            </div>
-
-                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                              <div class="card-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                              </div>
-                            </div>
-                          </div>
-                          <div class="card readed">
-                            <div class="card-header " id="headingTwo">
-                              <h2 class="mb-0">
-                                <button class="btn btn-link btn-noti style="text-align:left;" " type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                  Bài viết có ID... đã được duyệt.
-                                </button>
-                              </h2>
-                                <div class="time-label">
-                                <span>12 giờ 30 phút</span>
-                                <span>30/6/2021</span>
-                                </div>
-
-                            </div>
-                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                              <div class="card-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                              </div>
-                            </div>
-                          </div>
+                           <c:if test="${notiList != null}">
+                             <c:forEach var="noti" items="${notiList}" varStatus="status">
+                             <c:choose>
+                             <c:when test="${noti.dadoc}"> <div class="card readed">  </c:when>
+                             <c:when test="${!noti.dadoc}"> <div class="card">  </c:when>
+                             </c:choose>
+                                 <div class="card-header" id="heading${status.index}">
+                                     <h2 class="mb-0">
+                                     <button class="btn btn-link btn-noti" style="text-align:left;" type="button" data-toggle="collapse" data-target="#collapse${status.idnex}" aria-expanded="true" aria-controls="collapseOne">
+                                         ${noti.tieude}
+                                     </button>
+                                     </h2>
+                                     <div class="time-label">
+                                     <span>12 giờ 30 phút</span>
+                                     <span>"${noti.thoigian}"</span>
+                                     </div>
+                                     <div class="title-full">
+                                         Đăng ký thành công tài khoản tại timtro.vn Đăng ký thành công tài khoản tại timtro.vn Đăng ký thành công tài khoản tại timtro.vn
+                                     </div>
+                                 </div>
+                                 <div id="collapse${status.index}" class="collapse" aria-labelledby="heading${status.index}" data-parent="#accordionExample">
+                                     <div class="card-body">
+                                     ${noti.noidung}
+                                     </div>
+                                 </div>
+                                 </div>
+                             </c:forEach>
+                           </c:if>
                         </div>
                       </div>
                     </div>

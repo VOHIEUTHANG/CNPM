@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import ptithcm.dao.BaiVietDao;
 import ptithcm.dao.NguoiDungDao;
-import ptithcm.entity.AnhEntity;
-import ptithcm.entity.BaiVietEntity;
-import ptithcm.entity.TaiKhoanEntity;
+import ptithcm.entity.*;
 import ptithcm.service.UserService;
 @Controller
 @RequestMapping("/nguoidung")
@@ -97,8 +95,15 @@ public class NguoiDungController {
 	String username= userService.currentUserName();
 	TaiKhoanEntity tk= userDao.findByUserName(username);
 
-	model.addAttribute("user",tk.getNguoidung());
+	NguoiDungEntity user = tk.getNguoidung();
+	Collection<ThongBaoEntity> notiList = user.getThongbao();
+
+	model.addAttribute("user",user);
 	model.addAttribute("acc",tk);
+		System.out.println(notiList.size());
+	if(notiList.size() > 0){
+			model.addAttribute("notiList", notiList);
+		}
 	List<BaiVietEntity> bviet= (List<BaiVietEntity>) tk.getNguoidung().getBaiviet();
 	int tatca=0;
 	int chuaduyet=0;
