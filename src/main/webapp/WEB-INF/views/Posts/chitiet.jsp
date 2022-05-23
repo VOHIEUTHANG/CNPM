@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="<c:url value='/resources/assets/images/Logo-icon.png'/>">
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!-- fontawesome -->
     <script src="https://kit.fontawesome.com/11a1459669.js" crossorigin="anonymous"></script>
     <!-- css external links-->
@@ -50,23 +50,26 @@
                          </div>
                        </div>
                        <div class="acc-setting">
-                         <a href="#account-general" class="acc-setting-item">
+                         <a href="../../nguoidung/trangcanhan#account-general" class="acc-setting-item">
                            <i class="fa-solid fa-user"></i>
                            <span>Thông tin</span>
                          </a>
-
-                         <a href="#" class="acc-setting-item">
-                           <i class="fa-solid fa-bell"></i>
-                           <span>Thông báo</span>
-                         </a>
-                         <a href="#" class="acc-setting-item">
-                           <i class="fa-solid fa-file-signature"></i>
-                           <span>Góp Ý</span>
-                         </a>
-                         <a href="#" class="acc-setting-item">
-                           <i class="fa-solid fa-key"></i>
-                           <span>Đổi mật khẩu</span>
-                         </a>
+                       <a href="../../nguoidung/trangcanhan#account-post" class="acc-setting-item">
+                           <i class="fa-solid fa-paste"></i>
+                           <span>Quản lý tin</span>
+                       </a>
+                        <a href="../../nguoidung/trangcanhan#account-notifications" class="acc-setting-item">
+                          <i class="fa-solid fa-bell"></i>
+                          <span>Thông báo</span>
+                        </a>
+                        <a href="../../nguoidung/trangcanhan#account-feedback" class="acc-setting-item">
+                          <i class="fa-solid fa-file-signature"></i>
+                          <span>Góp Ý</span>
+                        </a>
+                        <a href="../../nguoidung/trangcanhan#account-change-password" class="acc-setting-item">
+                          <i class="fa-solid fa-key"></i>
+                          <span>Đổi mật khẩu</span>
+                        </a>
                          <div class="separator"></div>
                          <a href="<c:url value='/logout' />" class="acc-setting-item logout">
                            <i class="fa-solid fa-right-from-bracket"></i>
@@ -134,11 +137,11 @@
                             <div class="detail-post">
                                 <div class="dp-view">
                                     <ul class="dp-list">
-                                    <c:if test="${video != null}">
+                                    <c:if test="${linkvideo != null}">
                                         <li class="dp-item">
-                                                                                    <video class="video-item" controls src="<c:url value='/${video.linkvideo}'/>"
-                                                                                        alt="">
-                                                                                </li>
+                                           <video class="video-item" controls src="<c:url value='/${linkvideo}'/>"
+                                            alt="">
+                                        </li>
                                     </c:if>
                                      <c:forEach var="item" items="${baiviet.getAnh()}">
                                         <li class="dp-item">
@@ -183,7 +186,9 @@
                                     <div class="die-time">
                                         <i class="fa-solid fa-clock"></i>
                                         <div class="die-value">
-                                            ${baiviet.chitietbaiviet.getStartDateFormated()}
+                                            Ngày đăng: ${baiviet.chitietbaiviet.getStartDateFormated()}
+                                             -
+                                            Ngày hết hạn: ${baiviet.chitietbaiviet.getEndDateFormated()}
                                         </div>
                                     </div>
                                 </div>
@@ -195,6 +200,13 @@
                                        ${baiviet.chitietbaiviet.getMota()}
                                     </div>
                                 </div>
+                                 <div class="card">
+                                    <div class="card-body">
+                                      <h5 class="card-title" style="font-size: 2rem;margin-bottom: 10px;">Thông tin liên hệ</h5>
+                                      <p class="card-text">Email: ${user.email}</p>
+                                      <p class="card-text">Số điện thoại liên hệ: ${user.sdt}</p>
+                                    </div>
+                                  </div>
                                 <div class="di-report" style="margin-top: 30px;">
                                     <i class="fa-solid fa-flag"></i>
                                     <span>Báo cáo bài viêt</span>

@@ -12,7 +12,6 @@ import ptithcm.entity.TaiKhoanEntity;
 import ptithcm.entity.TenQuyenEntity;
 import ptithcm.hibernate.HibernateUtil;
 public class NguoiDungDao {
-	Session session;
     public TaiKhoanEntity findByUserName(String user_name){
         TaiKhoanEntity tk= new TaiKhoanEntity();
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -100,8 +99,8 @@ public class NguoiDungDao {
      return 0L;
 	}
 	public List<BaiVietEntity> getAllBaiviet(String username){
+		Session session=HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
-			session=HibernateUtil.getSessionFactory().getCurrentSession();
 			session.beginTransaction();
 			String hql ="FROM BaiVietEntity where nguoidung.maND=:id";
 			Query query = session.createQuery(hql);
@@ -117,9 +116,24 @@ public class NguoiDungDao {
 		}
   
 	}
-	public Integer checkEmailSdt(String Email, String Sdt){
+
+	public List<BaiVietEntity> getPostByID(String PostID) {
 		try {
-			session=HibernateUtil.getSessionFactory().getCurrentSession();
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			session.beginTransaction();
+			String hql = "FROM BaiVietEntity where mabaiviet = " + PostID;
+			Query query = session.createQuery(hql);
+			return (List<BaiVietEntity>) query.list();
+
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		}
+	}
+
+	public Integer checkEmailSdt(String Email, String Sdt){
+		Session session=HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
 			session.beginTransaction();
 			String hql ="FROM NguoiDungEntity as nguoidung where nguoidung.sdt=:sdt or nguoidung.email=:email";
 			Query query = session.createQuery(hql);

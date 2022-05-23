@@ -62,20 +62,23 @@
                       </div>
                     </div>
                     <div class="acc-setting">
-                      <a href="#account-general" class="acc-setting-item">
+                      <a href="#" class="acc-setting-item tab1">
                         <i class="fa-solid fa-user"></i>
                         <span>Thông tin</span>
                       </a>
-
-                      <a href="#" class="acc-setting-item">
+                      <a href="#" class="acc-setting-item tab2">
+                          <i class="fa-solid fa-paste"></i>
+                          <span>Quản lý tin</span>
+                      </a>
+                      <a href="#" class="acc-setting-item tab3">
                         <i class="fa-solid fa-bell"></i>
                         <span>Thông báo</span>
                       </a>
-                      <a href="#" class="acc-setting-item">
+                      <a href="#" class="acc-setting-item tab4">
                         <i class="fa-solid fa-file-signature"></i>
                         <span>Góp Ý</span>
                       </a>
-                      <a href="#" class="acc-setting-item">
+                      <a href="#" class="acc-setting-item tab5">
                         <i class="fa-solid fa-key"></i>
                         <span>Đổi mật khẩu</span>
                       </a>
@@ -121,13 +124,19 @@
             <i class="fa-solid fa-angle-up"></i>
           </a>
           <div class="container container-iso">
-            <div class="overflow-hidden">
+            <div class="">
               <div class="row no-gutters row-bordered row-border-light">
                 <div class="col-md-3  nav-control">
                   <div class="list-group list-group-flush account-settings-links">
                     <a class="list-group-item  active" data-toggle="list" href="#account-general">Thông tin cá nhân</a>
                     <a class="list-group-item " data-toggle="list" href="#account-post">Quản lý tin đăng</a>
-                    <a class="list-group-item " data-toggle="list" href="#account-notifications">Thông báo</a>
+                    <a class="list-group-item " style="position: relative" data-toggle="list" href="#account-notifications">Thông báo
+                       <c:if test="${notiCount > 0}">
+                       <div class="noti-icon">
+                          ${notiCount}
+                       </div>
+                       </c:if>
+                    </a>
                     <a class="list-group-item " data-toggle="list" href="#account-feedback">Góp ý</a>
                     <a class="list-group-item " data-toggle="list" href="#account-change-password">Đổi mật khẩu</a>
                   </div>
@@ -184,6 +193,7 @@
                     </div>
                     <div class="tab-pane fade " id="account-change-password">
                                     <div class="card-body pb-2">
+                                    <h3 style="margin-bottom: 30px;font-size: 2.4rem;text-transform: uppercase;text-align: center;">Đổi mật khẩu</h3>
                                       <form action="" id="form-changePassword">
                                         <div class="form-group">
                                           <label class="form-label">Mật khẩu hiện tại</label>
@@ -244,7 +254,6 @@
                                 <div class="mana-foot">
                                 <div class="manapost-btn button button--hl ">Quản lý chi tiết</div>
                                 </div>
-
                                         <div class="manapost-container ">
                                             <div class="mana-main">
                                                 <div class="man-close-btn">
@@ -328,7 +337,7 @@
                                                                        </c:when>
                                                                       </c:choose>
                                                                       <li class="mana-item">
-                                                                      <a href="./update-post">
+                                                                      <a href="./update-post/${post.mabaiviet}">
                                                                       <span class="mana-modify-btn">Chỉnh sửa</span>
                                                                       </a>
                                                                       </li>
@@ -346,111 +355,129 @@
                     </div>
                     <div class="tab-pane fade" id="account-feedback">
                       <div class="card-body pb-2">
-                        <div class="table-responsive">
-                          <table class="table table-striped table-bordered">
-                            <thead class="table-light">
-                              <tr>
-                                <th scope="col">Mã tin</th>
-                                <th scope="col">Tiêu đề</th>
-                                <th scope="col">Giá</th>
-                                <th scope="col">Diện tích</th>
-                                <th scope="col">Trạng thái</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <th scope="row">1</th>
-                                <td>Title</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>
-                                  <p class="text-danger">Chưa Duyệt</p>
-                                </td>
-                              </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                <td>
-                                  <p class="text-success">Đã xét duyệt</p>
-                                </td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                                <td>
-                                  <p class="text-success">Đã xét duyệt</p>
-                                </td>
-                              </tr>
-                            </tbody>
-                            <tfoot>
-                              <tr>
-                                <th scope="col">Mã tin</th>
-                                <th scope="col">Tiêu đề</th>
-                                <th scope="col">Giá</th>
-                                <th scope="col">Diện tích</th>
-                                <th scope="col">Chi tiết</th>
-                              </tr>
-                            </tfoot>
-                          </table>
-                        </div>
+                        <h3 style="margin-bottom: 30px;font-size: 2.4rem;text-transform: uppercase;text-align: center;">Đóng góp ý kiến </h3>
+                        <form action="" id="form-sendfeeback">
+                        <div id="full-stars-example">
+                              <div class="rating-group">
+                                <input
+                                  class="rating__input rating__input--none"
+                                  name="rating"
+                                  id="rating-none"
+                                  value="0"
+                                  type="radio"
+                                />
+                                <label aria-label="No rating" class="rating__label" for="rating-none"
+                                  ><i class="rating__icon rating__icon--none fa fa-ban"></i
+                                ></label>
+                                <label aria-label="1 star" class="rating__label" for="rating-1"
+                                  ><i class="rating__icon rating__icon--star fa fa-star"></i
+                                ></label>
+                                <input
+                                  class="rating__input"
+                                  name="rating"
+                                  id="rating-1"
+                                  value="1"
+                                  type="radio"
+                                />
+                                <label aria-label="2 stars" class="rating__label" for="rating-2"
+                                  ><i class="rating__icon rating__icon--star fa fa-star"></i
+                                ></label>
+                                <input
+                                  class="rating__input"
+                                  name="rating"
+                                  id="rating-2"
+                                  value="2"
+                                  type="radio"
+                                />
+                                <label aria-label="3 stars" class="rating__label" for="rating-3"
+                                  ><i class="rating__icon rating__icon--star fa fa-star"></i
+                                ></label>
+                                <input
+                                  class="rating__input"
+                                  name="rating"
+                                  id="rating-3"
+                                  value="3"
+                                  type="radio"
+                                  checked
+                                />
+                                <label aria-label="4 stars" class="rating__label" for="rating-4"
+                                  ><i class="rating__icon rating__icon--star fa fa-star"></i
+                                ></label>
+                                <input
+                                  class="rating__input"
+                                  name="rating"
+                                  id="rating-4"
+                                  value="4"
+                                  type="radio"
+                                />
+                                <label aria-label="5 stars" class="rating__label" for="rating-5"
+                                  ><i class="rating__icon rating__icon--star fa fa-star"></i
+                                ></label>
+                                <input
+                                  class="rating__input"
+                                  name="rating"
+                                  id="rating-5"
+                                  value="5"
+                                  type="radio"
+                                />
+                              </div>
+                              <p
+                                class="desc"
+                                style="margin-bottom: 2rem; font-family: sans-serif; font-size: 1.5rem"
+                              >
+                                Đánh giá trang web
+                              </p>
+                            </div>
+                          <div class="form-group">
+                            <label class="form-label" style="margin-bottom: 20px;text-align:center;">Nhập nội dung đóng góp ý kiến</label>
+                            <textarea class="form-control" id="form-feedback" name="feedbackContent" rows="7"></textarea>
+                            <span class="form-message"></span>
+                          </div>
+                          <div class="text-right mt-5">
+                            <button id="submit-feedback" type="submit" class="button button--hl">
+                              Đóng góp</button
+                            >&nbsp;
+                            <button onclick="location.reload()" class="button">Huỷ</button>
+                          </div>
+                        </form>
                       </div>
                     </div>
                     <div class="tab-pane fade" id="account-notifications">
-                      <div class="card-body pb-2">
-                        <div class="table-responsive">
-                          <table class="table table-striped table-bordered">
-                            <thead class="table-light">
-                              <tr>
-                                <th scope="col">Mã tin</th>
-                                <th scope="col">Tiêu đề</th>
-                                <th scope="col">Giá</th>
-                                <th scope="col">Diện tích</th>
-                                <th scope="col">Trạng thái</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <th scope="row">1</th>
-                                <td>Title</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>
-                                  <p class="text-danger">Chưa Duyệt</p>
-                                </td>
-                              </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                <td>
-                                  <p class="text-success">Đã xét duyệt</p>
-                                </td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                                <td>
-                                  <p class="text-success">Đã xét duyệt</p>
-                                </td>
-                              </tr>
-                            </tbody>
-                            <tfoot>
-                              <tr>
-                                <th scope="col">Mã tin</th>
-                                <th scope="col">Tiêu đề</th>
-                                <th scope="col">Giá</th>
-                                <th scope="col">Diện tích</th>
-                                <th scope="col">Chi tiết</th>
-                              </tr>
-                            </tfoot>
-                          </table>
+                      <div class="card-body ">
+                        <h3 style="margin-bottom: 30px;font-size: 2.4rem;text-transform: uppercase;text-align: center;">Thông báo </h3>
+                        <c:if test="${notiCount==0}">
+                        <img src="<c:url value='/resources/assets/images/NoNoti.png'/>" alt="Không có thông báo nào cả"/>
+                        <h3 style="margin: 20px 0;font-size: 2rem;text-align: center;">Bạn không có thông báo nào :( </h3>
+                        </c:if>
+                        <div class="accordion" id="accordionExample">
+                           <c:if test="${notiList != null}">
+                             <c:forEach var="noti" items="${notiList}" varStatus="status">
+                             <c:choose>
+                             <c:when test="${noti.dadoc}"> <div class="card readed">  </c:when>
+                             <c:when test="${!noti.dadoc}"> <div class="card">  </c:when>
+                             </c:choose>
+                                 <div class="card-header" id="heading${status.index}">
+                                     <h2 class="mb-0">
+                                     <button class="btn btn-link btn-noti" style="text-align:left;" type="button" data-toggle="collapse" data-target="#collapse${status.idnex}" aria-expanded="true" aria-controls="collapseOne">
+                                         ${noti.tieude}
+                                     </button>
+                                     </h2>
+                                     <div class="time-label">
+                                     <span>12 giờ 30 phút</span>
+                                     <span>"${noti.thoigian}"</span>
+                                     </div>
+                                     <div class="title-full">
+                                         Đăng ký thành công tài khoản tại timtro.vn Đăng ký thành công tài khoản tại timtro.vn Đăng ký thành công tài khoản tại timtro.vn
+                                     </div>
+                                 </div>
+                                 <div id="collapse${status.index}" class="collapse" aria-labelledby="heading${status.index}" data-parent="#accordionExample">
+                                     <div class="card-body">
+                                     ${noti.noidung}
+                                     </div>
+                                 </div>
+                                 </div>
+                             </c:forEach>
+                           </c:if>
                         </div>
                       </div>
                     </div>

@@ -1,40 +1,25 @@
 package ptithcm.controller;
-import com.nimbusds.oauth2.sdk.Response;
-import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToFile;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ptithcm.Object.User;
 import ptithcm.dao.*;
 import ptithcm.entity.*;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
-
 import java.util.UUID;
 
 
-import ptithcm.hibernate.HibernateUtil;
 import ptithcm.service.UserService;
 
 import javax.servlet.ServletContext;
@@ -73,7 +58,12 @@ public class AjaxAPIController {
 
     @RequestMapping(value = "/post-upload", method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
     @ResponseBody
-    public String getThongTin(@RequestParam("images") MultipartFile[] files,@RequestParam("video") MultipartFile video,HttpServletRequest req) throws IOException {JSONObject data= new JSONObject(req.getParameter("info"));
+    public String getThongTin(
+            @RequestParam("images") MultipartFile[] files,
+            @RequestParam("video") MultipartFile video,
+            HttpServletRequest req
+    ) throws IOException {
+        JSONObject data= new JSONObject(req.getParameter("info"));
         NguoiDungDao userDao = new NguoiDungDao();
         String username= userService.currentUserName();
         TaiKhoanEntity tk= userDao.findByUserName(username);
@@ -92,6 +82,7 @@ public class AjaxAPIController {
         ct.setPhuongxa(data.getString("wards"));
         ct.setQuanhuyen(data.getString("district"));
         ct.setTinhtp(data.getString("province"));
+        ct.setLinkVideo("Storage/Videos/"+ writeFile(video,"Videos"));
         Date date = new Date();
         Timestamp timestamp = new Timestamp(date.getTime());
         Timestamp timestampEnd = new Timestamp(date.getTime());
@@ -109,7 +100,6 @@ public class AjaxAPIController {
             BaiVietEntity currentPost = postList.get(postList.size()-1);
 
             AnhDao anhDao =new AnhDao();
-            VideoDao videoDao = new VideoDao();
             ChiTietBaiVietDao ctbv= new ChiTietBaiVietDao();
 
             ct.setMabaiviet(currentPost.getMabaiviet());
@@ -122,11 +112,7 @@ public class AjaxAPIController {
                 anhDao.Insert(a);
                 anh.add(a);
             }
-            VideoEntity vd = new VideoEntity();
-            vd.setBaiviet(currentPost);
-            vd.setLinkvideo("Storage/Videos/"+ writeFile(video,"Videos"));
 
-            videoDao.Insert(vd);
             ctbv.Insert(ct);
 
         }else{
@@ -144,6 +130,7 @@ public class AjaxAPIController {
         String username= userService.currentUserName();
         TaiKhoanEntity tk= userDao.findByUserName(username);
         NguoiDungEntity currentUser = tk.getNguoidung();
+
         List<AnhEntity> anh =new ArrayList<>();
         JSONObject data= new JSONObject(req.getParameter("info"));
         BaiVietEntity bv =new BaiVietEntity();
@@ -170,8 +157,7 @@ public class AjaxAPIController {
         bv.setNguoidung(currentUser);
         int result = bvD.insertBaiViet(bv);
         if(result == 1){
-            List <BaiVietEntity> postList =  bvD.getAll();
-            System.out.println(postList.size());
+            List <BaiVietEntity> postList =  bvD.getAllForParticularUser(currentUser.getMaND().toString());
             BaiVietEntity currentPost = postList.get(postList.size()-1);
             AnhDao anhDao =new AnhDao();
             ChiTietBaiVietDao ctbv= new ChiTietBaiVietDao();
@@ -191,6 +177,134 @@ public class AjaxAPIController {
         }
         return data.toString();
     }
+
+    @RequestMapping(value = "/post-upload-update/{id}", method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
+    @ResponseBody
+    public String updatePost(
+            @RequestParam("images") MultipartFile[] files,
+            @RequestParam("video") MultipartFile video,
+            HttpServletRequest req,
+            @PathVariable("id") Long id
+    ) throws IOException {
+        JSONObject data = new JSONObject(req.getParameter("info"));
+        BaiVietDao PostDao = new BaiVietDao();
+        ChiTietBaiVietDao PostDetailDao = new ChiTietBaiVietDao();
+        NguoiDungDao userDao = new NguoiDungDao();
+        AnhDao imgDao = new AnhDao();
+
+        List<BaiVietEntity> listPost = userDao.getPostByID(id.toString());
+        BaiVietEntity targetPost = listPost.get(0);
+        String imageIDs = data.getString("imageIDs").trim();
+        String imageIDList[] = imageIDs.split("_");
+        if(targetPost != null){
+            targetPost.setTieude(data.getString("title"));
+            targetPost.setDiachi(data.getString("street"));
+            targetPost.setDientich((int)Float.parseFloat(data.getString("area")));
+            Double roundPrice  = (double) Math.round( Float.valueOf(data.getString("price")) * 10) / 10;
+            targetPost.setGia(Float.valueOf(String.valueOf(roundPrice)));
+            System.out.println(Float.valueOf(String.valueOf(roundPrice)));
+            ChiTietBaiVietEntity targetPostDetail = targetPost.getChitietbaiviet();
+            targetPostDetail.setMota(data.getString("description"));
+            targetPostDetail.setPhuongxa(data.getString("wards"));
+            targetPostDetail.setQuanhuyen(data.getString("district"));
+            targetPostDetail.setTinhtp(data.getString("province"));
+            targetPostDetail.setLinkVideo("Storage/Videos/"+ writeFile(video,"Videos"));
+            int updatePostResult = PostDao.UpdateBaiViet(targetPost);
+            //  successfully update post will return 1
+            if(updatePostResult == 1){
+                int updatePostDetailResult = PostDetailDao.Update(targetPostDetail);
+                System.out.println("Update Post Detail Result !" + updatePostDetailResult);
+                Collection<AnhEntity> imageList = targetPost.getAnh();
+                ArrayList <AnhEntity> imageListCV= new ArrayList<>(imageList);
+                for(AnhEntity img:imageListCV){
+                    if(!Arrays.toString(imageIDList).contains(img.getMaanh().toString())){
+                        imgDao.Delete(img);
+                    }
+                }
+                if(files.length > 0){
+                    for(MultipartFile file: files){
+                        AnhEntity a = new AnhEntity();
+                        a.setLinkanh("Storage/Images/"+ writeFile(file,"Images"));
+                        a.setBaiviet(targetPost);
+                        imgDao.Insert(a);
+                        System.out.println("Write image File");
+                    }
+                }
+
+            }else{
+                System.out.println("Update Post failure !");
+                return "0";
+            }
+        }else{
+            System.out.println("Post has ID "+ id + " not exits !");
+            return "0";
+        }
+
+        return "1";
+    }
+    @RequestMapping(value = "/post-upload-update-no-video/{id}", method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
+    @ResponseBody
+    public String updatePostNoVideo(
+            @RequestParam("images") MultipartFile[] files,
+            HttpServletRequest req,
+            @PathVariable("id") Long id
+    ) throws IOException {
+        JSONObject data = new JSONObject(req.getParameter("info"));
+
+        BaiVietDao PostDao = new BaiVietDao();
+        ChiTietBaiVietDao PostDetailDao = new ChiTietBaiVietDao();
+        NguoiDungDao userDao = new NguoiDungDao();
+        AnhDao imgDao = new AnhDao();
+
+        List<BaiVietEntity> listPost = userDao.getPostByID(id.toString());
+        BaiVietEntity targetPost = listPost.get(0);
+        String imageIDs = data.getString("imageIDs").trim();
+        String imageIDList[] = imageIDs.split("_");
+        if(targetPost != null){
+            targetPost.setTieude(data.getString("title"));
+            targetPost.setDiachi(data.getString("street"));
+            targetPost.setDientich((int)Float.parseFloat(data.getString("area")));
+            Double roundPrice  = (double) Math.round( Float.valueOf(data.getString("price")) * 10) / 10;
+            targetPost.setGia(Float.valueOf(String.valueOf(roundPrice)));
+            System.out.println(Float.valueOf(String.valueOf(roundPrice)));
+            ChiTietBaiVietEntity targetPostDetail = targetPost.getChitietbaiviet();
+            targetPostDetail.setMota(data.getString("description"));
+            targetPostDetail.setPhuongxa(data.getString("wards"));
+            targetPostDetail.setQuanhuyen(data.getString("district"));
+            targetPostDetail.setTinhtp(data.getString("province"));
+            int updatePostResult = PostDao.UpdateBaiViet(targetPost);
+            //  successfully update post will return 1
+            if(updatePostResult == 1){
+                int updatePostDetailResult = PostDetailDao.Update(targetPostDetail);
+                System.out.println("Update Post Detail Result !" + updatePostDetailResult);
+                Collection<AnhEntity> imageList = targetPost.getAnh();
+                ArrayList <AnhEntity> imageListCV= new ArrayList<>(imageList);
+                for(AnhEntity img:imageListCV){
+                    if(!Arrays.toString(imageIDList).contains(img.getMaanh().toString())){
+                        imgDao.Delete(img);
+                    }
+                }
+                if(files.length > 0){
+                    for(MultipartFile file: files){
+                        AnhEntity a = new AnhEntity();
+                        a.setLinkanh("Storage/Images/"+ writeFile(file,"Images"));
+                        a.setBaiviet(targetPost);
+                        imgDao.Insert(a);
+                        System.out.println("Write image File");
+                     }
+                }
+            }else{
+                System.out.println("Update Post failure !");
+                return "0";
+            }
+        }else{
+            System.out.println("Post has ID "+ id + " not exits !");
+            return "0";
+        }
+
+        return "1";
+    }
+
 
     @RequestMapping(value = "/post-user-general", method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
     @ResponseBody
@@ -219,10 +333,40 @@ public class AjaxAPIController {
         }
     }
 
+    @RequestMapping(value = "/post-feedback", method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
+    @ResponseBody
+    public String getFeedback(HttpServletRequest req) throws IOException {
+        NguoiDungDao userDao = new NguoiDungDao();
+        String username= userService.currentUserName();
+        TaiKhoanEntity tk= userDao.findByUserName(username);
+        NguoiDungEntity user = tk.getNguoidung();
+
+        JSONObject data= new JSONObject(req.getParameter("feedback"));
+        String feedback = data.getString("feedbackContent");
+        String rating = data.getString("rating");
+        System.out.println("Feedback " + feedback);
+        System.out.println(rating);
+        GopYEntity feedbackObj = new GopYEntity();
+        feedbackObj.setNguoidung(user);
+        feedbackObj.setNoidung(feedback);
+        feedbackObj.setSosao(Integer.parseInt(rating));
+        Date date = new Date();
+        Timestamp timestamp = new Timestamp(date.getTime());
+        feedbackObj.setThoigian(timestamp);
+        GopYDao feedbackConnect = new GopYDao();
+        int InsertFBResult = feedbackConnect.InsertGY(feedbackObj);
+        if(InsertFBResult == 1){
+            System.out.println("Insert Feedback successfully !");
+            return "1";
+        }
+        return "0";
+    }
+
     @RequestMapping(value = "/post-user-general-no-avatar", method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
     @ResponseBody
     public  String getUserInfoNoAvatar(HttpServletRequest req){
         JSONObject data= new JSONObject(req.getParameter("userInfo"));
+
         String fullName = data.getString("fullName");
         String address = data.getString("address");
         String phoneNumber = data.getString("phoneNumber");
@@ -315,27 +459,6 @@ public class AjaxAPIController {
                 if(bvD.SetAn(post))
                     return "1";
             return "0";
-    }
-    public Integer test(Long id){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction t = session.beginTransaction();
-        int result =0;
-        try {
-            String hql = "select count (*) FROM BaiVietEntity where maND=:id ";
-            Query query = session.createQuery(hql);
-            query.setParameter("id", id);
-            result = query.getFirstResult();
-        }
-        catch (Exception e) {
-            t.rollback();
-            e.printStackTrace();
-            return 0;
-        }
-        finally {
-            session.close();
-            return result;
-        }
-
     }
 
 }

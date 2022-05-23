@@ -38,7 +38,7 @@ prefix="form"%>
     <!-- BOOSTRAP-->
     <title>Cập nhật bài viết</title>
   </head>
-  <body id="app" load="documentLoaded()">
+  <body id="app">
     <div id="toast"></div>
     <header id="header">
       <div class="header-wrapper">
@@ -331,8 +331,8 @@ prefix="form"%>
                         </div>
                         <div class="upload__img-wrap">
                         <c:forEach var="image" items="${images}">
-                            <div class="upload__img-box dataFill" >
-                              <div style="background-image: url(../../${image.linkanh})" class="img-bg">
+                            <div class="upload__img-box dataFill " data-imageid= "${image.maanh}" >
+                              <div style="background-image: url(../../${image.linkanh})" data-file= "${image.maanh}" class="img-bg">
                                 <div class="upload__img-close"></div>
                               </div>
                             </div>
@@ -361,7 +361,10 @@ prefix="form"%>
                           </label>
                         </div>
                         <div class="upload__video-wrap">
-                          <video id="video-tag" src="" controls></video>
+                          <c:choose>
+                          <c:when test="${video!=null}"><video id="video-tag" src="../../${video}" controls></video></c:when>
+                          <c:when test="${video==null}"><video id="video-tag" src="" controls></video></c:when>
+                          </c:choose>
                           <div class="video-placeholder">
                             <div class="video-icon">
                               <i class="fa-solid fa-film"></i>
@@ -398,15 +401,16 @@ prefix="form"%>
     <script src="<c:url value='/resources/js/signedIn.js'/>"></script>
     <script>
         $(()=>{
-            const imageLength = $('.upload__img-box.dataFill').length;
-            const videoURL = "${video.linkvideo}";
-            if(videoURL){
-                $("#video-tag").attr('src',`../../${videoURL}`);
-            }
             initialText = "${post.chitietbaiviet.mota}".replaceAll('//#','\n');
             $("#form-desc").text(initialText);
-
-
+            const ID = "${id}";
+            const main  = $('.main').attr('id',ID);
+            window.onload  = ()=>{
+            const videoURL = $("#video-tag").attr('src');
+            if(!videoURL){
+                $(".video-placeholder").css('z-index','1');
+            }
+            }
         })
     </script>
   </body>

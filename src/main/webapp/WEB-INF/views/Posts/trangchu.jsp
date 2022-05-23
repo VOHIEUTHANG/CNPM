@@ -52,20 +52,23 @@
                       </div>
                     </div>
                     <div class="acc-setting">
-                      <a href="#account-general" class="acc-setting-item">
+                      <a href="../nguoidung/trangcanhan#account-general" class="acc-setting-item">
                         <i class="fa-solid fa-user"></i>
                         <span>Thông tin</span>
                       </a>
-
-                      <a href="#" class="acc-setting-item">
+                       <a href="../nguoidung/trangcanhan#account-post" class="acc-setting-item">
+                           <i class="fa-solid fa-paste"></i>
+                           <span>Quản lý tin</span>
+                       </a>
+                      <a href="../nguoidung/trangcanhan#account-notifications" class="acc-setting-item">
                         <i class="fa-solid fa-bell"></i>
                         <span>Thông báo</span>
                       </a>
-                      <a href="#" class="acc-setting-item">
+                      <a href="../nguoidung/trangcanhan#account-feedback" class="acc-setting-item">
                         <i class="fa-solid fa-file-signature"></i>
                         <span>Góp Ý</span>
                       </a>
-                      <a href="<c:url value='/logout' />" class="acc-setting-item">
+                      <a href="../nguoidung/trangcanhan#account-change-password" class="acc-setting-item">
                         <i class="fa-solid fa-key"></i>
                         <span>Đổi mật khẩu</span>
                       </a>
@@ -125,7 +128,6 @@
             <div class="filter-wrapper">
                 <div class="filter-title">
                     <h1 class="title">Website đăng tin cho thuê phòng trọ tại Việt Nam</h1>
-                    <h4 class="subtitle">fb88.com nhà cái uy tín hàng đầu Việt Nam</h4>
                 </div>
                 <div class="filter-main">
                     <ul class="filter-list">
@@ -259,7 +261,7 @@
                                              <span class="post-price-value">${item.gia} triệu/tháng</span>
                                          </div>
                                          <div class="post-lessor">
-                                             <a href=>
+                                             <a href= "../nguoidung/trangcanhan">
                                                  <div class="pl-info">
                                                      <div class="pl-img">
                                                          <img src="${item.nguoidung.linkanhdaidien}" alt="hình đại diện">

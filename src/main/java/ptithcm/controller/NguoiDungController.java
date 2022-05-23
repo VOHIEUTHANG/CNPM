@@ -1,8 +1,5 @@
 package ptithcm.controller;
-import java.io.IOException;
-import java.sql.Time;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -16,10 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import ptithcm.dao.BaiVietDao;
 import ptithcm.dao.NguoiDungDao;
-import ptithcm.entity.AnhEntity;
-import ptithcm.entity.BaiVietEntity;
-import ptithcm.entity.TaiKhoanEntity;
-import ptithcm.entity.VideoEntity;
+import ptithcm.entity.*;
 import ptithcm.service.UserService;
 @Controller
 @RequestMapping("/nguoidung")
@@ -53,16 +47,14 @@ public class NguoiDungController {
 		List<BaiVietEntity> b = bVietDao.getById(id);
 		if(b.size() > 0){
 			model.addAttribute("post",b.get(0));
+			model.addAttribute("video", b.get(0).getChitietbaiviet().getLinkVideo());
 		}
-		Collection<VideoEntity> videos = b.get(0).getVideo();
-		if(videos.size() > 0){
-			model.addAttribute("video", videos.iterator().next());
-		}
+
 		Collection<AnhEntity> images = b.get(0).getAnh();
 		if(images.size()>0){
 			model.addAttribute("images", images);
 		}
-
+		model.addAttribute("id",id);
 		return "Posts/UpdatePost";
 	}
 
@@ -103,8 +95,16 @@ public class NguoiDungController {
 	String username= userService.currentUserName();
 	TaiKhoanEntity tk= userDao.findByUserName(username);
 
-	model.addAttribute("user",tk.getNguoidung());
+	NguoiDungEntity user = tk.getNguoidung();
+	Collection<ThongBaoEntity> notiList = user.getThongbao();
+
+	model.addAttribute("user",user);
 	model.addAttribute("acc",tk);
+		System.out.println(notiList.size());
+	if(notiList.size() > 0){
+			model.addAttribute("notiList", notiList);
+		}
+	model.addAttribute("notiCount",notiList.size());
 	List<BaiVietEntity> bviet= (List<BaiVietEntity>) tk.getNguoidung().getBaiviet();
 	int tatca=0;
 	int chuaduyet=0;

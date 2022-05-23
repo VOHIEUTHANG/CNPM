@@ -138,7 +138,7 @@
   bottom: 0;
   right: 0;
   background: white;
-  z-index: 2;
+  z-index: -1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -167,3 +167,4 @@ width: 0.1px;
     position: absolute;
     z-index: -1;
 }
+

@@ -203,6 +203,7 @@ a:hover {
   position: absolute;
   top: 105%;
   width: 100%;
+  min-width: 180px;
   background: white;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   border-radius: 8px;
@@ -249,4 +250,7 @@ display:none;
 }
 .acc-setting-item.logout:hover {
   background: rgb(255, 217, 212);
+}
+.acc-setting-item > i{
+color: var(--primary-color);
 }

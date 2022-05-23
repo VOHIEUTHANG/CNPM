@@ -5,7 +5,17 @@ const dataText = {
   wards: "",
 };
 
- var imgArray = [];
+$(".upload__img-wrap").css("border", "none");
+const imageLength = $(".upload__img-box.dataFill").length;
+var imgArray = [];
+
+let i = 0;
+const myArray = [...$(".upload__img-box.dataFill")];
+myArray.forEach((item) => {
+  imgArray[i] = item.dataset.imageid;
+  i++;
+});
+
 (() => {
   return {
     getAddressHandler() {
@@ -17,6 +27,9 @@ const dataText = {
       const districtValue = district.dataset.value;
       const wardsValue = commue.dataset.value;
 
+      dataText.province = provinceValue;
+      dataText.district = districtValue;
+      dataText.wards = wardsValue;
 
       const renderHTML = (arr, code, type) => {
         let result = "";
@@ -29,74 +42,78 @@ const dataText = {
         });
         return result;
       };
-         fetch("https://provinces.open-api.vn/api/?depth=3")
-           .then((response) => response.json())
-           .then((data) => {
-             const htmlProvince = data.reduce((acc, item) => {
-               return acc + `<option value=${item.code}>${item.name}</option>`;
-             }, "");
+      fetch("https://provinces.open-api.vn/api/?depth=3")
+        .then((response) => response.json())
+        .then((data) => {
+          const htmlProvince = data.reduce((acc, item) => {
+            return acc + `<option value=${item.code}>${item.name}</option>`;
+          }, "");
 
-             const htmlCommue = data[0].districts[0].wards.reduce((acc, item) => {
-               return acc + `<option value=${item.code}>${item.name}</option>`;
-             }, "");
+          const htmlCommue = data[0].districts[0].wards.reduce((acc, item) => {
+            return acc + `<option value=${item.code}>${item.name}</option>`;
+          }, "");
 
-             province.innerHTML =
-               '<option value="">Chọn Tỉnh, Thành Phố</option>' + htmlProvince;
+          province.innerHTML =
+            '<option value="">Chọn Tỉnh, Thành Phố</option>' + htmlProvince;
 
-             for (let option of province.options) {
-               if (option.text === provinceValue) {
-                 option.setAttribute("selected", "selected");
-                 const provinceCode = option.value;
-                 const html = renderHTML(data, provinceCode, "districts");
-                 district.innerHTML =
-                   '<option value="">Chọn Quận, Huyện</option>' + html;
-                 for (let option of district.options) {
-                   if (option.text === districtValue) {
-                     option.setAttribute("selected", "selected");
-                     data.forEach((item) => {
-                       if (item.code == provinceCode) {
-                         const html = renderHTML(
-                           item["districts"],
-                           option.value,
-                           "wards"
-                         );
-                         commue.innerHTML = html;
-                         for (let option of commue.options) {
-                           if (option.text === wardsValue) {
-                             option.setAttribute("selected", "selected");
-                           }
-                         }
-                       }
-                     });
-                   }
-                 }
-               }
-             }
-             province.onchange = (e) => {
-               const code = e.target.value;
-               dataText.province = province.options[province.selectedIndex].text;
-               const html = renderHTML(data, code, "districts");
-               district.innerHTML =
-                 '<option value="">Chọn Quận, Huyện</option>' + html;
+          for (let option of province.options) {
+            if (option.text === provinceValue) {
+              option.setAttribute("selected", "selected");
+              const provinceCode = option.value;
+              const html = renderHTML(data, provinceCode, "districts");
+              district.innerHTML =
+                '<option value="">Chọn Quận, Huyện</option>' + html;
+              for (let option of district.options) {
+                if (option.text === districtValue) {
+                  option.setAttribute("selected", "selected");
+                  data.forEach((item) => {
+                    if (item.code == provinceCode) {
+                      const html = renderHTML(
+                        item["districts"],
+                        option.value,
+                        "wards"
+                      );
+                      commue.innerHTML = html;
+                      for (let option of commue.options) {
+                        if (option.text === wardsValue) {
+                          option.setAttribute("selected", "selected");
+                        }
+                      }
+                    }
+                  });
+                }
+              }
+            }
+          }
+          province.onchange = (e) => {
+            const code = e.target.value;
+            dataText.province = province.options[province.selectedIndex].text;
+            const html = renderHTML(data, code, "districts");
+            district.innerHTML =
+              '<option value="">Chọn Quận, Huyện</option>' + html;
 
-               district.onchange = (e) => {
-                 const codeDistrict = e.target.value;
-                 dataText.district = district.options[district.selectedIndex].text;
+            district.onchange = (e) => {
+              const codeDistrict = e.target.value;
+              dataText.district = district.options[district.selectedIndex].text;
 
-                 data.forEach((item) => {
-                   if (item.code == code) {
-                     const html = renderHTML(item["districts"], codeDistrict, "wards");
-                     commue.innerHTML = html;
-                   }
-                 });
-               };
-               commue.onchange = (e) => {
-                 dataText.wards = commue.options[commue.selectedIndex].text;
-               };
-             };
-             return htmlCommue;
-           })
-           .catch((err) => console.error(err));
+              data.forEach((item) => {
+                if (item.code == code) {
+                  const html = renderHTML(
+                    item["districts"],
+                    codeDistrict,
+                    "wards"
+                  );
+                  commue.innerHTML = html;
+                }
+              });
+            };
+            commue.onchange = (e) => {
+              dataText.wards = commue.options[commue.selectedIndex].text;
+            };
+          };
+          return htmlCommue;
+        })
+        .catch((err) => console.error(err));
     },
     uploadImageFileHandler() {
       jQuery(document).ready(function () {
@@ -123,15 +140,14 @@ const dataText = {
               }
 
               if (imgArray.length > maxLength) {
-                if(!isNotiCase1){
-                 isNotiCase1 = true;
-                 toast({
-                                        title: "Quá số lượng ảnh quy định (6 ảnh) !",
-                                        message: "Một bài đăng tối đa chỉ được phép có 6 ảnh !",
-                                        type: "error",
-                                        duration: 5000,
-                                 });
-
+                if (!isNotiCase1) {
+                  isNotiCase1 = true;
+                  toast({
+                    title: "Quá số lượng ảnh quy định (6 ảnh) !",
+                    message: "Một bài đăng tối đa chỉ được phép có 6 ảnh !",
+                    type: "error",
+                    duration: 5000,
+                  });
                 }
                 return false;
               } else {
@@ -141,16 +157,16 @@ const dataText = {
                     len++;
                   }
                 }
-                if (len > maxLength-1) {
-                    if(!isNotiCase2){
+                if (len > maxLength - 1) {
+                  if (!isNotiCase2) {
                     isNotiCase2 = true;
-                          toast({
-                               title: "Quá số lượng ảnh quy định (6 ảnh) !",
-                               message: "Một bài đăng tối đa chỉ được phép có 6 ảnh !",
-                               type: "error",
-                               duration: 5000,
-                          });
-                    }
+                    toast({
+                      title: "Quá số lượng ảnh quy định (6 ảnh) !",
+                      message: "Một bài đăng tối đa chỉ được phép có 6 ảnh !",
+                      type: "error",
+                      duration: 5000,
+                    });
+                  }
                   return false;
                 } else {
                   imgArray.push(f);
@@ -180,14 +196,21 @@ const dataText = {
           });
         });
         $("body").on("click", ".upload__img-close", function (e) {
-         console.log("imgArray",imgArray);
-          var file = $(this).parent().data("file");
+          console.log(imgArray);
+
+          var fileData = $(this).parent().data("file");
+
           for (var i = 0; i < imgArray.length; i++) {
-            if (imgArray[i].name === file) {
-              imgArray.splice(i, 1);
-              break;
+            if (typeof imgArray[i] == "string") {
+              if (imgArray[i] == fileData) imgArray.splice(i, 1);
+            } else {
+              if (imgArray[i].name === fileData) {
+                imgArray.splice(i, 1);
+                break;
+              }
             }
           }
+
           $(this).parent().parent().remove();
         });
       });
@@ -267,7 +290,6 @@ const dataText = {
         $(".imageMessage").text("");
       });
 
-
       Validator({
         form: "#info-form",
         formGroupSelector: ".form-group",
@@ -303,7 +325,9 @@ const dataText = {
           ),
         ],
         onSubmit: function (data) {
-          let URL = "../api/post-upload-no-video";
+          let ID = $(".main").attr("id");
+          let URL = "../../api/post-upload-update-no-video/" + ID;
+
           const formData = new FormData();
           const imageInput = $("#fileUpload");
           const videoInput = $("#video_input");
@@ -311,26 +335,33 @@ const dataText = {
           const videoFile = videoInput[0].files[0];
 
           let desc = $("#form-desc").val().trim();
-          desc = desc.replaceAll("\n","//#");
+          desc = desc.replaceAll("\n", "//#");
 
           dataText.street = $("#form-street").val();
-          dataText.title = $("#form-title").val().trim().replaceAll('\n',' ');
+          dataText.title = $("#form-title").val().trim().replaceAll("\n", " ");
           dataText.description = desc;
           dataText.price = $("#form-price").val();
           dataText.area = $("#form-area").val();
 
+          const IDImgList = [];
+          imgArray.forEach((file) => {
+            if (typeof file == "string") {
+              IDImgList.push(file);
+            } else {
+              formData.append("images", file);
+            }
+          });
+
+          const imageIDs = IDImgList.join("_");
+          dataText.imageIDs = imageIDs;
+
           formData.append("info", JSON.stringify(dataText));
-
-          imgArray.forEach(file=>{
-          formData.append("images", file);
-          })
-
+            console.log(videoFile);
           if (videoFile) {
             formData.append("video", videoFile);
-            URL = "../api/post-upload";
+            URL = "../../api/post-upload-update/" + ID;
           }
-
-          if (!imageFiles.length) {
+          if (!imgArray.length) {
             $(".imageMessage").text(
               "Yêu cầu ít nhất 1 ảnh đại diện cho tin đăng!"
             );
@@ -341,6 +372,7 @@ const dataText = {
               duration: 5000,
             });
           } else {
+           console.log(URL);
             $.ajax({
               url: URL,
               type: "POST",
@@ -351,15 +383,14 @@ const dataText = {
               cache: false,
               success: function (data) {
                 toast({
-                  title: "Tạo tin đăng mới thành công !",
+                  title: "Cập nhật dữ liệu thành công !",
                   message:
-                    "Tin của bạn sẽ được hiển thị ngay sau khi được quản trị viên duyệt bài!",
+                    "Các thay đổi đã được lưu lại thành công!",
                   type: "success",
                   duration: 5000,
                 });
               },
               error: function () {
-                // Handle upload error
                 toast({
                   title: "Có lỗi xảy ra khi gửi request về server !",
                   message: "Vui lòng liên hệ quản trị viên để giải quyết !",
@@ -372,10 +403,10 @@ const dataText = {
         },
         onFormInvalid() {
           if (!$("#fileUpload")[0].files.length) {
-                          $(".imageMessage").text(
-                            "Yêu cầu ít nhất 1 ảnh đại diện cho tin đăng!"
-                          );
-                          }
+            $(".imageMessage").text(
+              "Yêu cầu ít nhất 1 ảnh đại diện cho tin đăng!"
+            );
+          }
           toast({
             title: "Các trường dữ liệu nhập không hợp lệ!",
             message: "Vui lòng chỉnh sửa lại nội dung bài đăng !",
@@ -386,7 +417,7 @@ const dataText = {
       });
     },
     run() {
-        this.getAddressHandler();
+      this.getAddressHandler();
       this.uploadImageFileHandler();
       this.uploadVideoHandler();
       this.showFormSignInUpHandler();
@@ -394,8 +425,3 @@ const dataText = {
     },
   };
 })().run();
-
-
-
-
-

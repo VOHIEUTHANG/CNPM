@@ -1,5 +1,6 @@
 package ptithcm.dao;
 import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -10,10 +11,10 @@ import ptithcm.entity.TenQuyenEntity;
 import ptithcm.hibernate.HibernateUtil;
 
 public class BaiVietDao {
-	Session session ;
     public List < BaiVietEntity > getAll() {
+		Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-			session = HibernateUtil.getSessionFactory().openSession();
+
             return session.createQuery("from BaiVietEntity as Bv where Bv.tinhtrang=1 and Bv.an=0", BaiVietEntity.class).list();
         }
 		catch(Exception e){
@@ -26,11 +27,14 @@ public class BaiVietDao {
 
 	public List < BaiVietEntity > getAllForParticularUser(String id)
 	{
-		try { session = HibernateUtil.getSessionFactory().openSession();
-			String hql = "FROM BaiVietEntity B WHERE B.MaND = NguoiDungEntity." + id;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			String hql = "FROM BaiVietEntity WHERE MaND = " + id;
+			System.out.println(hql);
 			return session.createQuery(hql, BaiVietEntity.class).list();
 		}
 		catch(Exception e){
+			System.out.println("Insert Post Failure !");
 			return null;
 		}
 		finally{
@@ -40,10 +44,10 @@ public class BaiVietDao {
 	}
 
     public List<BaiVietEntity> getById(Long id) {
+		Session session= HibernateUtil.getSessionFactory().openSession();
         try  {
-			session= HibernateUtil.getSessionFactory().openSession();
             String hql="from BaiVietEntity where mabaiviet = "+ String.valueOf(id);
-            Query query =session.createQuery(hql);
+            Query query = session.createQuery(hql);
             return query.list();
         }
 		catch(Exception e){
@@ -54,22 +58,24 @@ public class BaiVietDao {
 		}
 		
     }
-	public  Integer UpdateBaiViet (BaiVietEntity bv) {
+	public  int UpdateBaiViet (BaiVietEntity bv){
 		Session session = HibernateUtil.getSessionFactory().openSession();
+		BaiVietEntity updatePost = (BaiVietEntity) session.merge(bv);
 		Transaction t = session.beginTransaction();
 		try {
-			session.update(bv);
+			session.update(updatePost);
 			t.commit();
+			return 1;
 		}
 		catch (Exception e) {
-			t.rollback();
 			e.printStackTrace();
+			t.rollback();
 			return 0;
 		}
 		finally {
 			session.close();
+			System.out.println(" Update Post Finally!");
 		}
-		return 1;
 	}
 
     public Integer insertBaiViet (BaiVietEntity bv) {
@@ -91,8 +97,9 @@ public class BaiVietDao {
 		}
 		return 1;
 	}
-	public NguoiDungEntity getNguoidung(Long id) { 
-	try {session = HibernateUtil.getSessionFactory().getCurrentSession();
+	public NguoiDungEntity getNguoidung(Long id) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
 	session.beginTransaction();
 	String hql = "FROM NguoiDungEntity where maND =:id";
 	Query query = session.createQuery(hql); query.setParameter("id", id); 
@@ -107,7 +114,7 @@ public class BaiVietDao {
 		session.close();
 	}}
 	public boolean SetAn(BaiVietEntity bv){
-		session= HibernateUtil.getSessionFactory().openSession();
+		Session session= HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
 		boolean a= !bv.getAn();
 		bv.setAn(a);

@@ -259,11 +259,23 @@ a:hover {
   text-decoration: none !important;
 }
 .post > a {
+    display: block;
+    padding: 0 20px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   color: white;
 }
+.post > a > span{
+margin-left: 4px;
+}
+
 .post > a:hover {
   color: white;
 }
 .acc-setting-item {
   color: inherit;
 }
+
+

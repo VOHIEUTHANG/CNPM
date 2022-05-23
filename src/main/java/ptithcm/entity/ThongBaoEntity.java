@@ -1,5 +1,6 @@
 package ptithcm.entity;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -28,7 +29,10 @@ public class ThongBaoEntity {
 	private Date thoigian;
 	@Column(name = "NoiDung")
 	private String noidung;
-	
+	@Column(name = "TieuDe")
+	private String tieude;
+	@Column(name="DaDoc")
+	private Boolean dadoc;
 	@ManyToOne
 	@JoinColumn(name = "MaND")
 	private NguoiDungEntity nguoidung;
@@ -40,6 +44,8 @@ public class ThongBaoEntity {
 	public void setMatb(Long matb) {
 		this.matb = matb;
 	}
+	public Boolean getDaDoc(){return dadoc;};
+	public void setDaDoc(Boolean dadoc) {this.dadoc = dadoc;};
 
 	public Date getThoigian() {
 		return thoigian;
@@ -57,6 +63,14 @@ public class ThongBaoEntity {
 		this.noidung = noidung;
 	}
 
+	public String getTieude() {
+		return tieude;
+	}
+
+	public void setTieude(String tieude) {
+		this.tieude = tieude;
+	}
+
 	public NguoiDungEntity getNguoidung() {
 		return nguoidung;
 	}
@@ -64,5 +78,18 @@ public class ThongBaoEntity {
 	public void setNguoidung(NguoiDungEntity nguoidung) {
 		this.nguoidung = nguoidung;
 	}
-	
+
+	public String formatTime(Timestamp timeStamp){
+		int hours = timeStamp.getHours();
+		int minutes  = timeStamp.getNanos();
+		return String.valueOf(hours) + " giờ " + String.valueOf(minutes) + " phút";
+	}
+	public String formateDate(Timestamp timeStamp){
+		int date = timeStamp.getDate();
+		int month = timeStamp.getMonth() + 1;
+		int year = timeStamp.getYear() + 1900;
+		return String.valueOf(date) + "/" + String.valueOf(month) + "/"+ String.valueOf(year);
+	}
+
+
 }

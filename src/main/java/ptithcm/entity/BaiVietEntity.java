@@ -41,7 +41,7 @@ public class BaiVietEntity {
 	@JoinColumn(name = "MaND")
 	private NguoiDungEntity nguoidung;
 	
-	@OneToOne(mappedBy = "baiviet",cascade = {CascadeType.ALL},orphanRemoval = true)
+	@OneToOne(mappedBy = "baiviet",cascade = CascadeType.ALL,orphanRemoval = true)
 	private ChiTietBaiVietEntity chitietbaiviet;
 
 	public ChiTietBaiVietEntity getChitietbaiviet() {
@@ -53,19 +53,6 @@ public class BaiVietEntity {
 	}
 	
 	@OneToMany(mappedBy = "baiviet",cascade=CascadeType.ALL,orphanRemoval = true)
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@ElementCollection
-	private Collection<VideoEntity> video;
-
-	public Collection<VideoEntity> getVideo() {
-		return this.video;
-	}
-
-	public void setVideo(Collection<VideoEntity> video) {
-		this.video = video;
-	}
-	
-	@OneToMany(mappedBy = "baiviet",cascade = {CascadeType.ALL},orphanRemoval = true)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private Collection<AnhEntity> Anh;
 
@@ -85,7 +72,6 @@ public class BaiVietEntity {
 		return this.quangcao;
 	}
 
-	
 	public BaiVietEntity(String tieude, Float gia, String khuvuc, String diachi,
 			 String linkanh, int dientich) {
 		super();
@@ -119,8 +105,8 @@ public class BaiVietEntity {
 		return gia;
 	}
 	public void setGia(Float gia) {
-		Double roundPrice  = (double) Math.round( Float.valueOf(gia * 10) / 10);
-		this.gia = Float.valueOf(String.valueOf(roundPrice));
+		System.out.println(gia);
+		this.gia = gia;
 	}
 	public String getDiachi() {
 		return diachi;
