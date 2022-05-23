@@ -124,13 +124,17 @@
             <i class="fa-solid fa-angle-up"></i>
           </a>
           <div class="container container-iso">
-            <div class="overflow-hidden">
+            <div class="">
               <div class="row no-gutters row-bordered row-border-light">
                 <div class="col-md-3  nav-control">
                   <div class="list-group list-group-flush account-settings-links">
                     <a class="list-group-item  active" data-toggle="list" href="#account-general">Thông tin cá nhân</a>
                     <a class="list-group-item " data-toggle="list" href="#account-post">Quản lý tin đăng</a>
-                    <a class="list-group-item " data-toggle="list" href="#account-notifications">Thông báo</a>
+                    <a class="list-group-item " style="position: relative" data-toggle="list" href="#account-notifications">Thông báo
+                       <div class="noti-icon">
+                       4
+                       </div>
+                    </a>
                     <a class="list-group-item " data-toggle="list" href="#account-feedback">Góp ý</a>
                     <a class="list-group-item " data-toggle="list" href="#account-change-password">Đổi mật khẩu</a>
                   </div>
@@ -187,6 +191,7 @@
                     </div>
                     <div class="tab-pane fade " id="account-change-password">
                                     <div class="card-body pb-2">
+                                    <h3 style="margin-bottom: 30px;font-size: 2.4rem;text-transform: uppercase;text-align: center;">Đổi mật khẩu</h3>
                                       <form action="" id="form-changePassword">
                                         <div class="form-group">
                                           <label class="form-label">Mật khẩu hiện tại</label>
@@ -348,69 +353,40 @@
                     </div>
                     <div class="tab-pane fade" id="account-feedback">
                       <div class="card-body pb-2">
-                        <div class="table-responsive">
-                          <table class="table table-striped table-bordered">
-                            <thead class="table-light">
-                              <tr>
-                                <th scope="col">Mã tin</th>
-                                <th scope="col">Tiêu đề</th>
-                                <th scope="col">Giá</th>
-                                <th scope="col">Diện tích</th>
-                                <th scope="col">Trạng thái</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <th scope="row">1</th>
-                                <td>Title</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>
-                                  <p class="text-danger">Chưa Duyệt</p>
-                                </td>
-                              </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                <td>
-                                  <p class="text-success">Đã xét duyệt</p>
-                                </td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                                <td>
-                                  <p class="text-success">Đã xét duyệt</p>
-                                </td>
-                              </tr>
-                            </tbody>
-                            <tfoot>
-                              <tr>
-                                <th scope="col">Mã tin</th>
-                                <th scope="col">Tiêu đề</th>
-                                <th scope="col">Giá</th>
-                                <th scope="col">Diện tích</th>
-                                <th scope="col">Chi tiết</th>
-                              </tr>
-                            </tfoot>
-                          </table>
-                        </div>
+                        <h3 style="margin-bottom: 30px;font-size: 2.4rem;text-transform: uppercase;text-align: center;">Đóng góp ý kiến </h3>
+                        <form action="" id="form-changePassword">
+                          <div class="form-group">
+                            <label class="form-label">Nhập nội dung đóng góp ý kiến</label>
+                            <textarea class="form-control" id="form-feedback" name="feedbackContent" rows="7"></textarea>
+                            <span class="form-message"></span>
+                          </div>
+                          <div class="text-right mt-5">
+                            <button id="submit-feedback" type="submit" class="button button--hl">
+                              Đóng góp</button
+                            >&nbsp;
+                            <button onclick="location.reload()" class="button">Huỷ</button>
+                          </div>
+                        </form>
                       </div>
                     </div>
                     <div class="tab-pane fade" id="account-notifications">
                       <div class="card-body ">
+                        <h3 style="margin-bottom: 30px;font-size: 2.4rem;text-transform: uppercase;text-align: center;">Thông báo </h3>
                         <div class="accordion" id="accordionExample">
                           <div class="card">
                             <div class="card-header" id="headingOne">
                               <h2 class="mb-0">
-                                <button class="btn btn-link btn-noti" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                  Đăng ký thành công tài khoản tại timtro.vn
+                                <button class="btn btn-link btn-noti" style="text-align:left;" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                  Đăng ký thành công tài khoản tại timtro.vn Đăng ký thành công tài khoản tại timtro.vn Đăng ký thành công tài khoản tại timtro.vn
                                 </button>
                               </h2>
+                              <div class="time-label">
+                              <span>12 giờ 30 phút</span>
+                              <span>30/6/2021</span>
+                              </div>
+                              <div class="title-full">
+                                   Đăng ký thành công tài khoản tại timtro.vn Đăng ký thành công tài khoản tại timtro.vn Đăng ký thành công tài khoản tại timtro.vn
+                              </div>
                             </div>
 
                             <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
@@ -419,29 +395,20 @@
                               </div>
                             </div>
                           </div>
-                          <div class="card">
-                            <div class="card-header" id="headingTwo">
+                          <div class="card readed">
+                            <div class="card-header " id="headingTwo">
                               <h2 class="mb-0">
-                                <button class="btn btn-link btn-noti " type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <button class="btn btn-link btn-noti style="text-align:left;" " type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                   Bài viết có ID... đã được duyệt.
                                 </button>
                               </h2>
+                                <div class="time-label">
+                                <span>12 giờ 30 phút</span>
+                                <span>30/6/2021</span>
+                                </div>
+
                             </div>
                             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                              <div class="card-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                              </div>
-                            </div>
-                          </div>
-                          <div class="card">
-                            <div class="card-header" id="headingThree">
-                              <h2 class="mb-0">
-                                <button class="btn btn-link btn-noti " type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                  Bài viết có ID... đã hết hạn và sẽ bị ẩn khỏi trang web.
-                                </button>
-                              </h2>
-                            </div>
-                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                               <div class="card-body">
                                 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                               </div>

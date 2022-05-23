@@ -30,6 +30,9 @@ public class ThongBaoEntity {
 	private String noidung;
 	@Column(name = "TieuDe")
 	private String tieude;
+
+	@Column(name="DaDoc")
+	private Boolean dadoc;
 	
 	@ManyToOne
 	@JoinColumn(name = "MaND")
@@ -42,6 +45,8 @@ public class ThongBaoEntity {
 	public void setMatb(Long matb) {
 		this.matb = matb;
 	}
+	public Boolean getDaDoc(){return dadoc;};
+	public void setDaDoc(Boolean dadoc) {this.dadoc = dadoc;};
 
 	public Date getThoigian() {
 		return thoigian;
