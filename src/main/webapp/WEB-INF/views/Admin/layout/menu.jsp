@@ -27,6 +27,12 @@
           >
         </li>
         <li class="nav-item">
+                  <a class="nav-link" href="../">
+                    <i class="fas fa-user text-gray-300"></i>
+                    <span>Trang chủ</span></a
+                  >
+                </li>
+        <li class="nav-item">
           <a class="nav-link" href="quanlynguoidung.html">
             <i class="fas fa-user text-gray-300"></i>
             <span>Người dùng</span></a
