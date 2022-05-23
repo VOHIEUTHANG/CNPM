@@ -104,7 +104,7 @@
                       <a class="nav-link" href="#">Cộng đồng</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#">Dịch vụ</a>
+                     <a class="nav-link" href="../admin/tongquan">Quản trị</a>
                     </li>
                     <li class="nav-item active">
                       <a class="nav-link" href="#">Cá nhân</a>
