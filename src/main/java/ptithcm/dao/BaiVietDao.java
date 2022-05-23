@@ -14,7 +14,8 @@ public class BaiVietDao {
     public List < BaiVietEntity > getAll() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            return session.createQuery("from BaiVietEntity", BaiVietEntity.class).list();
+
+            return session.createQuery("from BaiVietEntity as Bv where Bv.tinhtrang=1 and Bv.an=0", BaiVietEntity.class).list();
         }
 		catch(Exception e){
 		return null;
