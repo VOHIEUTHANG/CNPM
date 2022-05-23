@@ -128,7 +128,6 @@
             <div class="filter-wrapper">
                 <div class="filter-title">
                     <h1 class="title">Website đăng tin cho thuê phòng trọ tại Việt Nam</h1>
-                    <h4 class="subtitle">fb88.com nhà cái uy tín hàng đầu Việt Nam</h4>
                 </div>
                 <div class="filter-main">
                     <ul class="filter-list">
