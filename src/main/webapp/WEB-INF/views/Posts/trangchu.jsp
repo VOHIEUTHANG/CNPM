@@ -34,7 +34,7 @@
              <form action="" style="font-size:17px">
                                 <div class="form-group">
                                     <label for="">Tỉnh - Thành phố</label>
-                                    <select style="padding: 8px 3px;border-radius: 4px; border: 1px solid rgba(0,0,0,0.1)">
+                                    <select id="filter-province" style="padding: 8px 3px;border-radius: 4px; border: 1px solid rgba(0,0,0,0.1)">
                                     <option>Chọn tỉnh - thành phố</option>
                                     <option>TP HCM</option>
                                     <option>Đà Nẵng</option>
@@ -42,27 +42,25 @@
                                 </div>
                                  <div class="form-group">
                                      <label for="">Quận - Huyện</label>
-                                     <select style="padding: 8px 3px;border-radius: 4px; border: 1px solid rgba(0,0,0,0.1)">
+                                     <select id="filter-district" style="padding: 8px 3px;border-radius: 4px; border: 1px solid rgba(0,0,0,0.1)">
                                      <option>Chọn quận - huyện</option>
-                                     <option>TP HCM</option>
-                                     <option>Đà Nẵng</option>
                                      </select>
                                  </div>
                                  <div class="form-group">
                                    <label class="form-label">Giá</label>
                                    <div class="range">
-                                     <input type="range" class="form-range" id="range-price1" />
-                                     <input type="range" class="form-range" id="range-price2" />
+                                     <input type="range"  max="30" min="1" step="0.1" value="0" class="form-range" id="range-price1" />
+                                     <input type="range"  max="30" min="1" step="0.1" value="5" class="form-range" id="range-price2" />
                                    </div>
                                  </div>
                                  <div class="form-group">
                                    <label class="form-label">Diện tích</label>
                                    <div class="range">
-                                     <input type="range" class="form-range" id="range-square1" />
-                                     <input type="range" class="form-range" id="range-square2" />
+                                     <input type="range" max="50" min="1" step="1" value="0" class="form-range" id="range-square1" />
+                                     <input type="range" max="50" min="1" step="1" value="30" class="form-range" id="range-square2" />
                                    </div>
                                  </div>
-                                 <button class="button button--hl" style="width:100%;margin: 20px 0">Lọc</button>
+                                 <button id="filter-submit" class="button button--hl" style="width:100%;margin: 20px 0">Lọc</button>
                             </form>
             <div class="filter-label">
                 <i class="fa-solid fa-angle-right"></i>
@@ -470,7 +468,7 @@
     <script src="<c:url value='/resources/js/global.js'/>"></script>
     <script src="<c:url value='/resources/js/signedIn.js'/>"></script>
     <script src="<c:url value='/resources/js/main.js'/>"></script>
-    <script src="<c:url value='/resources/js/rangeFilter.js'/>"></script>
+    <script src="<c:url value='/resources/js/filter.js'/>"></script>
     <script>
         if($(".post-item").length === 0){
         const span = document.createElement('span');
@@ -480,8 +478,5 @@
                     $('.filter-container').toggleClass('show');
                 })
     </script>
-
-
 </body>
-
 </html>

@@ -77,8 +77,8 @@ function closeAllSelect(elmnt) {
 
 document.addEventListener("click", closeAllSelect);
 
-$(()=>{
-const loginForm = document.querySelector(".form-login");
+window.onload = ()=>{
+      loginForm = document.querySelector(".form-login");
       const loginBtn = document.querySelector(".btn-login");
       const loginCloseBtn = document.querySelector(".btn-close");
       const loginOverlay = document.querySelector(".overlay-login");
@@ -95,24 +95,5 @@ const loginForm = document.querySelector(".form-login");
       formLogin.onclick = (e) => {
         e.stopPropagation();
       };
-
-      //FORM SIGN UP
-      const signForm = document.querySelector(".form-sign-up");
-      const signBtn = document.querySelector(".button--hl");
-      const signCloseBtn = document.querySelector(".btn-close");
-      const signOverlay = document.querySelector(".overlay-sign");
-      const formSign = document.querySelector(".sign .form");
-      signBtn.onclick = () => {
-        signForm.classList.add("active");
-      };
-      signCloseBtn.onclick = (e) => {
-        signForm.classList.remove("active");
-      };
-      signOverlay.onclick = () => {
-        signForm.classList.remove("active");
-      };
-      formSign.onclick = (e) => {
-        e.stopPropagation();
-      };
-})
+}
 

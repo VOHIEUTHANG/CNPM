@@ -397,5 +397,8 @@ margin-left: 4px;
         		transform: translateY(-50%);
         		pointer-events: visible;
         	}
-
+.di-title{
+font-weight: bold;
+margin-bottom: 10px;
+}
 
