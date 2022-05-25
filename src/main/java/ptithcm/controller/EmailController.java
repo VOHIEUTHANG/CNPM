@@ -25,7 +25,6 @@ public class EmailController {
         return "test";
     }
     void guimail(){
-
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo("laiducmanh01@gmail.com");
         message.setSubject("demo");

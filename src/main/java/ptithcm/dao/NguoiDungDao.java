@@ -148,4 +148,39 @@ public class NguoiDungDao {
 			session.close();
 		}
 	}
+	public NguoiDungEntity findUserByEmail(String email)
+	{
+		Session session=HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			String hql ="FROM NguoiDungEntity as nguoidung where nguoidung.email=:email";
+			Query query = session.createQuery(hql);
+			query.setParameter("email",email);
+			return  (NguoiDungEntity) query.list().get(0);
+
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		}
+		finally{
+			session.close();
+		}
+	}
+	public NguoiDungEntity findUserByTokenReset(String token)
+	{
+		Session session=HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			String hql ="select nguoidung FROM PasswordResetTokenEntity as pas where pas.token=:token";
+			Query query = session.createQuery(hql);
+			query.setParameter("token",token);
+			return  (NguoiDungEntity) query.list().get(0);
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		}
+		finally{
+			session.close();
+		}
+	}
 }

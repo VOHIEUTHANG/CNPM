@@ -36,7 +36,19 @@ public class NguoiDungEntity {
 	@OneToOne (cascade = CascadeType.ALL)
 	@JoinColumn(name = "TenDN", referencedColumnName = "TenDN")
 	private TaiKhoanEntity taikhoan;
-	
+
+
+
+	@OneToMany(mappedBy = "nguoidung")
+	private Collection<PasswordResetTokenEntity> passwordResetToken;
+
+	public Collection<PasswordResetTokenEntity> getPasswordResetToken() {
+		return passwordResetToken;
+	}
+
+	public void setPasswordResetToken(Collection<PasswordResetTokenEntity> passwordResetToken) {
+		this.passwordResetToken = passwordResetToken;
+	}
 	@OneToMany(mappedBy = "nguoidung")
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private Collection<BaiVietEntity> baiviet;

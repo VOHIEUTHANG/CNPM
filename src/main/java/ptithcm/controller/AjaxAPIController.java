@@ -4,6 +4,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -130,7 +131,6 @@ public class AjaxAPIController {
         String username= userService.currentUserName();
         TaiKhoanEntity tk= userDao.findByUserName(username);
         NguoiDungEntity currentUser = tk.getNguoidung();
-
         List<AnhEntity> anh =new ArrayList<>();
         JSONObject data= new JSONObject(req.getParameter("info"));
         BaiVietEntity bv =new BaiVietEntity();
@@ -327,7 +327,6 @@ public class AjaxAPIController {
         String address = data.getString("address");
         String phoneNumber = data.getString("phoneNumber");
         String email = data.getString("email");
-
         user.setDiachi(address);
         user.setEmail(email);
         user.setSdt(phoneNumber);
@@ -348,7 +347,6 @@ public class AjaxAPIController {
         String username= userService.currentUserName();
         TaiKhoanEntity tk= userDao.findByUserName(username);
         NguoiDungEntity user = tk.getNguoidung();
-
         JSONObject data= new JSONObject(req.getParameter("feedback"));
         String feedback = data.getString("feedbackContent");
         String rating = data.getString("rating");
@@ -374,22 +372,18 @@ public class AjaxAPIController {
     @ResponseBody
     public  String getUserInfoNoAvatar(HttpServletRequest req){
         JSONObject data= new JSONObject(req.getParameter("userInfo"));
-
         String fullName = data.getString("fullName");
         String address = data.getString("address");
         String phoneNumber = data.getString("phoneNumber");
         String email = data.getString("email");
-
         NguoiDungDao userDao = new NguoiDungDao();
         String username= userService.currentUserName();
         TaiKhoanEntity tk= userDao.findByUserName(username);
         NguoiDungEntity user = tk.getNguoidung();
-
         user.setDiachi(address);
         user.setEmail(email);
         user.setSdt(phoneNumber);
         user.setTenND(fullName);
-
         int result = userDao.updateUser(user);
         if(result == 1){
             return "1";
@@ -469,5 +463,6 @@ public class AjaxAPIController {
             return "0";
     }
 
-}
+    }
+
 

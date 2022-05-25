@@ -141,8 +141,8 @@ prefix="form"%>
               <input type="text" placeholder="Tên đăng nhập" />
               <input type="password" placeholder="Mật khẩu" />
               <div class="login-sub-option">
-                <a href="#">Quên mật khẩu?</a>
-                <a href="#">Tạo tài khoản mới!</a>
+                <a href="${pageContext.request.contextPath}/forgotpass">Quên mật khẩu?</a>
+                <a href="${pageContext.request.contextPath}/dangky">Tạo tài khoản mới!</a>
               </div>
               <button class="button button--submit active">Đăng nhập</button>
             </div>

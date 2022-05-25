@@ -1,20 +1,28 @@
 package ptithcm.service;
 
+import net.bytebuddy.utility.RandomString;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Component;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ptithcm.dao.NguoiDungDao;
+import ptithcm.dao.PasswordResetTokenDAO;
+import ptithcm.dao.TaiKhoanDao;
 import ptithcm.entity.NguoiDungEntity;
+import ptithcm.entity.PasswordResetTokenEntity;
 import ptithcm.entity.TaiKhoanEntity;
 import ptithcm.hibernate.HibernateUtil;
 import ptithcm.service.Interface.IUserService;
+
+import javax.mail.internet.MimeMessage;
+import java.util.Calendar;
 
 @Service
 public class UserService implements IUserService {
@@ -76,5 +84,70 @@ public class UserService implements IUserService {
             return null;
         }
     }
+    public String randomToken(){
+        return RandomString.make(30);
+    }
+    public Integer SaveToken_SendMail(String email, JavaMailSender mailSender, String link){
+        String token =this.randomToken();
+        NguoiDungDao nguoiDungDao =new NguoiDungDao();
+        NguoiDungEntity nguoiDungEntity=nguoiDungDao.findUserByEmail(email);
+        if(nguoiDungEntity==null) {
+            return 0; //Không tìm thấy người dùng
+        }
+        else{
+            PasswordResetTokenEntity a = new PasswordResetTokenEntity(token,nguoiDungEntity.getMaND());
+            a.setExpireDate();
+            PasswordResetTokenDAO passwordResetTokenDAO =new PasswordResetTokenDAO();
+            if(passwordResetTokenDAO.Insert(a)){
+                try {
+                    MimeMessage mail= mailSender.createMimeMessage();
+                    MimeMessageHelper helper = new MimeMessageHelper(mail);
+                    helper.setTo(email);
+                    helper.setSubject("Quên mật khẩu");
+                    String content= "Xin chào" +
 
+                            "<p>Vui lòng click vào link bên dưới để đổi mật khẩu mới:</p>" +
+                            "<p><a href='" + link+ token+
+                            "'>Change my password</a></p>" +
+                            "<br>" +
+                            "<p>Ignore this email if you do remember your password," +
+                            " you have not made the request.</p>";
+                    helper.setText(content,true);
+                    mailSender.send(mail);
+                }
+                catch(Exception e) {
+                   return -2; //Lỗi gửi email
+                }
+            }
+            else {
+                return -1; //Lỗi lưu token
+            }
+            return 1; //Thành công
+        }
+
+    }
+    public Integer resetPass(String token, String pass, PasswordEncoder passwordEncoder){
+        PasswordResetTokenDAO passwordResetTokenDAO =new PasswordResetTokenDAO();
+        passwordResetTokenDAO.FindByToken(token);
+        PasswordResetTokenEntity passwordResetToken =passwordResetTokenDAO.FindByToken(token);
+        if(passwordResetToken== null){
+            return 0; //token bị sai
+        }else {
+            final Calendar cal = Calendar.getInstance();
+            if ((passwordResetToken.getExpireDate().getTime() - cal.getTime().getTime()) >= 0) {
+                TaiKhoanDao taiKhoanDao = new TaiKhoanDao();
+                TaiKhoanEntity nguoiDung = passwordResetToken.getNguoidung().getTaikhoan();
+                nguoiDung.setMatkhau(passwordEncoder.encode(pass));
+                if(taiKhoanDao.UpdateAccount(nguoiDung)==1)
+                {
+                    return 1; //đổi thành công
+                }
+                else return 0; // đổi bị lỗi
+              }
+            else
+            {
+                return -1; // Token hết hạn
+            }
+            }
+    }
 }

@@ -163,7 +163,7 @@ prefix="c"%> <%@ taglib prefix="tg" tagdir="/WEB-INF/tags"%>
             success: function (data) {
               console.log(data);
               toast({
-                title: "Đăng ký tài khoản thành công !",
+                title: "Thông báo!",
                 message: data,
                 type: "success",
                 duration: 5000,

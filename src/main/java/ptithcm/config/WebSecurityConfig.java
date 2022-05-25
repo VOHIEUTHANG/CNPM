@@ -27,7 +27,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
         http.authorizeRequests().antMatchers("/nguoidung/**").hasAnyAuthority("USER","ADMIN");
-
         http.authorizeRequests().antMatchers("/baiviet/**","/resources/**","/Storage/**","/mail/**").permitAll();
         http.authorizeRequests().antMatchers("/admin/**").hasAuthority("ADMIN");
         //Những người quyền User mà vào trang Admin sẽ đẩy qua page 403

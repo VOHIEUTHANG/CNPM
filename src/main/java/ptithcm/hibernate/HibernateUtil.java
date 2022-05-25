@@ -7,15 +7,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
 
-import ptithcm.entity.AnhEntity;
-import ptithcm.entity.BaiVietEntity;
-import ptithcm.entity.ChiTietBaiVietEntity;
-import ptithcm.entity.GopYEntity;
-import ptithcm.entity.NguoiDungEntity;
-import ptithcm.entity.QuangCaoEntity;
-import ptithcm.entity.TaiKhoanEntity;
-import ptithcm.entity.TenQuyenEntity;
-import ptithcm.entity.ThongBaoEntity;
+import ptithcm.entity.*;
 
 public class HibernateUtil {
     private static SessionFactory sessionFactory;
@@ -30,7 +22,7 @@ public class HibernateUtil {
                 settings.put(Environment.USER, "ducmanh");
                 settings.put(Environment.PASS, "1234");
                 settings.put(Environment.DIALECT, "org.hibernate.dialect.SQLServerDialect");
-                settings.put(Environment.SHOW_SQL, "false");
+                settings.put(Environment.SHOW_SQL, "true");
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
                 settings.put(Environment.HBM2DDL_AUTO, "update");
                 settings.put(Environment.IMPLICIT_NAMING_STRATEGY,"org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl");
@@ -45,9 +37,9 @@ public class HibernateUtil {
                 configuration.addAnnotatedClass(TaiKhoanEntity.class);
                 configuration.addAnnotatedClass(TenQuyenEntity.class);
                 configuration.addAnnotatedClass(ThongBaoEntity.class);
+                configuration.addAnnotatedClass(PasswordResetTokenEntity.class);
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties()).build();
-
                 sessionFactory = configuration.buildSessionFactory(serviceRegistry);
             } catch (Exception e) {
                 e.printStackTrace();

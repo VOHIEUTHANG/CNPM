@@ -120,7 +120,6 @@ public class NguoiDungController {
 		if(!i.getTinhtrang()) chuaduyet++;
 		if(i.getChitietbaiviet().getThoigianketthuc().compareTo(timestamp) < 0) hethan++;
 		if(i.getAn()) an++;
-
 	}
 	model.addAttribute("tatca",tatca);
 	model.addAttribute("postList",bviet);
@@ -130,7 +129,6 @@ public class NguoiDungController {
 	model.addAttribute("an",an);
        return "user/trangcanhan";
 	}
-
 	@RequestMapping(value="/dangxuat",method=RequestMethod.GET)
 	public String dangxuat(){
 		return"Layout/logout";
