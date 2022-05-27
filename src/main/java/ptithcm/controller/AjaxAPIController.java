@@ -113,9 +113,7 @@ public class AjaxAPIController {
                 anhDao.Insert(a);
                 anh.add(a);
             }
-
             ctbv.Insert(ct);
-
         }else{
             System.out.println("Lỗi insert bài viết mới !");
             return "0";
@@ -299,8 +297,6 @@ public class AjaxAPIController {
                      }
                 }
 
-
-
             }else{
                 System.out.println("Update Post failure !");
                 return "0";
@@ -463,6 +459,11 @@ public class AjaxAPIController {
             return "0";
     }
 
+    @RequestMapping("/resetPassword")
+    public String getResetPasswordPage(){
+        return "user/resetpass";
     }
+
+}
 
 

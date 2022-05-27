@@ -79,6 +79,9 @@ prefix="c"%> <%@ taglib prefix="tg" tagdir="/WEB-INF/tags"%>
                   name="address"
                   placeholder="Địa chỉ"
                 />
+                <span class="form-message"></span>
+                </div>
+
                 <div class="form-group">
                   <input
                     type="text"
@@ -86,8 +89,8 @@ prefix="c"%> <%@ taglib prefix="tg" tagdir="/WEB-INF/tags"%>
                     name="username"
                     placeholder="Tên đăng nhập"
                   />
-                <span class="form-message"></span>
-              </div>
+                 <span class="form-message"></span>
+                </div>
               <div class="form-group">
                 <input
                   type="password"
@@ -97,6 +100,7 @@ prefix="c"%> <%@ taglib prefix="tg" tagdir="/WEB-INF/tags"%>
                 />
                 <span class="form-message"></span>
               </div>
+
               <div class="form-group">
                 <input
                   type="password"
@@ -105,6 +109,7 @@ prefix="c"%> <%@ taglib prefix="tg" tagdir="/WEB-INF/tags"%>
                 />
                 <span class="form-message"></span>
               </div>
+
               <button type="submit" class="button button--submit active">
                 Đăng Ký
               </button>
@@ -136,6 +141,10 @@ prefix="c"%> <%@ taglib prefix="tg" tagdir="/WEB-INF/tags"%>
             "#password",
             "Mật khẩu phải có ít nhất 8 ký tự và có ít nhất 1 chữ hoa và 1 chữ thường !"
           ),
+           Validator.isRequired(
+             "#address",
+            "Vui lòng nhập địa chỉ  !"
+           ),
           Validator.minLength(
             "#username",
             8,

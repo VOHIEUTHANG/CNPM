@@ -493,6 +493,7 @@
           <script src="<c:url value='/resources/js/global.js'/>"></script>
           <script src="<c:url value ='/resources/js/validateLibrary.js'/>"></script>
           <script src="<c:url value='/resources/js/toast.js'/>"></script>
+
           <script src="<c:url value='/resources/js/user.js'/>"></script>
           <script src="<c:url value='/resources/js/signedIn.js'/>"></script>
         </body>

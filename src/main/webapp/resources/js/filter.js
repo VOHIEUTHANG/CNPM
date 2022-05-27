@@ -41,7 +41,6 @@ const provinceCode = $(province).find(':selected').val();
 const provinceValue = $(province).find(':selected').text();
 const districtCode =  $(district).find(':selected').val();
 const districtValue =  $(district).find(':selected').text();
-const provinceRange1Val =
 })
 })
 
