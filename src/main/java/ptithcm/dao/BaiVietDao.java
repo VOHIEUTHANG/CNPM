@@ -14,7 +14,6 @@ public class BaiVietDao {
     public List < BaiVietEntity > getAll() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-
             return session.createQuery("from BaiVietEntity as Bv where Bv.tinhtrang=1 and Bv.an=0", BaiVietEntity.class).list();
         }
 		catch(Exception e){
@@ -30,7 +29,6 @@ public class BaiVietDao {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			String hql = "FROM BaiVietEntity WHERE MaND = " + id;
-			System.out.println(hql);
 			return session.createQuery(hql, BaiVietEntity.class).list();
 		}
 		catch(Exception e){
@@ -58,6 +56,31 @@ public class BaiVietDao {
 		}
 		
     }
+
+	public List<BaiVietEntity> getFilterPost(
+			 String provicne
+			,String district
+			,String priceFrom
+			,String priceTo
+			,String areaFrom
+			,String areaTo
+	) {
+		Session session= HibernateUtil.getSessionFactory().openSession();
+		try  {
+			String hql="from BaiVietEntity where gia > "+ priceFrom + " and gia < " + priceTo;
+			System.out.println(hql);
+			Query query = session.createQuery(hql);
+			return query.list();
+		}
+		catch(Exception e){
+			return null;
+		}
+		finally{
+			session.close();
+		}
+
+	}
+
 	public  int UpdateBaiViet (BaiVietEntity bv){
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		BaiVietEntity updatePost = (BaiVietEntity) session.merge(bv);

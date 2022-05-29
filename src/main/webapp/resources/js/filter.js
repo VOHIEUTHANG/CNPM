@@ -130,15 +130,15 @@ $(() => {
     const formData = new FormData();
     formData.append("filterValues", JSON.stringify(filterValues));
     $.ajax({
-                  url: "../api/post-filter",
+                  url: "../baiviet/post-filter",
                   type: "POST",
                   data: formData,
                   enctype: "multipart/form-data",
                   processData: false,
                   contentType: false,
                   cache: false,
-                  success: function (data) {
-                    console.log(data);
+                  success: function () {
+                    window.location.href = window.location.href + '/filter';
                   },
                   error: function () {
                     toast({

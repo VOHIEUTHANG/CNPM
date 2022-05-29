@@ -6,7 +6,6 @@
                 <div class="overlay-login">
                     <div class="login active">
                         <div class="btn-close">
-                            <i class="fa-solid fa-xmark"></i>
                         </div>
                         <div class="form">
                             <h2>Đăng nhập</h2>

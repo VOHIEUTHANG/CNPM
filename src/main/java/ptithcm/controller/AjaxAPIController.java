@@ -30,6 +30,8 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping("/api")
 public class AjaxAPIController {
+
+    String province_global_variable;
     @Autowired
     BCryptPasswordEncoder passwordEncoder;
     @Autowired
@@ -460,25 +462,10 @@ public class AjaxAPIController {
             return "0";
     }
 
-    @RequestMapping(value = "/post-filter",method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
-    @ResponseBody
-    public String getFilterValue(HttpServletRequest request)throws IOException{
-        JSONObject data= new JSONObject(request.getParameter("filterValues"));
-        String province = data.getString("tinh");
-        String district = data.getString("huyen");
-        String priceFrom = data.getString("giaTu");
-        String priceTo = data.getString("giaDen");
-        String areaFrom = data.getString("dienTichTu");
-        String areaTo = data.getString("dienTichDen");
-
-        System.out.println(province);
-        System.out.println(district);
-        System.out.println(priceFrom);
-        System.out.println(priceTo);
-        System.out.println(areaFrom);
-        System.out.println(areaTo);
-
-        return "success";
+    @RequestMapping("/trangchu")
+    public String filtervalue(ModelMap model){
+        model.addAttribute("province",province_global_variable);
+        return "trangchu";
     }
 
 }
