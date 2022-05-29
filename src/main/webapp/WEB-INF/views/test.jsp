@@ -21,6 +21,7 @@
     <title>ĐĂNG TIN</title>
 </head>
 <body>
-      đã gửi mail
+      <img src="<c:url value='https://drive.google.com/uc?export=view&id=1f3YNkVkZR9SVIAphCNz71BkwNay-lpeW'/>"
+                                                     alt="">
 </body>
 </html>

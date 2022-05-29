@@ -105,7 +105,6 @@ public class UserService implements IUserService {
                     helper.setTo(email);
                     helper.setSubject("Quên mật khẩu");
                     String content= "Xin chào" +
-
                             "<p>Vui lòng click vào link bên dưới để đổi mật khẩu mới:</p>" +
                             "<p><a href='" + link+ token+
                             "'>Change my password</a></p>" +

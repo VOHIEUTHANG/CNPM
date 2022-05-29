@@ -31,7 +31,7 @@
     <!-- Custom styles for this template-->
     <link href="<c:url value='/resources/css/admin/sb-admin-2.css'/>" rel="stylesheet" />
     <link rel="stylesheet" href="<c:url value='/resources/css/admin/main.css'/>" />
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
 <!-- Page Wrapper -->
@@ -102,91 +102,54 @@
               </li>
             </ul>
           </nav>
-          <!-- End of Topbar -->
-<!-- Begin Page Content -->
-                <div class="container-fluid">
-
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Charts</h1>
-                    <p class="mb-4">Chart.js is a third party plugin that is used to generate the charts in this theme.
-                        The charts below have been customized - for further customization options, please visit the <a
-                            target="_blank" href="https://www.chartjs.org/docs/latest/">official Chart.js
-                            documentation</a>.</p>
-
-                    <!-- Content Row -->
-                    <div class="row">
-
-                        <div class="col-xl-8 col-lg-7">
-
-                            <!-- Area Chart -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="chart-area">
-                                        <canvas id="myAreaChart"></canvas>
+        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-xl-8 col-lg-7">
+                                    <!-- Bar Chart -->
+                                    <div class="card shadow mb-4">
+                                        <div class="card-body">
+                                           <input type="number" id="year" min="1900" max="2099" step="1" value="2022" oninput="reload()"/>
+                                            <div class="chart-bar">
+                                                <canvas id="myBarChart" style="pointer-events: none"></canvas>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <hr>
-                                    Styling for the area chart can be found in the
-                                    <code>/js/demo/chart-area-demo.js</code> file.
                                 </div>
                             </div>
-
-                            <!-- Bar Chart -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Bar Chart</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="chart-bar">
-                                        <canvas id="myBarChart"></canvas>
+        </div>
+          <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-xl-8 col-lg-8">
+                                            <!-- Bar Chart -->
+                                            <div class="card shadow mb-6">
+                                                <div class="card-body">
+                                                   <input type="number" id="year2" min="1900" max="2099" step="1" value="2022" oninput="gettheothang()"/>
+                                                   <input type="number" id="month" min="1" max="12" step="1" value="5" oninput="gettheothang()"/>
+                                                    <div class="chart-bar">
+                                                        <canvas id="CharMonth" style="pointer-events: none"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <hr>
-                                    Styling for the bar chart can be found in the
-                                    <code>/js/demo/chart-bar-demo.js</code> file.
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <!-- Donut Chart -->
-                        <div class="col-xl-4 col-lg-5">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Donut Chart</h6>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="chart-pie pt-4">
-                                        <canvas id="myPieChart"></canvas>
-                                    </div>
-                                    <hr>
-                                    Styling for the donut chart can be found in the
-                                    <code>/js/demo/chart-pie-demo.js</code> file.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
-                <!-- /.container-fluid -->
-
-            </div>
             <!-- End of Main Content -->
  <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-          <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-              <span>Copyright &copy; timtro.com 2022</span>
-            </div>
-          </div>
-        </footer>
+
         <!-- End of Footer -->
       </div>
-      <!-- End of Content Wrapper -->
+      <footer class="sticky-footer bg-white">
+               <div class="container my-auto">
+                 <div class="copyright text-center my-auto">
+                   <span>Copyright &copy; timtro.com 2022</span>
+                 </div>
+               </div>
+             </footer>
     </div>
     <!-- End of Page Wrapper -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+      <script src ="<c:url value= '/resources/js/admin/bieudonam.js'/>"></script>
+      <script src ="<c:url value= '/resources/js/admin/bieudothang.js'/>"></script>
 </body>
 </html>

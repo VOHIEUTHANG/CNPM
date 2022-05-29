@@ -31,7 +31,7 @@
   </head>
   <body>
     <div id="form-login" class="form-login active iso-form" style="backdrop-filter: blur(2px) brightness(90%);")>
-        <form action="${pageContext.request.contextPath}/forgotpass" method="post">
+
          <div
            class="overlay-login"
            style="backdrop-filter: blur(2px) brightness(90%)">
@@ -41,26 +41,43 @@
              </div>
              <div class="form">
                <h2>Đăng nhập</h2>
-               <input type="text" name="email" placeholder="Nhập email đã đăng ký" />
+               <input type="text" name="email" id="email" placeholder="Nhập email đã đăng ký" />
                <button
                  class="button button--submit active"
-                 onclick="submitHandler()"
-                 type= "submit"
+                 onclick="submit()"
                >
                  Xác nhận
                </button>
              </div>
            </div>
          </div>
-       </form>
+
        </div>
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+       <script src="<c:url value='/resources/js/toast.js'/>"></script>
        <script>
-         function submitHandler() {
-           console.log("submit form");
+         function submit() {
+           $.ajax({
+           type: "GET",
+           url:"checkmailforgot",
+           data: { email: $("#email").val()},
+           timeout: 10000,
+           success: function(data){
+                      alert(data)
+                 },
+           error : function(error){
+                     toast({
+                           title: "Thông báo",
+                           message: "Có lỗi xảy ra, vui lòng thử lại sau",
+                           type: "error",
+                           duration: 5000,
+                            });
+           }
+           });
          }
        </script>
        <script
-         src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+         src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"
          integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
          crossorigin="anonymous"
        ></script>
