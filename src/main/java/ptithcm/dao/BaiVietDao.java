@@ -58,7 +58,7 @@ public class BaiVietDao {
     }
 
 	public List<BaiVietEntity> getFilterPost(
-			 String provicne
+			 String province
 			,String district
 			,String priceFrom
 			,String priceTo
@@ -67,9 +67,29 @@ public class BaiVietDao {
 	) {
 		Session session= HibernateUtil.getSessionFactory().openSession();
 		try  {
-			String hql="from BaiVietEntity where gia > "+ priceFrom + " and gia < " + priceTo;
-			System.out.println(hql);
+			boolean isProvinceFilter = false;
+			boolean isDistrictFilter = false;
+
+			String hql="from BaiVietEntity" +
+					" where gia >= "+ priceFrom + " and gia <= " + priceTo
+					+ " and dientich >= " + areaFrom + " and dientich <= " + areaTo;
+
+			if(province.length() > 0){
+				isProvinceFilter = true;
+				hql = hql + " and chitietbaiviet.tinhtp = ?1";
+			}
+			if (district.length() > 0) {
+				isDistrictFilter = true;
+				hql = hql + " and chitietbaiviet.quanhuyen = ?2";
+			}
+
 			Query query = session.createQuery(hql);
+			if(isProvinceFilter){
+				query.setParameter(1,province);
+			}
+			if(isDistrictFilter){
+				query.setParameter(2,district);
+			}
 			return query.list();
 		}
 		catch(Exception e){
@@ -78,7 +98,6 @@ public class BaiVietDao {
 		finally{
 			session.close();
 		}
-
 	}
 
 	public  int UpdateBaiViet (BaiVietEntity bv){

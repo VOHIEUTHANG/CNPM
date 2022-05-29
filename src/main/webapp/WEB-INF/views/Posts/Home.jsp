@@ -247,49 +247,6 @@
                     <h1 class="title">Website đăng tin cho thuê phòng trọ tại Việt Nam</h1>
                 </div>
                 <div class="filter-main">
-                    <ul class="filter-list">
-                        <li class="filter-item">
-                            <div class="custom-select" style="width:200px;">
-                                <select>
-                                <option value="0">Tỉnh - Thành Phố</option>
-                                <option value="1">Tp.HCM</option>
-                                <option value="2">Hà nội</option>
-                                <option value="3">Bình Định</option>
-                            </select>
-                            </div>
-                        </li>
-                        <li class="filter-item">
-                            <div class="custom-select" style="width:200px;">
-                                <select>
-                                <option value="0">Quận - Huyện</option>
-                                <option value="1">Quận 9</option>
-                                <option value="2">Quận 1</option>
-                                <option value="3">Quận 10</option>
-                            </select>
-                            </div>
-                        </li>
-                        <li class="filter-item">
-                            <div class="custom-select" style="width:200px;">
-                                <select>
-                                <option value="0">Giá</option>
-                                <option value="1">3.000.000 VND</option>
-                                <option value="2">2.000.000 VND</option>
-                                <option value="3">1.000.000 VND</option>
-                            </select>
-                            </div>
-                        </li>
-                        <li class="filter-item">
-                            <div class="custom-select" style="width:200px;">
-                                <select>
-                                <option value="0">Diện tích</option>
-                                <option value="1">100 m2</option>
-                                <option value="2">50 m2</option>
-                                <option value="3">25 m2</option>
-                                <option value="3">chưa xác định</option>
-                            </select>
-                            </div>
-                        </li>
-                    </ul>
                     <div class="filter-button">
                         <div class="button button--filter button--hl">Lọc</div>
                     </div>

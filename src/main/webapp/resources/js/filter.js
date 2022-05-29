@@ -1,4 +1,37 @@
 $(() => {
+  const price1Input = $("#range-price1");
+  const price2Input = $("#range-price2");
+  const area1Input = $("#range-area1");
+  const area2Input = $("#range-area2");
+
+  const priceStart = $(".price-start");
+  const priceEnd = $(".price-end");
+  const areaStart = $(".area-start");
+  const areaEnd = $(".area-end");
+
+  let storageProvince = "";
+  let storageDistrict = "";
+
+  let filterStorageValue = localStorage.getItem("filter");
+  if (filterStorageValue) {
+    filterStorageValue = JSON.parse(filterStorageValue);
+    price1Input.val(filterStorageValue.giaTu);
+    price2Input.val(filterStorageValue.giaDen);
+    priceStart.text(filterStorageValue.giaTu);
+    priceEnd.text(filterStorageValue.giaDen);
+
+    area1Input.val(filterStorageValue.dienTichTu);
+    area2Input.val(filterStorageValue.dienTichDen);
+    areaStart.text(filterStorageValue.dienTichTu);
+    areaEnd.text(filterStorageValue.dienTichDen);
+
+    storageProvince = filterStorageValue.tinh;
+    storageDistrict = filterStorageValue.huyen;
+
+    console.log(storageProvince);
+    console.log(storageDistrict);
+  }
+
   $(".filter-label").click(() => {
     $(".filter-container").toggleClass("show");
   });
@@ -26,6 +59,24 @@ $(() => {
       }, "");
       province.innerHTML =
         '<option value="">Chọn Tỉnh, Thành Phố</option>' + htmlProvince;
+        if (storageProvince) {
+                  for (let option of province.options) {
+                    if (option.text === storageProvince) {
+                      option.setAttribute("selected", "selected");
+                      const provinceCode = option.value;
+                      const html = renderHTML(data, provinceCode, "districts");
+                      district.innerHTML =
+                        '<option value="">Chọn Quận, Huyện</option>' + html;
+                      if (storageDistrict) {
+                        for (let option of district.options) {
+                          if (option.text === storageDistrict) {
+                            option.setAttribute("selected", "selected");
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
       province.onchange = (e) => {
         const code = e.target.value;
         const html = renderHTML(data, code, "districts");
@@ -35,16 +86,6 @@ $(() => {
       return htmlCommue;
     })
     .catch((err) => console.error(err));
-
-  const price1Input = $("#range-price1");
-  const price2Input = $("#range-price2");
-  const area1Input = $("#range-area1");
-  const area2Input = $("#range-area2");
-
-  const priceStart = $(".price-start");
-  const priceEnd = $(".price-end");
-  const areaStart = $(".area-start");
-  const areaEnd = $(".area-end");
 
   let priceStartValue = price1Input.val();
   let priceEndValue = price2Input.val();
@@ -127,27 +168,37 @@ $(() => {
     filterValues.giaDen = priceEnd.text();
     filterValues.dienTichTu = areaStart.text();
     filterValues.dienTichDen = areaEnd.text();
+    localStorage.setItem("filter", JSON.stringify(filterValues));
     const formData = new FormData();
     formData.append("filterValues", JSON.stringify(filterValues));
+    let URL = "./post-filter";
+    if (window.location.href.includes("/filter")) {
+      URL = "../post-filter";
+    }
     $.ajax({
-                  url: "../baiviet/post-filter",
-                  type: "POST",
-                  data: formData,
-                  enctype: "multipart/form-data",
-                  processData: false,
-                  contentType: false,
-                  cache: false,
-                  success: function () {
-                    window.location.href = window.location.href + '/filter';
-                  },
-                  error: function () {
-                    toast({
-                      title: "Có lỗi xảy ra khi gửi request về server !",
-                      message: "Vui lòng liên hệ quản trị viên để giải quyết !",
-                      type: "error",
-                      duration: 5000,
-                    });
-                  },
-                });
+      url: URL,
+      type: "POST",
+      data: formData,
+      enctype: "multipart/form-data",
+      processData: false,
+      contentType: false,
+      cache: false,
+      success: function () {
+        localStorage.setItem("filter", JSON.stringify(filterValues));
+        if (!window.location.href.includes("/filter")) {
+          window.location.href = window.location.href + "/filter";
+        } else {
+          window.location.reload();
+        }
+      },
+      error: function () {
+        toast({
+          title: "Có lỗi xảy ra khi gửi request về server !",
+          message: "Vui lòng liên hệ quản trị viên để giải quyết !",
+          type: "error",
+          duration: 5000,
+        });
+      },
+    });
   });
 });

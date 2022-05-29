@@ -146,7 +146,7 @@
             <div class="header-wrapper">
               <div class="header-login">
                 <div class="logo">
-                  <a href="" #>
+                  <a href="../index">
                     <img src="<c:url value='/resources/assets/images/logo.png'/>" alt="main logo" />
                   </a>
                 </div>
@@ -166,27 +166,27 @@
                         <span>${user.tenND}</span>
                       </div>
                       <div class="acc-avatar">
-                        <img src="${user.linkanhdaidien}" alt="avatar" />
+                        <img src="../${user.linkanhdaidien}" alt="avatar" />
                       </div>
                     </div>
                     <div class="acc-setting">
-                      <a href="../nguoidung/trangcanhan#account-general" class="acc-setting-item">
+                      <a href="../../nguoidung/trangcanhan#account-general" class="acc-setting-item">
                         <i class="fa-solid fa-user"></i>
                         <span>Thông tin</span>
                       </a>
-                       <a href="../nguoidung/trangcanhan#account-post" class="acc-setting-item">
+                       <a href="../../nguoidung/trangcanhan#account-post" class="acc-setting-item">
                            <i class="fa-solid fa-paste"></i>
                            <span>Quản lý tin</span>
                        </a>
-                      <a href="../nguoidung/trangcanhan#account-notifications" class="acc-setting-item">
+                      <a href="../../nguoidung/trangcanhan#account-notifications" class="acc-setting-item">
                         <i class="fa-solid fa-bell"></i>
                         <span>Thông báo</span>
                       </a>
-                      <a href="../nguoidung/trangcanhan#account-feedback" class="acc-setting-item">
+                      <a href="../../nguoidung/trangcanhan#account-feedback" class="acc-setting-item">
                         <i class="fa-solid fa-file-signature"></i>
                         <span>Góp Ý</span>
                       </a>
-                      <a href="../nguoidung/trangcanhan#account-change-password" class="acc-setting-item">
+                      <a href="../../nguoidung/trangcanhan#account-change-password" class="acc-setting-item">
                         <i class="fa-solid fa-key"></i>
                         <span>Đổi mật khẩu</span>
                       </a>
@@ -203,7 +203,7 @@
                 <nav class="navigation">
                   <ul class="nav-list">
                     <li class="nav-item active">
-                      <a class="nav-link" href="../">Trang chủ</a>
+                      <a class="nav-link" href="../index">Trang chủ</a>
                     </li>
                     <li class="nav-item ">
                       <a class="nav-link" href="#">Chi tiết</a>
@@ -212,14 +212,14 @@
                       <a class="nav-link" href="#">Cộng đồng</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="../admin/tongquan">Quản trị</a>
+                      <a class="nav-link" href="../../admin/tongquan">Quản trị</a>
                     </li>
                     <li class="nav-item ">
-                      <a class="nav-link" href="../nguoidung/trangcanhan">Cá nhân</a>
+                      <a class="nav-link" href="../../nguoidung/trangcanhan">Cá nhân</a>
                     </li>
                   </ul>
                   <div class="post" style="padding: 0">
-                    <a href="../nguoidung/dangbai">
+                    <a href="../../nguoidung/dangbai">
                       <i class="fa-solid fa-pen-to-square"></i>
                       <span>Đăng tin</span>
                     </a>
@@ -247,49 +247,6 @@
                     <h1 class="title">Website đăng tin cho thuê phòng trọ tại Việt Nam</h1>
                 </div>
                 <div class="filter-main">
-                    <ul class="filter-list">
-                        <li class="filter-item">
-                            <div class="custom-select" style="width:200px;">
-                                <select>
-                                <option value="0">Tỉnh - Thành Phố</option>
-                                <option value="1">Tp.HCM</option>
-                                <option value="2">Hà nội</option>
-                                <option value="3">Bình Định</option>
-                            </select>
-                            </div>
-                        </li>
-                        <li class="filter-item">
-                            <div class="custom-select" style="width:200px;">
-                                <select>
-                                <option value="0">Quận - Huyện</option>
-                                <option value="1">Quận 9</option>
-                                <option value="2">Quận 1</option>
-                                <option value="3">Quận 10</option>
-                            </select>
-                            </div>
-                        </li>
-                        <li class="filter-item">
-                            <div class="custom-select" style="width:200px;">
-                                <select>
-                                <option value="0">Giá</option>
-                                <option value="1">3.000.000 VND</option>
-                                <option value="2">2.000.000 VND</option>
-                                <option value="3">1.000.000 VND</option>
-                            </select>
-                            </div>
-                        </li>
-                        <li class="filter-item">
-                            <div class="custom-select" style="width:200px;">
-                                <select>
-                                <option value="0">Diện tích</option>
-                                <option value="1">100 m2</option>
-                                <option value="2">50 m2</option>
-                                <option value="3">25 m2</option>
-                                <option value="3">chưa xác định</option>
-                            </select>
-                            </div>
-                        </li>
-                    </ul>
                     <div class="filter-button">
                         <div class="button button--filter button--hl">Lọc</div>
                     </div>
@@ -356,12 +313,12 @@
                                 <c:if test="${item.isDisplay()}">
                                  <li class="post-item">
                                      <div class="post-img">
-                                         <a href="../baiviet/chitiet/${item.mabaiviet}">
+                                         <a href="../../baiviet/chitiet/${item.mabaiviet}">
                                              <img src="<c:url value='/${item.getAnh().iterator().next().getLinkanh()}'/>" alt="">
                                          </a>
                                      </div>
                                      <div class="post-content">
-                                         <a href="../baiviet/chitiet/${item.mabaiviet}" class="post-title">
+                                         <a href="../../baiviet/chitiet/${item.mabaiviet}" class="post-title">
                                          ${item.tieude}
                                          </a>
                                          <div class="post-area">

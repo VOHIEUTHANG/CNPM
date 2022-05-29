@@ -24,7 +24,6 @@ import ptithcm.service.UserService;
 public class BaiVietController {
     boolean isFilter = false;
     String provinceGl,districtGl,priceFromGl,priceToGl,areaFromGl,areaToGl;
-
     @Autowired
     private UserService userService;
     @RequestMapping("/chitiet/{id}")
