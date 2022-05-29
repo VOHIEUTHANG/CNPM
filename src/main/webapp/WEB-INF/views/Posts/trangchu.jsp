@@ -10,7 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="<c:url value='/resources/assets/images/Logo-icon.png'/>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <!-- fontawesome -->
     <script src="https://kit.fontawesome.com/11a1459669.js" crossorigin="anonymous"></script>
     <!-- css external links-->
@@ -25,48 +24,122 @@
     <title>Thuê nhà trọ</title>
 </head>
 <body id="app" onload="loginHandler()">
-<div class="filter">
-        <div class="filter-container">
-            <h3 class="text-center"  style="text-transform: uppercase;font-size: 1.8rem;margin: 0 0;">
-            <i class="fa-solid fa-filter" style="color: #ccc; margin-right: 2px"></i>
-            Lọc bài viết</h3>
-            <hr>
-             <form action="" style="font-size:17px">
-                                <div class="form-group">
-                                    <label for="">Tỉnh - Thành phố</label>
-                                    <select id="filter-province" style="padding: 8px 3px;border-radius: 4px; border: 1px solid rgba(0,0,0,0.1)">
-                                    <option>Chọn tỉnh - thành phố</option>
-                                    <option>TP HCM</option>
-                                    <option>Đà Nẵng</option>
-                                    </select>
-                                </div>
-                                 <div class="form-group">
-                                     <label for="">Quận - Huyện</label>
-                                     <select id="filter-district" style="padding: 8px 3px;border-radius: 4px; border: 1px solid rgba(0,0,0,0.1)">
-                                     <option>Chọn quận - huyện</option>
-                                     </select>
-                                 </div>
-                                 <div class="form-group">
-                                   <label class="form-label">Giá</label>
-                                   <div class="range">
-                                     <input type="range"  max="30" min="1" step="0.1" value="0" class="form-range" id="range-price1" />
-                                     <input type="range"  max="30" min="1" step="0.1" value="5" class="form-range" id="range-price2" />
-                                   </div>
-                                 </div>
-                                 <div class="form-group">
-                                   <label class="form-label">Diện tích</label>
-                                   <div class="range">
-                                     <input type="range" max="50" min="1" step="1" value="0" class="form-range" id="range-square1" />
-                                     <input type="range" max="50" min="1" step="1" value="30" class="form-range" id="range-square2" />
-                                   </div>
-                                 </div>
-                                 <button id="filter-submit" class="button button--hl" style="width:100%;margin: 20px 0">Lọc</button>
-                            </form>
-            <div class="filter-label">
-                <i class="fa-solid fa-angle-right"></i>
-                <i class="fa-solid fa-angle-left"></i>
+    <div id= "toast"></div>
+    <div class="filter">
+      <div class="filter-container">
+        <h3
+          class="text-center"
+          style="text-transform: uppercase; font-size: 1.8rem; margin: 0 0"
+        >
+          <i
+            class="fa-solid fa-filter"
+            style="color: #ccc; margin-right: 2px"
+          ></i>
+          Lọc bài viết
+        </h3>
+        <hr />
+        <form action="" style="font-size: 17px">
+          <div class="form-group">
+            <label for="">Tỉnh - Thành phố</label>
+            <select
+              id="filter-province"
+              style="
+                padding: 8px 3px;
+                border-radius: 4px;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+              "
+            >
+              <option>Chọn tỉnh - thành phố</option>
+              <option>TP HCM</option>
+              <option>Đà Nẵng</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="">Quận - Huyện</label>
+            <select
+              id="filter-district"
+              style="
+                padding: 8px 3px;
+                border-radius: 4px;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+              "
+            >
+              <option value="">Chọn Quận , Huyện</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Giá</label>
+            <div class="range">
+              <input
+                type="range"
+                max="30"
+                min="0"
+                step="0.1"
+                value="0"
+                class="form-range"
+                id="range-price1"
+              />
+              <input
+                type="range"
+                max="30"
+                min="0"
+                step="0.1"
+                value="5"
+                class="form-range"
+                id="range-price2"
+              />
             </div>
+            <div class="price-desc">
+              Từ
+              <span class="price-start">0</span>
+              triệu -
+              <span class="price-end">5</span>
+              triệu
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Diện tích</label>
+            <div class="range">
+              <input
+                type="range"
+                max="100"
+                min="0"
+                step="1"
+                value="0"
+                class="form-range"
+                id="range-area1"
+              />
+              <input
+                type="range"
+                max="100"
+                min="0"
+                step="1"
+                value="30"
+                class="form-range"
+                id="range-area2"
+              />
+            </div>
+            <div class="area-desc">
+              Từ
+              <span class="area-start">0</span>
+              m<sup>2</sup> -
+              <span class="area-end">30</span>
+              m<sup>2</sup>
+            </div>
+          </div>
+          <button
+            id="filter-submit"
+            class="button button--hl"
+            style="width: 100%; margin: 20px 0"
+          >
+            Lọc
+          </button>
+        </form>
+        <div class="filter-label">
+          <i class="fa-solid fa-angle-right"></i>
+          <i class="fa-solid fa-angle-left"></i>
         </div>
+      </div>
     </div>
 <header id="header">
            <jsp:include page="../Layout/form_login.jsp" />
@@ -468,15 +541,13 @@
     <script src="<c:url value='/resources/js/global.js'/>"></script>
     <script src="<c:url value='/resources/js/signedIn.js'/>"></script>
     <script src="<c:url value='/resources/js/main.js'/>"></script>
+    <script src="<c:url value='/resources/js/toast.js'/>"></script>
     <script src="<c:url value='/resources/js/filter.js'/>"></script>
     <script>
         if($(".post-item").length === 0){
         const span = document.createElement('span');
         $(".post-list").text("Hiện tại không có bài viết nào để hiển thị !");
         }
-         $('.filter-label').click(()=>{
-                    $('.filter-container').toggleClass('show');
-                })
     </script>
 </body>
 </html>

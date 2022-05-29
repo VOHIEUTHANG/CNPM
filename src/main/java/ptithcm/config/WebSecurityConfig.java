@@ -25,7 +25,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.addFilterBefore(new EncodingFilter(), ChannelProcessingFilter.class);
 
-
         http.authorizeRequests().antMatchers("/nguoidung/**").hasAnyAuthority("USER","ADMIN");
         http.authorizeRequests().antMatchers("/baiviet/**","/resources/**","/Storage/**","/mail/**").permitAll();
         http.authorizeRequests().antMatchers("/admin/**").hasAuthority("ADMIN");

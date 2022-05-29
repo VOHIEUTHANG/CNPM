@@ -198,6 +198,7 @@ public class AjaxAPIController {
             targetPost.setTieude(data.getString("title"));
             targetPost.setDiachi(data.getString("street"));
             targetPost.setDientich((int)Float.parseFloat(data.getString("area")));
+            targetPost.setTinhtrang(false);
             Double roundPrice  = (double) Math.round( Float.valueOf(data.getString("price")) * 10) / 10;
             targetPost.setGia(Float.valueOf(String.valueOf(roundPrice)));
             System.out.println(Float.valueOf(String.valueOf(roundPrice)));
@@ -264,9 +265,9 @@ public class AjaxAPIController {
             targetPost.setTieude(data.getString("title"));
             targetPost.setDiachi(data.getString("street"));
             targetPost.setDientich((int)Float.parseFloat(data.getString("area")));
+            targetPost.setTinhtrang(false);
             Double roundPrice  = (double) Math.round( Float.valueOf(data.getString("price")) * 10) / 10;
             targetPost.setGia(Float.valueOf(String.valueOf(roundPrice)));
-            System.out.println(Float.valueOf(String.valueOf(roundPrice)));
             ChiTietBaiVietEntity targetPostDetail = targetPost.getChitietbaiviet();
             targetPostDetail.setMota(data.getString("description"));
             targetPostDetail.setPhuongxa(data.getString("wards"));
@@ -459,9 +460,25 @@ public class AjaxAPIController {
             return "0";
     }
 
-    @RequestMapping("/resetPassword")
-    public String getResetPasswordPage(){
-        return "user/resetpass";
+    @RequestMapping(value = "/post-filter",method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
+    @ResponseBody
+    public String getFilterValue(HttpServletRequest request)throws IOException{
+        JSONObject data= new JSONObject(request.getParameter("filterValues"));
+        String province = data.getString("tinh");
+        String district = data.getString("huyen");
+        String priceFrom = data.getString("giaTu");
+        String priceTo = data.getString("giaDen");
+        String areaFrom = data.getString("dienTichTu");
+        String areaTo = data.getString("dienTichDen");
+
+        System.out.println(province);
+        System.out.println(district);
+        System.out.println(priceFrom);
+        System.out.println(priceTo);
+        System.out.println(areaFrom);
+        System.out.println(areaTo);
+
+        return "success";
     }
 
 }

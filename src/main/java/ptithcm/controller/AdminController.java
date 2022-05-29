@@ -32,16 +32,28 @@ import ptithcm.entity.NguoiDungEntity;
 import ptithcm.entity.TaiKhoanEntity;
 import ptithcm.entity.ThongBaoEntity;
 import ptithcm.hibernate.HibernateUtil;
+import ptithcm.service.UserService;
+
 @Controller
 @Transactional
 @RequestMapping("/admin/")
 public class AdminController {
+	@Autowired
+	private UserService userService;
     SessionFactory factory;
     Session session;
     //thông kê
     @RequestMapping(value = "tongquan", method = RequestMethod.GET)
     public String tongQuan(HttpServletRequest request, ModelMap model) {
-    	return"Admin/tongquan";
+		NguoiDungDao userDao = new NguoiDungDao();
+		String username= userService.currentUserName();
+		TaiKhoanEntity tk= userDao.findByUserName(username);
+		if(tk != null) {
+			model.addAttribute("user",tk.getNguoidung());
+		}else{
+			System.out.println("Account is not found!");
+		}
+		return"Admin/tongquan";
     }
     //biểu đồ
     @RequestMapping(value = "bieudo", method = RequestMethod.GET)
@@ -201,6 +213,15 @@ public class AdminController {
     // thống kê số lượng người dùng
     @RequestMapping(value = "quanlynguoidung", method = RequestMethod.GET)
     public String NguoiDung(HttpServletRequest request, ModelMap model) {
+		NguoiDungDao userDao = new NguoiDungDao();
+		String username= userService.currentUserName();
+		TaiKhoanEntity tk= userDao.findByUserName(username);
+		if(tk != null) {
+			model.addAttribute("user",tk.getNguoidung());
+		}else{
+			System.out.println("Account is not found!");
+		}
+
     	List<NguoiDungEntity> Nguoidung = this.getNguoiDung();
     	
     	int page = ServletRequestUtils.getIntParameter(request, "p" , 0);

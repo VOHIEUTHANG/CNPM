@@ -54,8 +54,6 @@ public class BaiVietController {
 		pagedListHolder.setMaxLinkedPages(5);
 		pagedListHolder.setPageSize(5);
 
-        System.out.println(pagedListHolder);
-
         model.addAttribute("baiviet", pagedListHolder);
         return "Posts/trangchu";
     }
