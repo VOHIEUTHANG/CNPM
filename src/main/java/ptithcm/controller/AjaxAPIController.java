@@ -72,6 +72,8 @@ public class AjaxAPIController {
         TaiKhoanEntity tk= userDao.findByUserName(username);
         NguoiDungEntity currentUser = tk.getNguoidung();
 
+        System.out.println(tk.getQuyen().getTenquyen());
+
         List<AnhEntity> anh =new ArrayList<>();
         BaiVietEntity bv =new BaiVietEntity();
         ChiTietBaiVietEntity ct= new ChiTietBaiVietEntity();
@@ -79,6 +81,10 @@ public class AjaxAPIController {
         bv.setTieude(data.getString("title"));
         bv.setDiachi(data.getString("street"));
         bv.setDientich(Integer.valueOf(data.getString("area")));
+        bv.setTinhtrang(Boolean.FALSE);
+        if(tk.getQuyen().getTenquyen().equals("ADMIN")){
+            bv.setTinhtrang(Boolean.TRUE);
+        }
         Double roundPrice  = (double) Math.round( Float.valueOf(data.getString("price")) * 10) / 10;
         bv.setGia(Float.valueOf(String.valueOf(roundPrice)));
         ct.setMota(data.getString("description"));
@@ -120,7 +126,6 @@ public class AjaxAPIController {
             System.out.println("Lỗi insert bài viết mới !");
             return "0";
         }
-
         return data.toString();
     }
 
@@ -139,6 +144,10 @@ public class AjaxAPIController {
         bv.setTieude(data.getString("title"));
         bv.setDiachi(data.getString("street"));
         bv.setDientich(Integer.valueOf(data.getString("area")));
+        bv.setTinhtrang(Boolean.FALSE);
+        if(tk.getQuyen().getTenquyen().equals("ADMIN")){
+            bv.setTinhtrang(Boolean.TRUE);
+        }
         Double roundPrice  = (double) Math.round( Float.valueOf(data.getString("price")) * 10) / 10;
         bv.setGia(Float.valueOf(String.valueOf(roundPrice)));
         ct.setMota(data.getString("description"));

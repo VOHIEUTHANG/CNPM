@@ -124,7 +124,6 @@ public class BaiVietDao {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
 		try {
-			bv.setTinhtrang(Boolean.FALSE);
 			bv.setAn(Boolean.FALSE);
 			session.save(bv);
 			t.commit();	
