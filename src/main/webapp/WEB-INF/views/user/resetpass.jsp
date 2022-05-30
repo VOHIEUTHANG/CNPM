@@ -247,6 +247,37 @@
               ),
             ],
             onSubmit: function (userInfo) {
+            const formData = new FormData();
+            const data = {
+            pass: $("#password").val(),
+            token: ""
+            };
+            const index = window.location.href.lastIndexOf('token=');
+            const token = window.location.href.slice(index+6);
+            data.token = token;
+            formData.append("data", JSON.stringify(data));
+            $.ajax({
+                                url: "./reset_password",
+                                type: "POST",
+                                data: formData,
+                                enctype: "multipart/form-data",
+                                processData: false,
+                                contentType: false,
+                                cache: false,
+                                success: function (res) {
+                                  if (res == 1) {
+                                    window.location.reload();
+                                  }
+                                },
+                                error: function () {
+                                  toast({
+                                    title: "Có lỗi xảy ra khi gửi request về server !",
+                                    message: "Vui lòng liên hệ quản trị viên để giải quyết !",
+                                    type: "error",
+                                    duration: 5000,
+                                  });
+                                },
+                              });
 
             },
             onFormInvalid() {

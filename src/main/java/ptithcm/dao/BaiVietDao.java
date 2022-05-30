@@ -54,8 +54,54 @@ public class BaiVietDao {
 		finally{
 			session.close();
 		}
-		
     }
+	public List<BaiVietEntity> getRelatePost(String province) {
+		Session session= HibernateUtil.getSessionFactory().openSession();
+
+		try  {
+			String hql="from BaiVietEntity where chitietbaiviet.tinhtp = ?1";
+			Query query =  session.createQuery(hql);
+			query.setParameter(1,province);
+			query.setFirstResult(0);
+			query.setMaxResults(4);
+			return query.list();
+		}
+		catch(Exception e){
+			return null;
+		}
+		finally{
+			session.close();
+		}
+	}
+
+	public List<BaiVietEntity> sortPost(String option) {
+		Session session= HibernateUtil.getSessionFactory().openSession();
+		try  {
+			String hql="from BaiVietEntity";
+			switch(option){
+				case "1":
+					break;
+				case "2":
+					hql+= " order by chitietbaiviet.thoigianbatdau DESC";
+					break;
+				case "3":
+                    hql +=" where chitietbaiviet.linkVideo is not null";
+					break;
+				default:
+					System.out.println("option is invalid?");
+			}
+			System.out.println(hql);
+			Query query = session.createQuery(hql);
+			return query.list();
+		}
+		catch(Exception e){
+			return null;
+		}
+		finally{
+			session.close();
+		}
+
+	}
 
 	public List<BaiVietEntity> getFilterPost(
 			 String province

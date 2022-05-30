@@ -210,70 +210,49 @@
                         <div class="main-post">
                             <h3 class="main-post-title">Tin liên quan
                             </h3>
-                            <div class="main-post-sort">
-                                <span>Sắp xếp:</span>
-                                <button class="button active">Mặc định</button>
-                                <button class="button">Mới nhất</button>
-                                <button class="button">Có video</button>
-                            </div>
                             <ul class="post-list">
-                                <li class="post-item">
-                                    <div class="post-img">
-                                        <a href="#">
-                                            <img src="<c:url value='/resources/assets/images/Tro1.jpg' />" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="post-content">
-                                        <a href="#" class="post-title">
-                                            Cho thuê phòng trọ dạng chung cư gần khu công nghệ cao Thủ Đức
-                                        </a>
-                                        <div class="post-area">
-                                            <i class="fa-solid fa-chart-area"></i>
-                                            <span class="post-area-value">18 m²</span>
-                                        </div>
-                                        <div class="post-location">
-                                            <i class="fa-solid fa-map-location-dot"></i>
-                                            <span class="post-location-value">
-                                                Thành phố Thủ Đức - Thành phố HCM
-                                            </span>
-                                        </div>
-                                        <div class="post-price">
-                                            <span class="post-price-value">3 triệu / tháng</span>
-                                        </div>
-                                        <div class="post-lessor">
-                                            <a href="#">
-                                                <div class="pl-info">
-                                                    <div class="pl-img">
-                                                        <img src="<c:url value='/resources/assets/images/lessor.jpg'/>" alt="">
-                                                    </div>
-                                                    <span>Văn Châu</span>
-                                                </div>
-                                            </a>
-                                            <button class="button">Gọi 0999999999</button>
-                                        </div>
-                                    </div>
-                                </li>
+                                <c:forEach var="item" items="${relatePost}">
+                                                                <c:if test="${item.isDisplay()}">
+                                                                 <li class="post-item">
+                                                                     <div class="post-img">
+                                                                         <a href="../baiviet/chitiet/${item.mabaiviet}">
+                                                                             <img src="<c:url value='/${item.getAnh().iterator().next().getLinkanh()}'/>" alt="">
+                                                                         </a>
+                                                                     </div>
+                                                                     <div class="post-content">
+                                                                         <a href="../baiviet/chitiet/${item.mabaiviet}" class="post-title">
+                                                                         ${item.tieude}
+                                                                         </a>
+                                                                         <div class="post-area">
+                                                                             <i class="fa-solid fa-chart-area"></i>
+                                                                             <span class="post-area-value">${item.dientich} m²</span>
+                                                                         </div>
+                                                                         <div class="post-location">
+                                                                             <i class="fa-solid fa-map-location-dot"></i>
+                                                                             <span class="post-location-value">
+                                                                             ${item.diachi}, ${item.chitietbaiviet.phuongxa}, ${item.chitietbaiviet.quanhuyen}, ${item.chitietbaiviet.tinhtp}
+                                                                             </span>
+                                                                         </div>
+                                                                         <div class="post-price">
+                                                                             <span class="post-price-value">${item.gia} triệu/tháng</span>
+                                                                         </div>
+                                                                         <div class="post-lessor">
+                                                                             <a href= "../nguoidung/trangcanhan">
+                                                                                 <div class="pl-info">
+                                                                                     <div class="pl-img">
+                                                                                         <img src="../${item.nguoidung.linkanhdaidien}" alt="hình đại diện">
+                                                                                     </div>
+                                                                                     <span>${item.nguoidung.tenND}</span>
+                                                                                 </div>
+                                                                             </a>
+                                                                             <button class="button">Gọi ${item.nguoidung.sdt}</button>
+                                                                         </div>
+                                                                     </div>
+                                                                 </li>
+                                                                </c:if>
+                                                            </c:forEach>
                             </ul>
-                            <div class="pagination">
-                                <ul class="pagination-list">
-                                    <li class="p-ctl-prev">
-                                        <a href="#">
-                                            <i class="fa-solid fa-angle-left"></i>
-                                        </a>
-                                    </li>
-                                    <li class="pagination-item"><a href="#">1</a></li>
-                                    <li class="pagination-item"><a href="#">2</a></li>
-                                    <li class="pagination-item"><a href="#">3</a></li>
-                                    <li class="pagination-item"><a href="#">4</a></li>
-                                    <li class="pagination-item"><a href="#">5</a></li>
-                                    <span >...</span>
-                                    <li class="p-ctl-next">
-                                         <a href="#">
-                                            <i class="fa-solid fa-angle-right"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+
                         </div>
                     </div>
                     <div class="right-content">

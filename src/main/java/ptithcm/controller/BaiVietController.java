@@ -22,8 +22,8 @@ import ptithcm.service.UserService;
 @Controller
 @RequestMapping("/baiviet")
 public class BaiVietController {
-    boolean isFilter = false,isFilterByProvince = false;
-    String provinceGl,districtGl,priceFromGl,priceToGl,areaFromGl,areaToGl,provinceIsoGl;
+    boolean isFilter = false,isFilterByProvince = false,isFilterByOption = false;
+    String provinceGl,districtGl,priceFromGl,priceToGl,areaFromGl,areaToGl,provinceIsoGl,filterOption;
     @Autowired
     private UserService userService;
     @RequestMapping("/chitiet/{id}")
@@ -38,6 +38,8 @@ public class BaiVietController {
         List<BaiVietEntity> b = bVietDao.getById(id);
         model.addAttribute("baiviet",b.get(0));
         model.addAttribute("linkvideo",b.get(0).getChitietbaiviet().getLinkVideo());
+        List<BaiVietEntity> list = bVietDao.getRelatePost(b.get(0).getChitietbaiviet().getTinhtp());
+        model.addAttribute("relatePost",list);
         return "Posts/DetailPage";
     }
     @RequestMapping("/index")
@@ -45,6 +47,9 @@ public class BaiVietController {
         BaiVietDao bVietDao =new BaiVietDao();
         NguoiDungDao userDao = new NguoiDungDao();
         List<BaiVietEntity> list = bVietDao.getAll();
+        if(isFilterByOption){
+            list = bVietDao.sortPost(filterOption);
+        }
         String username= userService.currentUserName();
         TaiKhoanEntity tk= userDao.findByUserName(username);
         if(tk != null) {
@@ -81,6 +86,19 @@ public class BaiVietController {
             isFilterByProvince = true;
             provinceIsoGl = data.getString("province");
             System.out.println(provinceIsoGl);
+            return "1";
+        }
+        return "0";
+    }
+
+    @RequestMapping(value = "/post-filter-by-option",method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
+    @ResponseBody
+    public String getFilterOption(HttpServletRequest request)throws IOException {
+        JSONObject data= new JSONObject(request.getParameter("filter"));
+        if(data!=null){
+            isFilterByOption = true;
+            filterOption = data.getString("data");
+            System.out.println(filterOption);
             return "1";
         }
         return "0";

@@ -267,7 +267,7 @@
                                     <img src="<c:url value='/resources/assets/images/location_hcm.jpg'/>" alt="">
                                 </div>
                                 <div class="ml-content">
-                                    Hồ chí minh
+                                    Hồ Chí Minh
                                 </div>
                             </div>
                         </li>
@@ -277,7 +277,7 @@
                                     <img src="<c:url value='/resources/assets/images/location_hn.jpg'/>" alt="">
                                 </div>
                                 <div class="ml-content">
-                                    Hà nội
+                                    Hà Nội
                                 </div>
                             </div>
                         </li>
@@ -287,7 +287,7 @@
                                     <img src="<c:url value='/resources/assets/images/location_dn.jpg'/>" alt="">
                                 </div>
                                 <div class="ml-content">
-                                    Đà nẵng
+                                    Đà Nẵng
                                 </div>
                             </div>
                         </li>
@@ -299,9 +299,9 @@
                         <h3 class="main-post-title">Danh sách tin đăng</h3>
                         <div class="main-post-sort">
                             <span>Sắp xếp:</span>
-                            <button class="button active">Mặc định</button>
-                            <button class="button">Mới nhất</button>
-                            <button class="button">Có video</button>
+                            <button onclick="sendFilterValue(1)" class="button active">Mặc định</button>
+                            <button onclick="sendFilterValue(2)" class="button">Mới nhất</button>
+                            <button onclick="sendFilterValue(3)" class="button">Có video</button>
                         </div>
                         <ul class="post-list">
                             <c:forEach var="item" items="${baiviet.pageList}">
@@ -323,7 +323,7 @@
                                          <div class="post-location">
                                              <i class="fa-solid fa-map-location-dot"></i>
                                              <span class="post-location-value">
-                                             ${item.diachi} ${item.chitietbaiviet.tinhtp}/${item.chitietbaiviet.quanhuyen}/${item.chitietbaiviet.phuongxa}
+                                             ${item.diachi}, ${item.chitietbaiviet.phuongxa}, ${item.chitietbaiviet.quanhuyen}, ${item.chitietbaiviet.tinhtp}
                                              </span>
                                          </div>
                                          <div class="post-price">
@@ -478,7 +478,33 @@
         const span = document.createElement('span');
         $(".post-list").text("Hiện tại không có bài viết nào để hiển thị !");
         }
-
+        const sendFilterValue = data =>{
+            const formData = new FormData();
+                formData.append("filter", JSON.stringify({ data:String(data) }));
+                let URL = "./post-filter-by-option";
+        $.ajax({
+                  url: URL,
+                  type: "POST",
+                  data: formData,
+                  enctype: "multipart/form-data",
+                  processData: false,
+                  contentType: false,
+                  cache: false,
+                  success: function (res) {
+                    if(res==1){
+                    window.location.reload();
+                    }
+                  },
+                  error: function () {
+                    toast({
+                      title: "Có lỗi xảy ra khi gửi request về server !",
+                      message: "Vui lòng liên hệ quản trị viên để giải quyết !",
+                      type: "error",
+                      duration: 5000,
+                    });
+                  },
+                });
+        }
     </script>
 </body>
 </html>

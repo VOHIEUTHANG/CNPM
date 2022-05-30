@@ -1,5 +1,6 @@
 package ptithcm.controller;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -52,11 +53,15 @@ public class DangNhapController {
     public String  resetPass(){
         return "user/resetpass";
     }
-    @RequestMapping(value="/reset_password",method= RequestMethod.POST)
+
+
+
+    @RequestMapping(value="/reset_password",method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
     @ResponseBody
     public Integer resetPass(HttpServletRequest req){
-        String pass= req.getParameter("pass");
-        String token = req.getParameter("token");
+        JSONObject data = new JSONObject(req.getParameter("data"));
+        String pass= data.getString("pass");
+        String token = data.getString("token");
         UserService userService =new UserService();
         return userService.resetPass(token,pass,passwordEncoder);
     }

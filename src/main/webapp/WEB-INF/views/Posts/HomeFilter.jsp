@@ -267,7 +267,7 @@
                                     <img src="<c:url value='/resources/assets/images/location_hcm.jpg'/>" alt="">
                                 </div>
                                 <div class="ml-content">
-                                    Hồ chí minh
+                                    Hồ Chí Minh
                                 </div>
                             </div>
                         </li>
@@ -277,7 +277,7 @@
                                     <img src="<c:url value='/resources/assets/images/location_hn.jpg'/>" alt="">
                                 </div>
                                 <div class="ml-content">
-                                    Hà nội
+                                    Hà Nội
                                 </div>
                             </div>
                         </li>
@@ -287,7 +287,7 @@
                                     <img src="<c:url value='/resources/assets/images/location_dn.jpg'/>" alt="">
                                 </div>
                                 <div class="ml-content">
-                                    Đà nẵng
+                                    Đà Nẵng
                                 </div>
                             </div>
                         </li>
@@ -323,7 +323,7 @@
                                          <div class="post-location">
                                              <i class="fa-solid fa-map-location-dot"></i>
                                              <span class="post-location-value">
-                                             ${item.diachi} ${item.chitietbaiviet.tinhtp}/${item.chitietbaiviet.quanhuyen}/${item.chitietbaiviet.phuongxa}
+                                              ${item.diachi}, ${item.chitietbaiviet.phuongxa}, ${item.chitietbaiviet.quanhuyen}, ${item.chitietbaiviet.tinhtp}
                                              </span>
                                          </div>
                                          <div class="post-price">

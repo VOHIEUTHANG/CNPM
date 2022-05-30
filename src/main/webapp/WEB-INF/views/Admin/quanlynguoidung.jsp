@@ -137,7 +137,7 @@
                                   <th>SĐT</th>
                                   <th>Email</th>
                                   <th>Địa chỉ</th>
-                                  <th>Trạng thái</th>
+                                  <th>Gửi thông báo</th>
                                   <th>Vai trò</th>
                                 </tr>
                               </thead>
@@ -147,7 +147,7 @@
                                   <th>SĐT</th>
                                   <th>Email</th>
                                   <th>Địa chỉ</th>
-                                  <th>Trạng thái</th>
+                                  <th>Gửi thông báo</th>
                                   <th>Vai trò </th>
                                 </tr>
                               </tfoot>
@@ -158,7 +158,9 @@
                                     <td>${nd.sdt}</td>
                                     <td>${nd.email}</td>
                                     <td>${nd.diachi}</td>
-                                    <td>${nd.taikhoan.tinhtrang}</td>
+                                    <td><button type="button" data-username="${nd.maND}" class="btn" data-toggle="modal" data-target=".bd-example-modal-lg" data-whatever="@mdo">
+                                                                      <i style="color: #26bac9" class="fas fa-bell fa-fw"></i>
+                                                                    </button></td>
                                     <td>${nd.taikhoan.quyen.tenquyen}</td>
 
                                   </tr>
@@ -178,6 +180,55 @@
         </div>
         <!-- End of Main Content -->
         <!-- Footer -->
+        <div class="noti-create-wrapper">
+                  <div class="modal fade bd-example-modal-lg" id="notifcation-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+                    <div class="modal-dialog modal-lg" role="document">
+                      <form class="modal-content" action="ThongBao.html" method="post">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">
+                           Gửi thông báo cho người dùng
+                          </h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <div>
+                            <div class="form-group">
+                              <label for="userID" class="col-form-label">
+                              Địa chỉ email người gửi</label>
+                              <input type="text" class="form-control" name="from" id="userID">
+                            </div>
+                            <div class="form-group">
+                              <label for="userID" class="col-form-label">
+                                Địa chỉ email người nhận</label>
+                              <input type="email" name="to" class="form-control" id="notiEmail">
+                            </div>
+                            <div class="form-group">
+                              <label for="userID" class="col-form-label">
+                                Tiêu đề thông báo</label>
+                              <input type="text" name="subject" class="form-control" id="notiTitle" lang="vi">
+                            </div>
+                            <div class="form-group">
+                              <label for="noti-content" class="col-form-label">
+                                Nội dung thông báo:</label>
+                              <textarea class="form-control" rows="5" id="noti-content" name="body" lang="vi"></textarea>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button"  class="btn btn-secondary" data-dismiss="modal">
+                            Hủy
+                          </button>
+                          <a href="../admin/ThongBao.htm?guiMail">
+                          <button type="submit" name="guiMail" id="noti-submit" class="btn btn-primary">
+                            Gửi thông báo
+                          </button>
+                        </a></div><a href="../admin/ThongBao.htm?guiMail">
+
+                    </a></form></div><a href="../admin/ThongBao.htm?guiMail">
+                  </a></div><a href="../admin/ThongBao.htm?guiMail">
+                </a></div>
         <footer class="sticky-footer bg-white">
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
