@@ -51,12 +51,10 @@ public class BaiVietController {
             model.addAttribute("user",tk.getNguoidung());
         }
         int page= ServletRequestUtils.getIntParameter( request,"p",0);
-
         PagedListHolder pagedListHolder =new PagedListHolder(list);
         pagedListHolder.setPage(page);
 		pagedListHolder.setMaxLinkedPages(5);
 		pagedListHolder.setPageSize(5);
-
         model.addAttribute("baiviet", pagedListHolder);
         return "Posts/Home";
     }
