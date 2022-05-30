@@ -24,7 +24,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         String role = User.getQuyen().getTenquyen();
         GrantedAuthority authority = new SimpleGrantedAuthority(role);
         grantList.add(authority);
-        UserDetails userDetails= (UserDetails) new User(username,User.getMatkhau(),grantList);
+        UserDetails userDetails= new User(username,User.getMatkhau(),grantList);
         return userDetails;
     }
     public void register() {

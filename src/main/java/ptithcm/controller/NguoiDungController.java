@@ -96,8 +96,7 @@ public class NguoiDungController {
 	TaiKhoanEntity tk= userDao.findByUserName(username);
 
 	NguoiDungEntity user = tk.getNguoidung();
-	Collection<ThongBaoEntity> notiList = user.getThongbao();
-
+	List<ThongBaoEntity> notiList = (List<ThongBaoEntity>) user.getThongbao();
 	model.addAttribute("user",user);
 	model.addAttribute("acc",tk);
 		System.out.println(notiList.size());

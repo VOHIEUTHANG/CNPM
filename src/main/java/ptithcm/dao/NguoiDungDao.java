@@ -22,6 +22,16 @@ public class NguoiDungDao {
             return null;
         }
     }
+	public NguoiDungEntity findById(Long id){
+		NguoiDungEntity tk = new NguoiDungEntity();
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+			String hql="from NguoiDungEntity AS tk where  tk.maND = :id";
+			tk = session.createQuery(hql,NguoiDungEntity.class).setParameter("id",id).uniqueResult();
+			return tk;
+		} catch(Exception e){
+			return null;
+		}
+	}
 	//retrun 2 bị trùng tên đăng nhập ,1 thành công, 0 thất bại
 
 	public Integer insertTk (TaiKhoanEntity tk) {

@@ -28,9 +28,9 @@ public class TaiKhoanEntity {
 
 	public void setQuyen(TenQuyenEntity quyen) {
 		this.quyen = quyen;
-	};
-	
-	@OneToOne(mappedBy = "taikhoan")
+	}
+
+    @OneToOne(mappedBy = "taikhoan")
 	private NguoiDungEntity nguoidung;
 	
 	public String getTenDN() {

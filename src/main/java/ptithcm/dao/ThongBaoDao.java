@@ -20,8 +20,8 @@ public class ThongBaoDao {
         }
         finally {
             session.close();
-            System.out.println("Insert notification close session !");
+            return 1;
         }
-        return 1;
+
     }
 }

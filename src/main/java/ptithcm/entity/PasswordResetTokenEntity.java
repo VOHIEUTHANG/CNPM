@@ -47,7 +47,7 @@ public class PasswordResetTokenEntity {
         Timestamp timestamp = new Timestamp(date.getTime());
         Calendar cal = Calendar.getInstance();
         cal.setTime(timestamp);
-        cal.add(Calendar.HOUR_OF_DAY, this.EXPIRATION);
+        cal.add(Calendar.HOUR_OF_DAY, EXPIRATION);
         timestamp.setTime(cal.getTime().getTime());
         this.expireDate = timestamp;
 

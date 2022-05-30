@@ -23,7 +23,6 @@
             @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
           </style>
         </head>
-
         <body id="app">
           <div id="toast"></div>
           <div id="myCustomToast">
@@ -125,11 +124,12 @@
                     <a class="list-group-item  active" data-toggle="list" href="#account-general">Thông tin cá nhân</a>
                     <a class="list-group-item " data-toggle="list" href="#account-post">Quản lý tin đăng</a>
                     <a class="list-group-item " style="position: relative" data-toggle="list" href="#account-notifications">Thông báo
-                       <c:if test="${notiCount > 0}">
-                       <div class="noti-icon">
-                          ${notiCount}
-                       </div>
-                       </c:if>
+                     <c:set var = "dem" value = "${notiCount}"/>
+                            <c:if test="${dem> 0}">
+                                               <div class="noti-icon">
+                                                       ${notiCount}
+                                               </div>
+                                           </c:if>
                     </a>
                     <a class="list-group-item " data-toggle="list" href="#account-feedback">Góp ý</a>
                     <a class="list-group-item " data-toggle="list" href="#account-change-password">Đổi mật khẩu</a>
@@ -439,17 +439,15 @@
                     <div class="tab-pane fade" id="account-notifications">
                       <div class="card-body ">
                         <h3 style="margin-bottom: 30px;font-size: 2.4rem;text-transform: uppercase;text-align: center;">Thông báo </h3>
-                        <c:if test="${notiCount==0}">
+                        <c:if test="${dem==0}">
                         <img src="<c:url value='/resources/assets/images/NoNoti.png'/>" alt="Không có thông báo nào cả"/>
                         <h3 style="margin: 20px 0;font-size: 2rem;text-align: center;">Bạn không có thông báo nào :( </h3>
                         </c:if>
                         <div class="accordion" id="accordionExample">
-                           <c:if test="${notiList != null}">
-                             <c:forEach var="noti" items="${notiList}" varStatus="status">
-                             <c:choose>
-                             <c:when test="${noti.dadoc}"> <div class="card readed">  </c:when>
-                             <c:when test="${!noti.dadoc}"> <div class="card">  </c:when>
-                             </c:choose>
+                             <c:forEach var="noti" items="${notiList}" >
+                             <c:set var = "dadoc"  value = "${noti.getDaDoc()}"/>
+                             ${dadoc ? "<div class='card readed'>":"<div class='card'>"}
+
                                  <div class="card-header" id="heading${status.index}">
                                      <h2 class="mb-0">
                                      <button class="btn btn-link btn-noti" style="text-align:left;" type="button" data-toggle="collapse" data-target="#collapse${status.idnex}" aria-expanded="true" aria-controls="collapseOne">
@@ -457,11 +455,10 @@
                                      </button>
                                      </h2>
                                      <div class="time-label">
-                                     <span>12 giờ 30 phút</span>
-                                     <span>"${noti.thoigian}"</span>
+                                     <span>${noti.thoigian}</span>
                                      </div>
                                      <div class="title-full">
-                                         Đăng ký thành công tài khoản tại timtro.vn Đăng ký thành công tài khoản tại timtro.vn Đăng ký thành công tài khoản tại timtro.vn
+                                       Đăng ký thành công tài khoản tại timtro.vn
                                      </div>
                                  </div>
                                  <div id="collapse${status.index}" class="collapse" aria-labelledby="heading${status.index}" data-parent="#accordionExample">
@@ -471,7 +468,6 @@
                                  </div>
                                  </div>
                              </c:forEach>
-                           </c:if>
                         </div>
                       </div>
                     </div>

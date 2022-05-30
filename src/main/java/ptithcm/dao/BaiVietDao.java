@@ -44,7 +44,7 @@ public class BaiVietDao {
     public List<BaiVietEntity> getById(Long id) {
 		Session session= HibernateUtil.getSessionFactory().openSession();
         try  {
-            String hql="from BaiVietEntity where mabaiviet = "+ String.valueOf(id);
+            String hql="from BaiVietEntity where mabaiviet = "+ id;
             Query query = session.createQuery(hql);
             return query.list();
         }

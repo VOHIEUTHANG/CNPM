@@ -51,7 +51,7 @@ public class AjaxAPIController {
         String fileExtension = getFileExtension(fileParam.getOriginalFilename());
         Path path = Paths.get(context.getRealPath("//Storage//" + currentPath + "//")  + uniqueKey +  fileExtension);
         Files.write(path, bytes);
-        return uniqueKey.toString()+fileExtension;
+        return uniqueKey +fileExtension;
     }
 
     @RequestMapping("/dangky")
@@ -204,7 +204,7 @@ public class AjaxAPIController {
         List<BaiVietEntity> listPost = userDao.getPostByID(id.toString());
         BaiVietEntity targetPost = listPost.get(0);
         String imageIDs = data.getString("imageIDs").trim();
-        String imageIDList[] = imageIDs.split("_");
+        String[] imageIDList = imageIDs.split("_");
         if(targetPost != null){
             targetPost.setTieude(data.getString("title"));
             targetPost.setDiachi(data.getString("street"));
@@ -271,7 +271,7 @@ public class AjaxAPIController {
         List<BaiVietEntity> listPost = userDao.getPostByID(id.toString());
         BaiVietEntity targetPost = listPost.get(0);
         String imageIDs = data.getString("imageIDs").trim();
-        String imageIDList[] = imageIDs.split("_");
+        String[] imageIDList = imageIDs.split("_");
         if(targetPost != null){
             targetPost.setTieude(data.getString("title"));
             targetPost.setDiachi(data.getString("street"));
@@ -476,7 +476,26 @@ public class AjaxAPIController {
         model.addAttribute("province",province_global_variable);
         return "trangchu";
     }
-
+    @RequestMapping(value = "/sendnoti",method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
+    @ResponseBody
+    public  String addNoti(HttpServletRequest request) throws IOException{
+        ThongBaoEntity tb =new ThongBaoEntity();
+        ThongBaoDao tbDao = new ThongBaoDao();
+       String id = request.getParameter("id");
+       NguoiDungDao nguoiDungDao = new NguoiDungDao();
+       String tiltle = request.getParameter("title");
+       String content = request.getParameter("content");
+        Date date = new Date();
+        Timestamp tg = new Timestamp(date.getTime());
+        tb.setNguoidung(nguoiDungDao.findById(Long.parseLong(id)));
+        tb.setTieude(tiltle);
+        tb.setNoidung(content);
+        tb.setDaDoc(false);
+        tb.setThoigian(tg);
+        if(tbDao.InsertTB(tb)==1 )
+            return "Thành công";
+        else return "Thất bại";
+    }
 }
 
 

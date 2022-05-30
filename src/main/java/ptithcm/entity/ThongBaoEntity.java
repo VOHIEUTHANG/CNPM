@@ -3,15 +3,7 @@ package ptithcm.entity;
 import java.sql.Timestamp;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -20,7 +12,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class ThongBaoEntity {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "MaTB")
 	private Long matb;
 	@Column(name = "ThoiGian")
@@ -44,10 +36,11 @@ public class ThongBaoEntity {
 	public void setMatb(Long matb) {
 		this.matb = matb;
 	}
-	public Boolean getDaDoc(){return dadoc;};
-	public void setDaDoc(Boolean dadoc) {this.dadoc = dadoc;};
+	public Boolean getDaDoc(){return dadoc;}
 
-	public Date getThoigian() {
+    public void setDaDoc(Boolean dadoc) {this.dadoc = dadoc;}
+
+    public Date getThoigian() {
 		return thoigian;
 	}
 
@@ -82,13 +75,13 @@ public class ThongBaoEntity {
 	public String formatTime(Timestamp timeStamp){
 		int hours = timeStamp.getHours();
 		int minutes  = timeStamp.getNanos();
-		return String.valueOf(hours) + " giờ " + String.valueOf(minutes) + " phút";
+		return hours + " giờ " + minutes + " phút";
 	}
 	public String formateDate(Timestamp timeStamp){
 		int date = timeStamp.getDate();
 		int month = timeStamp.getMonth() + 1;
 		int year = timeStamp.getYear() + 1900;
-		return String.valueOf(date) + "/" + String.valueOf(month) + "/"+ String.valueOf(year);
+		return date + "/" + month + "/"+ year;
 	}
 
 

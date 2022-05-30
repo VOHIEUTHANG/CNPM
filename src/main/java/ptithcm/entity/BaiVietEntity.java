@@ -35,9 +35,9 @@ public class BaiVietEntity {
 
 	public void setDientich(int dientich) {
 		this.dientich = dientich;
-	};
-	
-	@ManyToOne
+	}
+
+    @ManyToOne
 	@JoinColumn(name = "MaND")
 	private NguoiDungEntity nguoidung;
 	
