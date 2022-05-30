@@ -15,6 +15,15 @@
 	</properties>
 	<dependencies>
 
+	<!-- https://mvnrepository.com/artifact/com.google.apis/google-api-services-drive -->
+    <dependency>
+         <groupId>com.google.apis</groupId>
+         <artifactId>google-api-services-drive</artifactId>
+         <version>v3-rev197-1.25.0</version>
+       </dependency>
+
+
+
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
@@ -137,8 +146,8 @@
 			<artifactId>spring-context-support</artifactId>
 			<version>3.1.1.RELEASE</version>
 	   </dependency>
+	
 	</dependencies>
-
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<plugins>

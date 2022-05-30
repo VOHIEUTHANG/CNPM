@@ -37,13 +37,16 @@ public class DangNhapController {
         public String forgot(ModelMap model){
             return "user/forgotpass";
     }
-    @RequestMapping(value="/forgotpass",method= RequestMethod.POST)
+    @RequestMapping(value="/checkmailforgot",method= RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public Integer forgot(HttpServletRequest req){
+    public String forgot(HttpServletRequest req){
         String email = req.getParameter("email");
         UserService  userService =new UserService();
         String link = req.getRequestURL().toString().replace(req.getServletPath(), "")+ "/reset_password?token=";
-        return userService.SaveToken_SendMail(email,mailSender,link);
+       int ma= userService.SaveToken_SendMail(email,mailSender,link);
+       if(ma==1) return "Đã gửi mail thành công";
+       if(ma == 0) return "Địa chỉ mail chưa đăng kí tài khoản";
+       return "Lỗi hệ thống, hãy thử lại sau";
     }
     @RequestMapping(value="/reset_password",method= RequestMethod.GET)
     public String  resetPass(){
