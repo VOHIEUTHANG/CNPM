@@ -100,6 +100,22 @@ public class BaiVietDao {
 		}
 	}
 
+	public List<BaiVietEntity> getFilterPostByProvince(String province) {
+		Session session= HibernateUtil.getSessionFactory().openSession();
+		try  {
+			String hql="from BaiVietEntity where chitietbaiviet.tinhtp = ?1";
+			Query query = session.createQuery(hql);
+			query.setParameter(1,province);
+			return query.list();
+		}
+		catch(Exception e){
+			return null;
+		}
+		finally{
+			session.close();
+		}
+	}
+
 	public  int UpdateBaiViet (BaiVietEntity bv){
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		BaiVietEntity updatePost = (BaiVietEntity) session.merge(bv);

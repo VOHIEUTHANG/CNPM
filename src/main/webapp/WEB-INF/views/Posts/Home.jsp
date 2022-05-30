@@ -25,6 +25,12 @@
 </head>
 <body id="app" onload="loginHandler()">
     <div id= "toast"></div>
+      <div id="instruction">
+          <div class="text-effect">
+           <i class="fa-solid fa-angles-left"></i>
+           <span>Lọc</span>
+          </div>
+        </div>
     <div class="filter">
       <div class="filter-container">
         <h3
@@ -205,12 +211,6 @@
                     <li class="nav-item active">
                       <a class="nav-link" href="../">Trang chủ</a>
                     </li>
-                    <li class="nav-item ">
-                      <a class="nav-link" href="#">Chi tiết</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">Cộng đồng</a>
-                    </li>
                     <li class="nav-item">
                       <a class="nav-link" href="../admin/tongquan">Quản trị</a>
                     </li>
@@ -246,11 +246,6 @@
                 <div class="filter-title">
                     <h1 class="title">Website đăng tin cho thuê phòng trọ tại Việt Nam</h1>
                 </div>
-                <div class="filter-main">
-                    <div class="filter-button">
-                        <div class="button button--filter button--hl">Lọc</div>
-                    </div>
-                </div>
             </div>
         </section>
         <%-- form login and sign up --%>
@@ -267,34 +262,34 @@
                     <h3 class="main-loca-title">Khu vực nổi bật</h3>
                     <ul class="main-loca-list">
                         <li class="main-loca-item">
-                            <a href="#" class="main-local-link">
+                            <div onclick="sendValue('Thành phố Hồ Chí Minh')" class="main-local-link" >
                                 <div class="ml-img">
                                     <img src="<c:url value='/resources/assets/images/location_hcm.jpg'/>" alt="">
                                 </div>
                                 <div class="ml-content">
                                     Hồ chí minh
                                 </div>
-                            </a>
+                            </div>
                         </li>
                         <li class="main-loca-item">
-                            <a href="#" class="main-local-link">
+                            <div class="main-local-link" onclick="sendValue('Thành phố Hà Nội')">
                                 <div class="ml-img">
                                     <img src="<c:url value='/resources/assets/images/location_hn.jpg'/>" alt="">
                                 </div>
                                 <div class="ml-content">
                                     Hà nội
                                 </div>
-                            </a>
+                            </div>
                         </li>
                         <li class="main-loca-item">
-                            <a href="#" class="main-local-link">
+                            <div class="main-local-link" onclick="sendValue('Thành phố Đà Nẵng')">
                                 <div class="ml-img">
                                     <img src="<c:url value='/resources/assets/images/location_dn.jpg'/>" alt="">
                                 </div>
                                 <div class="ml-content">
                                     Đà nẵng
                                 </div>
-                            </a>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -356,28 +351,6 @@
                     </div>
                     <div class="right-content">
                     <div class="main-sidebar">
-                        <div class="ms-section ms-category">
-                            <h3 class="ms-title">Danh mục cho thuê</h3>
-                            <div class="ms-content">
-                                <ul class="msc-list">
-                                    <li class="msc-item">
-                                        <a href="#" class="msc-link">Cho thuê phòng trọ</a>
-                                    </li>
-                                    <li class="msc-item">
-                                        <a href="#" class="msc-link">Cho thuê nhà nguyên căn</a>
-                                    </li>
-                                    <li class="msc-item">
-                                        <a href="#" class="msc-link">Cho thuê căn hộ</a>
-                                    </li>
-                                    <li class="msc-item">
-                                        <a href="#" class="msc-link">Cho thuê mặt bằng</a>
-                                    </li>
-                                    <li class="msc-item">
-                                        <a href="#" class="msc-link">Tìm người ở ghép</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
                         <div class="ms-section ms-prices">
                             <h3 class="ms-title">Xem theo giá</h3>
                             <div class="ms-content">
@@ -505,6 +478,7 @@
         const span = document.createElement('span');
         $(".post-list").text("Hiện tại không có bài viết nào để hiển thị !");
         }
+
     </script>
 </body>
 </html>

@@ -97,12 +97,6 @@
                     <li class="nav-item">
                       <a class="nav-link" href="../">Trang chủ</a>
                     </li>
-                    <li class="nav-item ">
-                      <a class="nav-link" href="#">Khám phá</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">Cộng đồng</a>
-                    </li>
                     <li class="nav-item">
                      <a class="nav-link" href="../admin/tongquan">Quản trị</a>
                     </li>

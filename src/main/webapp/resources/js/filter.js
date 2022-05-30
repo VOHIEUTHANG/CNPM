@@ -27,9 +27,6 @@ $(() => {
 
     storageProvince = filterStorageValue.tinh;
     storageDistrict = filterStorageValue.huyen;
-
-    console.log(storageProvince);
-    console.log(storageDistrict);
   }
 
   $(".filter-label").click(() => {
@@ -185,11 +182,15 @@ $(() => {
       cache: false,
       success: function () {
         localStorage.setItem("filter", JSON.stringify(filterValues));
-        if (!window.location.href.includes("/filter")) {
-          window.location.href = window.location.href + "/filter";
-        } else {
-          window.location.reload();
-        }
+        if (window.location.href.endsWith("/filter")) {
+                     window.location.reload();
+                   } else if (window.location.href.includes("/filter-province")) {
+                     const index = window.location.href.lastIndexOf('-');
+                     window.location.href = window.location.href.slice(0,index);
+                   }
+                   else{
+                     window.location.href = window.location.href + "/filter";
+                   }
       },
       error: function () {
         toast({
@@ -202,3 +203,38 @@ $(() => {
     });
   });
 });
+     const sendValue = (province) => {
+        const formData = new FormData();
+        formData.append("province", JSON.stringify({ province }));
+        let URL = "./post-filter-by-province";
+        if (window.location.href.includes("/filter")) {
+          URL = "../post-filter-by-province";
+        }
+        $.ajax({
+          url: URL,
+          type: "POST",
+          data: formData,
+          enctype: "multipart/form-data",
+          processData: false,
+          contentType: false,
+          cache: false,
+          success: function (res) {
+            console.log(res);
+            if (window.location.href.endsWith("/filter")) {
+                         window.location.href = window.location.href + "-province";
+                       } else if (window.location.href.endsWith("/filter-province")) {
+                         window.location.reload();
+                       } else {
+                         window.location.href = window.location.href + "/filter-province";
+                       }
+          },
+          error: function () {
+            toast({
+              title: "Có lỗi xảy ra khi gửi request về server !",
+              message: "Vui lòng liên hệ quản trị viên để giải quyết !",
+              type: "error",
+              duration: 5000,
+            });
+          },
+        });
+      };

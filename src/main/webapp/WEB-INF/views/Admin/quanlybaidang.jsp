@@ -66,10 +66,12 @@
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  <span class="mr-2 d-none d-lg-inline text-gray-600 small"
-                    >Văn Châu</span
-                  >
-                 <i class="fas fa-user-circle fa-2x text-gray-300"></i>
+                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"
+                                     >${user.tenND}</span
+                                   >
+                                    <div style="width:40px;height:40px;border-radius:50%;overflow:hidden;">
+                                    <img style="width: 100%;height: 100%;object-fit:cover" src="${user.linkanhdaidien}"/>
+                                    </div>
                 </a>
                 <!-- Dropdown - User Information -->
                 <div

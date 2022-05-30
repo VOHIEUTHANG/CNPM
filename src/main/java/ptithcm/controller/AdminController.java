@@ -53,6 +53,7 @@ public class AdminController {
 		}else{
 			System.out.println("Account is not found!");
 		}
+
 		return"Admin/tongquan";
     }
     //biểu đồ
@@ -63,6 +64,14 @@ public class AdminController {
     // thống kê số lượng bài đăng
     @RequestMapping( value ="quanlybaidang", method = RequestMethod.GET)
     public String BaiViet(HttpServletRequest request, ModelMap model) {
+		NguoiDungDao userDao = new NguoiDungDao();
+		String username= userService.currentUserName();
+		TaiKhoanEntity tk= userDao.findByUserName(username);
+		if(tk != null) {
+			model.addAttribute("user",tk.getNguoidung());
+		}else{
+			System.out.println("Account is not found!");
+		}
     	List<BaiVietEntity> Baivietchuaduyet = this.getBVChuaDuyet();
     	List<BaiVietEntity> Baivietdaduyet = this.getBVDaDuyet();
     	//phân trang
@@ -143,6 +152,16 @@ public class AdminController {
 		 pagedListHolder.setMaxLinkedPages(3);
 		 pagedListHolder.setPageSize(10); 
 		 model.addAttribute("baivietchuaduyet",pagedListHolder);
+
+
+		NguoiDungDao userDao = new NguoiDungDao();
+		String username= userService.currentUserName();
+		TaiKhoanEntity tk= userDao.findByUserName(username);
+		if(tk != null) {
+			model.addAttribute("user",tk.getNguoidung());
+		}else{
+			System.out.println("Account is not found!");
+		}
 	
 		if(temp != 0) {
 			model.addAttribute("message","Delete thành công");
@@ -174,6 +193,17 @@ public class AdminController {
 	@RequestMapping(value = "quanlybaidang/{mabaiviet}.htm", params = "linkEdit" )
 	public String edit (HttpServletRequest request, ModelMap model, 
 			@PathVariable("mabaiviet") long mabaiviet) {
+
+		NguoiDungDao userDao = new NguoiDungDao();
+		String username= userService.currentUserName();
+		TaiKhoanEntity tk= userDao.findByUserName(username);
+		if(tk != null) {
+			model.addAttribute("user",tk.getNguoidung());
+			System.out.println(tk.getNguoidung().getTenND());
+		}else{
+			System.out.println("Account is not found!");
+		}
+
 		BaiVietEntity bv = this.getBaiviet(mabaiviet);
 		bv.setTinhtrang(true);
 		Integer temp = this.updateTrangThai(bv);
