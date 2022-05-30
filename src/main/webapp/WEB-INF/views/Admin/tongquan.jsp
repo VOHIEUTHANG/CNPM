@@ -152,7 +152,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Số lượng tài khoản
                                             </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">500</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id ="Songuoidung"></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-user fa-2x text-gray-300"></i>
@@ -170,7 +170,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                 Yêu cầu duyệt bài </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">10</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id= "Baichuaduyet"></div>
                                         </div>
                                         <div class="col-auto">
                                            <i class="fas fa-tasks fa-2x text-gray-300"></i>
@@ -235,7 +235,41 @@
       </div>
       <!-- End of Content Wrapper -->
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <script>
+     !function CountTk() {
+        let url = "http://localhost:3000/api/countND";
+        try {
+            fetch(url)
+            .then(res=>res.json())
+            .then(data=>{
+               $("#Songuoidung").text( data[0].tk);
+            })
+            
+            
+        } catch (error) {
+            console.log(error);
+        }
+    }();
+    
+     !function CountBVCD() {
+        let url = "http://localhost:3000/api/countBVCD";
+        try {
+            fetch(url)
+            .then(res=>res.json())
+            .then(data=>{
+            	 $("#Baichuaduyet").text( data[0].bv);
+     
+            })
+        }catch (error) {
+            console.log(error);
+        }
+            
+    }()
+  
+    </script>
+   
     <script src="<c:url value='/resources/js/admin/global.js'/>"></script>
     <!-- End of Page Wrapper -->
 </body>
