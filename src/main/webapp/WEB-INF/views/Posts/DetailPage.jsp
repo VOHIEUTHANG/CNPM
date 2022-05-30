@@ -215,12 +215,12 @@
                                                                 <c:if test="${item.isDisplay()}">
                                                                  <li class="post-item">
                                                                      <div class="post-img">
-                                                                         <a href="../baiviet/chitiet/${item.mabaiviet}">
+                                                                         <a href="./${item.mabaiviet}">
                                                                              <img src="<c:url value='/${item.getAnh().iterator().next().getLinkanh()}'/>" alt="">
                                                                          </a>
                                                                      </div>
                                                                      <div class="post-content">
-                                                                         <a href="../baiviet/chitiet/${item.mabaiviet}" class="post-title">
+                                                                         <a href="./${item.mabaiviet}" class="post-title">
                                                                          ${item.tieude}
                                                                          </a>
                                                                          <div class="post-area">
@@ -237,7 +237,7 @@
                                                                              <span class="post-price-value">${item.gia} triệu/tháng</span>
                                                                          </div>
                                                                          <div class="post-lessor">
-                                                                             <a href= "../nguoidung/trangcanhan">
+                                                                             <a href= "../../nguoidung/trangcanhan">
                                                                                  <div class="pl-info">
                                                                                      <div class="pl-img">
                                                                                          <img src="../${item.nguoidung.linkanhdaidien}" alt="hình đại diện">
