@@ -88,6 +88,9 @@ public class AjaxAPIController {
         Double roundPrice  = (double) Math.round( Float.valueOf(data.getString("price")) * 10) / 10;
         bv.setGia(Float.valueOf(String.valueOf(roundPrice)));
         ct.setMota(data.getString("description"));
+
+        System.out.println(data.getString("description"));
+
         ct.setPhuongxa(data.getString("wards"));
         ct.setQuanhuyen(data.getString("district"));
         ct.setTinhtp(data.getString("province"));
@@ -151,6 +154,9 @@ public class AjaxAPIController {
         Double roundPrice  = (double) Math.round( Float.valueOf(data.getString("price")) * 10) / 10;
         bv.setGia(Float.valueOf(String.valueOf(roundPrice)));
         ct.setMota(data.getString("description"));
+
+        System.out.println(data.getString("description"));
+
         ct.setPhuongxa(data.getString("wards"));
         ct.setQuanhuyen(data.getString("district"));
         ct.setTinhtp(data.getString("province"));

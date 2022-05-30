@@ -32,6 +32,9 @@ $(() => {
   $(".filter-label").click(() => {
     $(".filter-container").toggleClass("show");
   });
+  $("#instruction").click(()=>{
+  $(".filter-label").click();
+  })
   const province = document.getElementById("filter-province");
   const district = document.getElementById("filter-district");
   const renderHTML = (arr, code, type) => {

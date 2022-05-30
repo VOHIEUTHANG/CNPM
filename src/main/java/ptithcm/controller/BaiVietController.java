@@ -36,9 +36,19 @@ public class BaiVietController {
             model.addAttribute("user",tk.getNguoidung());
         }
         List<BaiVietEntity> b = bVietDao.getById(id);
-        model.addAttribute("baiviet",b.get(0));
-        model.addAttribute("linkvideo",b.get(0).getChitietbaiviet().getLinkVideo());
-        List<BaiVietEntity> list = bVietDao.getRelatePost(b.get(0).getChitietbaiviet().getTinhtp());
+        BaiVietEntity post = b.get(0);
+        model.addAttribute("baiviet",post);
+        if(post.getChitietbaiviet().getLinkVideo() != null){
+            model.addAttribute("linkvideo",post.getChitietbaiviet().getLinkVideo());
+        }else{
+            System.out.println("video is null!");
+        }
+        List<BaiVietEntity> list = bVietDao.getRelatePost(post.getChitietbaiviet().getTinhtp());
+        for(int i = 0;i<list.size();i++){
+            if(list.get(i).getMabaiviet() == post.getMabaiviet()){
+                list.remove(i);
+            }
+        }
         model.addAttribute("relatePost",list);
         return "Posts/DetailPage";
     }
