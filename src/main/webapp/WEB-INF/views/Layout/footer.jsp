@@ -63,7 +63,7 @@
                         <li class="info-item">
                             <a target="_blank" href="https://www.facebook.com/leuleeu123" class="info-link">
                                 <i class="fa-brands fa-facebook"></i>
-                                <span>Mạnh có nyc</span>
+                                <span>Đức Mạnh</span>
                             </a>
                         </li>
                         <li class="info-item">

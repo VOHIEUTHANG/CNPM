@@ -443,14 +443,13 @@
                         <img src="<c:url value='/resources/assets/images/NoNoti.png'/>" alt="Không có thông báo nào cả"/>
                         <h3 style="margin: 20px 0;font-size: 2rem;text-align: center;">Bạn không có thông báo nào :( </h3>
                         </c:if>
-                        <div class="accordion" id="accordionExample">
-                             <c:forEach var="noti" items="${notiList}" >
+                         <div class="accordion" id="accordionExample">
+                             <c:forEach var="noti" items="${notiList}" varStatus="loop" >
                              <c:set var = "dadoc"  value = "${noti.getDaDoc()}"/>
                              ${dadoc ? "<div class='card readed'>":"<div class='card'>"}
-
-                                 <div class="card-header" id="heading${status.index}">
+                                 <div class="card-header" id="heading">
                                      <h2 class="mb-0">
-                                     <button class="btn btn-link btn-noti" style="text-align:left;" type="button" data-toggle="collapse" data-target="#collapse${status.idnex}" aria-expanded="true" aria-controls="collapseOne">
+                                     <button class="btn btn-link btn-noti" style="text-align:left;" type="button" data-toggle="collapse" data-target="#collapse${loop.index}" aria-expanded="true" aria-controls="collapseOne">
                                          ${noti.tieude}
                                      </button>
                                      </h2>
@@ -458,17 +457,17 @@
                                      <span>${noti.thoigian}</span>
                                      </div>
                                      <div class="title-full">
-                                       Đăng ký thành công tài khoản tại timtro.vn
+                                        ${noti.tieude}
                                      </div>
                                  </div>
-                                 <div id="collapse${status.index}" class="collapse" aria-labelledby="heading${status.index}" data-parent="#accordionExample">
+                                 <div id="collapse${loop.index}" class="collapse" aria-labelledby="heading" data-parent="#accordionExample">
                                      <div class="card-body">
                                      ${noti.noidung}
                                      </div>
                                  </div>
                                  </div>
                              </c:forEach>
-                        </div>
+                              </div>
                       </div>
                     </div>
                   </div>
