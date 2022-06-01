@@ -177,6 +177,9 @@ prefix="c"%> <%@ taglib prefix="tg" tagdir="/WEB-INF/tags"%>
                 type: "success",
                 duration: 5000,
               });
+              setTimeout(() => {
+                window.location.href = "./baiviet/index";
+              }, 2000);
             },
             error: function (data) {
               toast({

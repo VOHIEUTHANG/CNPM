@@ -72,12 +72,6 @@
                                 <span>Hiếu Thắng</span>
                             </a>
                         </li>
-                        <li class="info-item">
-                            <a target="_blank" href="https://www.facebook.com/huu.nguyenthanh.9275" class="info-link">
-                                <i class="fa-brands fa-facebook"></i>
-                                <span>Nguyễn Hữu</span>
-                            </a>
-                        </li>
                     </ul>
                 </div>
             </div>

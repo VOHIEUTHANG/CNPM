@@ -45,7 +45,7 @@ public class BaiVietController {
         }
         List<BaiVietEntity> list = bVietDao.getRelatePost(post.getChitietbaiviet().getTinhtp());
         for(int i = 0;i<list.size();i++){
-            if(list.get(i).getMabaiviet() == post.getMabaiviet()){
+            if(list.get(i).getMabaiviet().equals(post.getMabaiviet())){
                 list.remove(i);
             }
         }

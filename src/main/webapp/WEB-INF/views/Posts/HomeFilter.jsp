@@ -78,7 +78,7 @@
             <div class="range">
               <input
                 type="range"
-                max="30"
+                max="50"
                 min="0"
                 step="0.1"
                 value="0"
@@ -87,7 +87,7 @@
               />
               <input
                 type="range"
-                max="30"
+                max="50"
                 min="0"
                 step="0.1"
                 value="5"

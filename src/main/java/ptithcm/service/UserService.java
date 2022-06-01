@@ -51,6 +51,7 @@ public class UserService implements IUserService {
         nguoiDung.setEmail(email);
         nguoiDung.setTenND(fullName);
         nguoiDung.setSdt(phoneNumber);
+        nguoiDung.setLinkanhdaidien("../Storage/Images/default_avatar.jpg");
         tk.setTenDN(username);
         tk.setMatkhau(passwordEncoder.encode(password));
         int checkES=nguoiDungDao.checkEmailSdt(email,phoneNumber);
@@ -106,11 +107,10 @@ public class UserService implements IUserService {
                     helper.setSubject("Quên mật khẩu");
                     String content= "Xin chào" +
                             "<p>Vui lòng click vào link bên dưới để đổi mật khẩu mới:</p>" +
-                            "<p><a href='" + link+ token+
-                            "'>Change my password</a></p>" +
-                            "<br>" +
-                            "<p>Ignore this email if you do remember your password," +
-                            " you have not made the request.</p>";
+                            "<p>Ấn để đổi mật khẩu <a href='" + link+ token+
+                            "'></a></p>" +
+                            "<br>"
+                            ;
                     helper.setText(content,true);
                     mailSender.send(mail);
                 }

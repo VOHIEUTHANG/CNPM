@@ -59,7 +59,15 @@ public class AdminController {
     //biểu đồ
     @RequestMapping(value = "bieudo", method = RequestMethod.GET)
     public String bieuDo(HttpServletRequest request, ModelMap model) {
-    	return"Admin/bieudo";
+		NguoiDungDao userDao = new NguoiDungDao();
+		String username= userService.currentUserName();
+		TaiKhoanEntity tk= userDao.findByUserName(username);
+		if(tk != null) {
+			model.addAttribute("user",tk.getNguoidung());
+		}else{
+			System.out.println("Account is not found!");
+		}
+		return"Admin/bieudo";
     }
     // thống kê số lượng bài đăng
     @RequestMapping( value ="quanlybaidang", method = RequestMethod.GET)
@@ -275,6 +283,15 @@ public class AdminController {
     @RequestMapping(value = "GopY", method = RequestMethod.GET)
     public String gopY(HttpServletRequest request, ModelMap model) {
     	List<GopYEntity> Gopy = this.getGopY();
+
+		NguoiDungDao userDao = new NguoiDungDao();
+		String username= userService.currentUserName();
+		TaiKhoanEntity tk= userDao.findByUserName(username);
+		if(tk != null) {
+			model.addAttribute("user",tk.getNguoidung());
+		}else{
+			System.out.println("Account is not found!");
+		}
     	
     	int page = ServletRequestUtils.getIntParameter(request, "p" , 0);
     	PagedListHolder pagedListHolder = new PagedListHolder(Gopy);
@@ -297,6 +314,15 @@ public class AdminController {
     @RequestMapping(value = "ThongBao", method = RequestMethod.GET)
     public String thongBao(HttpServletRequest request, ModelMap model) {
     	List<ThongBaoEntity> Thongbao = this.getThongBao();
+
+		NguoiDungDao userDao = new NguoiDungDao();
+		String username= userService.currentUserName();
+		TaiKhoanEntity tk= userDao.findByUserName(username);
+		if(tk != null) {
+			model.addAttribute("user",tk.getNguoidung());
+		}else{
+			System.out.println("Account is not found!");
+		}
     	
     	int page = ServletRequestUtils.getIntParameter(request, "p" , 0);
     	PagedListHolder pagedListHolder = new PagedListHolder(Thongbao);

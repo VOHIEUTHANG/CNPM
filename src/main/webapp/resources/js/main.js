@@ -4,16 +4,17 @@ window.onload = ()=>{
       const loginCloseBtn = document.querySelector(".btn-close");
       const loginOverlay = document.querySelector(".overlay-login");
       const formLogin = document.querySelector(".login .form");
+
       loginBtn.onclick = () => {
         loginForm.classList.add("active");
       };
       loginCloseBtn.onclick = (e) => {
         loginForm.classList.remove("active");
       };
-      loginOverlay.onclick = () => {
+      loginOverlay.onmousedown = () => {
         loginForm.classList.remove("active");
       };
-      formLogin.onclick = (e) => {
+      formLogin.onmousedown = (e) => {
         e.stopPropagation();
       };
 }

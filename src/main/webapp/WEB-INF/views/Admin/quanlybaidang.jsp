@@ -140,6 +140,7 @@
                         <th>Trạng thái</th>
                         <th>Ngày tạo</th>
                         <th>Xác nhận</th>
+                        <th>Xóa</th>
                       </tr>
                     </thead>
                     <tfoot>
@@ -151,7 +152,7 @@
                         <th>Trạng thái</th>
                         <th>Ngày tạo</th>
                         <th>Xác nhận</th>
-                        <th></th>
+                        <th>Xóa</th>
                       </tr>
                     </tfoot>
                     <tbody>

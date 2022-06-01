@@ -445,8 +445,14 @@
                         </c:if>
                          <div class="accordion" id="accordionExample">
                              <c:forEach var="noti" items="${notiList}" varStatus="loop" >
-                             <c:set var = "dadoc"  value = "${noti.getDaDoc()}"/>
-                             ${dadoc ? "<div class='card readed'>":"<div class='card'>"}
+                             <c:choose>
+                             <c:when test="${noti.getDaDoc()}">
+                              <div class="card readed" data-id="${noti.matb}" >
+                             </c:when>
+                             <c:when test="${!noti.getDaDoc()}">
+                              <div class="card" data-id="${noti.matb}" >
+                             </c:when>
+                             </c:choose>
                                  <div class="card-header" id="heading">
                                      <h2 class="mb-0">
                                      <button class="btn btn-link btn-noti" style="text-align:left;" type="button" data-toggle="collapse" data-target="#collapse${loop.index}" aria-expanded="true" aria-controls="collapseOne">
@@ -485,6 +491,28 @@
 
           <script src="<c:url value='/resources/js/user.js'/>"></script>
           <script src="<c:url value='/resources/js/signedIn.js'/>"></script>
+          <script>
+          $(".card:not(.readed)").click(function(){
+           const formData = new FormData();
+           formData.append("id", JSON.stringify({id:this.dataset.id}));
+           console.log(this.dataset.id);
+            $.ajax({
+              url: '../api/post-set-readed',
+              type: "POST",
+              data: formData,
+              enctype: "multipart/form-data",
+              processData: false,
+              contentType: false,
+              cache: false,
+              success: function (data) {
+               console.log("set readed success!");
+              },
+              error: function () {
+                console.log("set readed error!");
+              },
+            });
+          })
+          </script>
         </body>
 
         </html>

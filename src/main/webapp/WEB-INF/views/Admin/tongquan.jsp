@@ -42,7 +42,7 @@
         <div id="content">
           <!-- Topbar -->
           <nav
-            class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
+            class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" style="margin-bottom:0;"
           >
             <!-- Sidebar Toggle (Topbar) -->
             <button
@@ -104,46 +104,12 @@
           <!-- End of Topbar -->
  <!-- Begin Page Content -->
                 <div class="container-fluid">
-
                     <!-- Content Row -->
-                    <div class="row">
+                    <blockquote class="blockquote text-center" style="background-color: white;padding: 20px 0;border-bottom:5px solid #26bac9; margin-bottom:40px">
+                      <p class="h1">THỐNG KÊ & BIỂU ĐỒ</p>
+                    </blockquote>
 
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Số lượng bài viết (tháng)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">25</div>
-                                        </div>
-                                        <div class="col-auto">
-                                           <i class="fas fa-newspaper fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Số lượng bài viết (Năm)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">900</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-newspaper fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                    <div class="row" style="display:flex;justify-content:center;">
                         <!-- số lượng user -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-info shadow h-100 py-2">
@@ -217,7 +183,37 @@
                             </div>
                         </div>
                     </div> --%>
-                    
+
+                              <div class="row">
+                                <div class="col-xl-8 col-lg-7" style="margin:20px auto;">
+                                  <!-- Bar Chart -->
+                                  <div class="card shadow mb-4">
+                                    <div class="card-body" style="min-height:600px">
+                                      <input type="number" id="year" min="1900" max="2099" step="1" value="2022" oninput="reload()" />
+                                      <div class="chart-bar">
+                                        <canvas id="myBarChart" style="pointer-events: none"></canvas>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                                      <div class="row">
+                                        <div class="col-xl-8 col-lg-8"  style="margin:20px auto;">
+                                          <!-- Bar Chart -->
+                                          <div class="card shadow mb-6">
+                                            <div class="card-body" style="min-height:600px">
+                                              <input type="number" id="year2" min="1900" max="2099" step="1" value="2022"
+                                                oninput="gettheothang()" />
+                                              <input type="number" id="month" min="1" max="12" step="1" value="5" oninput="gettheothang()" />
+                                              <div class="chart-bar">
+                                                <canvas id="CharMonth" style="pointer-events: none"></canvas>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+
 
                 </div>
                 <!-- /.container-fluid -->
@@ -271,6 +267,9 @@
     </script>
    
     <script src="<c:url value='/resources/js/admin/global.js'/>"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+        <script src="<c:url value= '/resources/js/admin/bieudonam.js'/>"></script>
+        <script src="<c:url value= '/resources/js/admin/bieudothang.js'/>"></script>
     <!-- End of Page Wrapper -->
 </body>
 </html>

@@ -477,6 +477,25 @@ public class AjaxAPIController {
             return "0";
     }
 
+    @RequestMapping(value = "/post-set-readed", method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
+    @ResponseBody
+    public String setReaded(HttpServletRequest req) throws IOException {
+        JSONObject data= new JSONObject(req.getParameter("id"));
+        String notiID = data.getString("id");
+        ThongBaoDao tbd = new ThongBaoDao();
+        List <ThongBaoEntity> notiList = tbd.getTBFromID(notiID);
+        if(notiList.size() > 0){
+            ThongBaoEntity noti = notiList.get(0);
+            noti.setDaDoc(true);
+            int result = tbd.updateTB(noti);
+            if(result==1){
+                System.out.println("Set readed success!");
+                return "1";
+            }
+        }
+        return "0";
+    }
+
     @RequestMapping("/trangchu")
     public String filtervalue(ModelMap model){
         model.addAttribute("province",province_global_variable);

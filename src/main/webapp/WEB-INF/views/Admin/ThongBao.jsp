@@ -3,6 +3,7 @@
 <%@ taglib prefix="tg" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix = "c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +21,7 @@
       href="<c:url value= '/resources/vendor/fontawesome-free/css/all.min.css'/>"
       rel="stylesheet"
       type="text/css"
-    /> 
+    />
 <!-- Google Fonts -->
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap");
@@ -164,10 +165,12 @@
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  <span class="mr-2 d-none d-lg-inline text-gray-600 small"
-                    >Văn Châu</span
-                  >
-                  <i class="fas fa-user-circle fa-2x text-gray-300"></i>
+                      <span class="mr-2 d-none d-lg-inline text-gray-600 small"
+                                      >${user.tenND}</span
+                                    >
+                                    <div style="width:40px;height:40px;border-radius:50%;overflow:hidden;">
+                                                      <img style="width: 100%;height: 100%;object-fit:cover" src="${user.linkanhdaidien}"/>
+                                                      </div>
                 </a>
                 <!-- Dropdown - User Information -->
                 <div
@@ -202,7 +205,7 @@
 <!-- Begin Page Content -->
 		 <div class="container-fluid">
 		 <jsp:useBean id="thongbao" scope="request"
-                        type="org.springframework.beans.support.PagedListHolder" /> 
+                        type="org.springframework.beans.support.PagedListHolder" />
                         <c:url value="" var="pagedLink">
                         <c:param name="p" value="~" />
                        </c:url>
@@ -302,7 +305,7 @@
                     </div>
                     <div class="form-group">
                       <label for="userID" class="col-form-label">
-                        Địa chỉ email người nhận</label> 
+                        Địa chỉ email người nhận</label>
                       <input type="email" name="to" class="form-control" id="notiEmail" />
                     </div>
                     <div class="form-group">
@@ -343,7 +346,6 @@
           <a class="scroll-to-top rounded" href="#page-top">
               <i class="fas fa-angle-up"></i>
             </a>
-
     <script>
           $(() => {
             const notiContent = $("#noti-content");
@@ -359,6 +361,5 @@
             });
           });
     </script>
-    <!-- End of Page Wrapper -->
 </body>
 </html>
