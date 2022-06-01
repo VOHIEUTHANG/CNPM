@@ -31,7 +31,8 @@
   </head>
 
   <body>
-    <div id="form-login" class="form-login active iso-form" style="backdrop-filter: blur(2px) brightness(90%);")>
+    <div id="form-login" class="form-login active iso-form" style="backdrop-filter: blur(2px) brightness(90%);position:relative")>
+    <div style="position:absolute;top:20px;left:20px;color:white;font-size:2rem ;z-index:1000"><a href="./baiviet/index"><i class="fa-solid fa-house"></i> Home</a></div>
      <form action="${pageContext.request.contextPath}/login" method="post">
       <div
         class="overlay-login"

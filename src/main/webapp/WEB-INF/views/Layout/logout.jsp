@@ -71,7 +71,7 @@ pageEncoding="UTF-8" %>
       <div class="custom-toast-content">
         <h3 class="heading">Đăng xuất thành công, về trang chủ trong</h3>
         <div class="body">
-          <div class="text-center">3</div>
+          <div class="text-center">0</div>
         </div>
       </div>
     </div>
@@ -88,11 +88,11 @@ pageEncoding="UTF-8" %>
             text.text(--time);
             if (time === 0) {
               clearInterval(IntervalID);
-              window.location.href = "../";
+              window.location.href = "../login";
             }
           }, 1000);
         }
-        timeout(3);
+        timeout(1);
     </script>
   </body>
 </html>
