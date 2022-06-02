@@ -330,7 +330,7 @@
                                              <span class="post-price-value">${item.gia} triệu/tháng</span>
                                          </div>
                                          <div class="post-lessor">
-                                             <a href= "../nguoidung/trangcanhan">
+                                             <a href= "#">
                                                  <div class="pl-info">
                                                      <div class="pl-img">
                                                          <img src="../${item.nguoidung.linkanhdaidien}" alt="hình đại diện">
@@ -351,28 +351,7 @@
                     </div>
                     <div class="right-content">
                     <div class="main-sidebar">
-                        <div class="ms-section ms-category">
-                            <h3 class="ms-title">Danh mục cho thuê</h3>
-                            <div class="ms-content">
-                                <ul class="msc-list">
-                                    <li class="msc-item">
-                                        <a href="#" class="msc-link">Cho thuê phòng trọ</a>
-                                    </li>
-                                    <li class="msc-item">
-                                        <a href="#" class="msc-link">Cho thuê nhà nguyên căn</a>
-                                    </li>
-                                    <li class="msc-item">
-                                        <a href="#" class="msc-link">Cho thuê căn hộ</a>
-                                    </li>
-                                    <li class="msc-item">
-                                        <a href="#" class="msc-link">Cho thuê mặt bằng</a>
-                                    </li>
-                                    <li class="msc-item">
-                                        <a href="#" class="msc-link">Tìm người ở ghép</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+
                         <div class="ms-section ms-prices">
                             <h3 class="ms-title">Xem theo giá</h3>
                             <div class="ms-content">
@@ -470,11 +449,6 @@
                                     </li>
 
                                 </ul>
-                            </div>
-                        </div>
-                        <div class="ms-advertisement">
-                            <div class="msa-img">
-                                <img src="https://phongtro123.com/images/ad_nhom_fb.jpg" alt="">
                             </div>
                         </div>
                     </div>

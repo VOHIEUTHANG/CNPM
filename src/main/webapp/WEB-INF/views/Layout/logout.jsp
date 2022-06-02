@@ -67,7 +67,7 @@ pageEncoding="UTF-8" %>
     </style>
   </head>
   <body>
-    <div id="myCustomToast">
+    <div id="myCustomToast" class="active">
       <div class="custom-toast-content">
         <h3 class="heading">Đăng xuất thành công, về trang chủ trong</h3>
         <div class="body">
@@ -81,18 +81,7 @@ pageEncoding="UTF-8" %>
       crossorigin="anonymous"
     ></script>
     <script>
-        const text = $(".custom-toast-content > .body > .text-center");
-        $("#myCustomToast").addClass("active");
-        function timeout(time = 3) {
-          const IntervalID = setInterval(() => {
-            text.text(--time);
-            if (time === 0) {
-              clearInterval(IntervalID);
-              window.location.href = "../login";
-            }
-          }, 1000);
-        }
-        timeout(1);
+    window.location.href = "../login";
     </script>
   </body>
 </html>

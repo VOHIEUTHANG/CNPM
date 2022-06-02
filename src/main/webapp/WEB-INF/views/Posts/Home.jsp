@@ -20,6 +20,12 @@
     <!-- google fonts -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+    </style>
+    <style>
+       input{
+       outline:none !important;
+       }
     </style>
     <title>Thuê nhà trọ</title>
 </head>
@@ -46,7 +52,12 @@
         <hr />
         <form action="" style="font-size: 17px">
           <div class="form-group">
-            <label for="">Tỉnh - Thành phố</label>
+            <label >
+            <div class="form-check form-switch">
+            <label class="form-check-label" for="province_status">Tỉnh - Thành phố</label>
+            <input class="form-check-input" type="checkbox" role="switch" id="province_status" checked>
+            </div>
+            </label>
             <select
               id="filter-province"
               style="
@@ -61,7 +72,12 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="">Quận - Huyện</label>
+            <label>
+            <div class="form-check form-switch">
+            <label class="form-check-label" for="district_status">Quận - Huyện</label>
+            <input class="form-check-input" type="checkbox" role="switch" id="district_status" checked>
+            </div>
+            </label>
             <select
               id="filter-district"
               style="
@@ -74,7 +90,12 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="form-label">Giá</label>
+            <label>
+            <div class="form-check form-switch">
+            <label class="form-check-label" for="price_status">Giá</label>
+            <input class="form-check-input" type="checkbox" role="switch" id="price_status" checked>
+            </div>
+            </label>
             <div class="range">
               <input
                 type="range"
@@ -104,7 +125,12 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="form-label">Diện tích</label>
+            <label>
+            <div class="form-check form-switch">
+            <label class="form-check-label" for="area_status">Diện Tích</label>
+            <input class="form-check-input" type="checkbox" role="switch" id="area_status" checked>
+            </div>
+            </label>
             <div class="range">
               <input
                 type="range"
@@ -330,15 +356,19 @@
                                              <span class="post-price-value">${item.gia} triệu/tháng</span>
                                          </div>
                                          <div class="post-lessor">
-                                             <a href= "../nguoidung/trangcanhan">
+                                             <div >
                                                  <div class="pl-info">
                                                      <div class="pl-img">
                                                          <img src="${item.nguoidung.linkanhdaidien}" alt="hình đại diện">
                                                      </div>
                                                      <span>${item.nguoidung.tenND}</span>
                                                  </div>
+                                             </div>
+                                             <button class="button">Gọi
+                                             <a href="tel:+${item.nguoidung.sdt}" style="color: inherit">
+                                             ${item.nguoidung.sdt}
                                              </a>
-                                             <button class="button">Gọi ${item.nguoidung.sdt}</button>
+                                             </button>
                                          </div>
                                      </div>
                                  </li>

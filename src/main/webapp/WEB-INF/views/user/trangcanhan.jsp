@@ -462,7 +462,7 @@
                                      <div class="time-label">
                                      <span>${noti.thoigian}</span>
                                      </div>
-                                     <div class="title-full">
+                                     <div class="title-full" style="user-select:none;pointer-events: none;">
                                         ${noti.tieude}
                                      </div>
                                  </div>

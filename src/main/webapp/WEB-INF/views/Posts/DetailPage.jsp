@@ -299,7 +299,7 @@
                             </div>
                             <div class="ms-advertisement">
                                 <div class="msa-img">
-                                    <img src="https://images.wallpaperscraft.com/image/single/bmw_vision_efficientdynamics_concept_front_view_97571_1280x1280.jpg"
+                                    <img src="https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8bGl2aW5nJTIwcm9vbXxlbnwwfHwwfHw%3D&w=1000&q=80"
                                         alt="">
                                 </div>
                             </div>

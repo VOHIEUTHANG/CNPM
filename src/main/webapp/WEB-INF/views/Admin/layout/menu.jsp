@@ -62,17 +62,5 @@
             <span>Quảng cáo</span></a
           >
         </li> -->
-        <li class="nav-item">
-          <a class="nav-link" href="bieudo.html">
-            <i class="fas  fa-chart-area text-gray-300"></i>
-            <span>Biểu đồ</span></a
-          >
-        </li>
-        <hr class="sidebar-divider d-none d-md-block" />
-
-        <!-- Sidebar Toggler (Sidebar) -->
-        <div class="text-center d-none d-md-inline">
-          <button class="rounded-circle border-0" id="sidebarToggle"></button>
-        </div>
       </ul>
       <!-- End of Sidebar -->
