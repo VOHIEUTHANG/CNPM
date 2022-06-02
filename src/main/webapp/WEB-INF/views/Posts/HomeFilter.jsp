@@ -21,6 +21,17 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
     </style>
+        <style>
+           input{
+           outline:none !important;
+           }
+           .toast:not(.show) {
+               display: flex;
+           }
+           .toast__title{
+           margin: 10px 0;
+           }
+        </style>
     <title>Thuê nhà trọ</title>
 </head>
 <body id="app" onload="loginHandler()">
@@ -31,7 +42,7 @@
        <span>Lọc</span>
       </div>
     </div>
-    <div class="filter">
+<div class="filter">
       <div class="filter-container">
         <h3
           class="text-center"
@@ -46,7 +57,12 @@
         <hr />
         <form action="" style="font-size: 17px">
           <div class="form-group">
-            <label for="">Tỉnh - Thành phố</label>
+            <label >
+            <div class="form-check form-switch">
+            <label class="form-check-label" for="province_status">Tỉnh - Thành phố</label>
+            <input class="form-check-input" type="checkbox" role="switch" id="province_status" checked>
+            </div>
+            </label>
             <select
               id="filter-province"
               style="
@@ -61,7 +77,12 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="">Quận - Huyện</label>
+            <label>
+            <div class="form-check form-switch">
+            <label class="form-check-label" for="district_status">Quận - Huyện</label>
+            <input class="form-check-input" type="checkbox" role="switch" id="district_status" checked>
+            </div>
+            </label>
             <select
               id="filter-district"
               style="
@@ -74,7 +95,12 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="form-label">Giá</label>
+            <label>
+            <div class="form-check form-switch">
+            <label class="form-check-label" for="price_status">Giá</label>
+            <input class="form-check-input" type="checkbox" role="switch" id="price_status" checked>
+            </div>
+            </label>
             <div class="range">
               <input
                 type="range"
@@ -104,7 +130,12 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="form-label">Diện tích</label>
+            <label>
+            <div class="form-check form-switch">
+            <label class="form-check-label" for="area_status">Diện Tích</label>
+            <input class="form-check-input" type="checkbox" role="switch" id="area_status" checked>
+            </div>
+            </label>
             <div class="range">
               <input
                 type="range"

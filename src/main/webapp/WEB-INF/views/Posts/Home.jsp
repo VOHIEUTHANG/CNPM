@@ -26,6 +26,12 @@
        input{
        outline:none !important;
        }
+       .toast:not(.show) {
+           display: flex;
+       }
+       .toast__title{
+       margin: 10px 0;
+       }
     </style>
     <title>Thuê nhà trọ</title>
 </head>

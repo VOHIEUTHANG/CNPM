@@ -13,7 +13,7 @@
                             <input type="password" name="password" placeholder="Mật khẩu">
                             <div class="login-sub-option">
                                 <a href="${pageContext.request.contextPath}/forgotpass">Quên mật khẩu?</a>
-                                <a href="${pageContext.request.contextPath}/dangky">Tạo tài khoản mới!</a>
+                                <a href="${pageContext.request.contextPath}/dangki">Tạo tài khoản mới!</a>
                             </div>
                             <button type= "submit"class="button button--submit active">Đăng nhập</button>
                         </div>

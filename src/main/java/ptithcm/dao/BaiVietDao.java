@@ -102,7 +102,6 @@ public class BaiVietDao {
 		}
 
 	}
-
 	public List<BaiVietEntity> getFilterPost(
 			 String province
 			,String district
@@ -116,17 +115,44 @@ public class BaiVietDao {
 			boolean isProvinceFilter = false;
 			boolean isDistrictFilter = false;
 
-			String hql="from BaiVietEntity" +
-					" where gia >= "+ priceFrom + " and gia <= " + priceTo
-					+ " and dientich >= " + areaFrom + " and dientich <= " + areaTo;
+			String hql="from BaiVietEntity where";
 
-			if(province.length() > 0){
-				isProvinceFilter = true;
-				hql = hql + " and chitietbaiviet.tinhtp = ?1";
+			if(!priceTo.equals("0")){
+				hql+=" gia >= "+ priceFrom + " and gia <= " + priceTo;
 			}
-			if (district.length() > 0) {
-				isDistrictFilter = true;
-				hql = hql + " and chitietbaiviet.quanhuyen = ?2";
+
+			if(!areaTo.equals("0") && !priceTo.equals("0")){
+				hql+=" and dientich >= " + areaFrom + " and dientich <= " + areaTo;
+			}
+
+			if(!areaTo.equals("0") && priceTo.equals("0")){
+				hql+=" dientich >= " + areaFrom + " and dientich <= " + areaTo;
+			}
+
+			if(priceTo.equals("0") && areaTo.equals("0")){
+				if(province.length() > 0){
+					isProvinceFilter = true;
+					hql = hql + " chitietbaiviet.tinhtp = ?1";
+
+					if (district.length() > 0) {
+						isDistrictFilter = true;
+						hql = hql + " and chitietbaiviet.quanhuyen = ?2";
+					}
+				}else{
+					if (district.length() > 0) {
+						isDistrictFilter = true;
+						hql = hql + "chitietbaiviet.quanhuyen = ?2";
+					}
+				}
+			}else{
+				if(province.length() > 0){
+					isProvinceFilter = true;
+					hql = hql + " and chitietbaiviet.tinhtp = ?1";
+				}
+				if (district.length() > 0) {
+					isDistrictFilter = true;
+					hql = hql + " and chitietbaiviet.quanhuyen = ?2";
+				}
 			}
 
 			Query query = session.createQuery(hql);
@@ -136,6 +162,8 @@ public class BaiVietDao {
 			if(isDistrictFilter){
 				query.setParameter(2,district);
 			}
+
+			System.out.println(hql);
 			return query.list();
 		}
 		catch(Exception e){
