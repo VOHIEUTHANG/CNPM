@@ -190,6 +190,37 @@ public class BaiVietDao {
 		}
 	}
 
+	public List<BaiVietEntity> getFilterPostByPrice(String startPrice,String endPrice) {
+		Session session= HibernateUtil.getSessionFactory().openSession();
+		try  {
+			String hql="from BaiVietEntity where gia >= "+ startPrice + " and gia <= " + endPrice;
+			System.out.println(hql);
+			Query query = session.createQuery(hql);
+			return query.list();
+		}
+		catch(Exception e){
+			return null;
+		}
+		finally{
+			session.close();
+		}
+	}
+
+	public List<BaiVietEntity> getFilterPostByArea(String startArea,String endArea) {
+		Session session= HibernateUtil.getSessionFactory().openSession();
+		try  {
+			String hql="from BaiVietEntity where dientich >= "+ startArea + " and dientich <= " + endArea;
+			Query query = session.createQuery(hql);
+			return query.list();
+		}
+		catch(Exception e){
+			return null;
+		}
+		finally{
+			session.close();
+		}
+	}
+
 	public  int UpdateBaiViet (BaiVietEntity bv){
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		BaiVietEntity updatePost = (BaiVietEntity) session.merge(bv);

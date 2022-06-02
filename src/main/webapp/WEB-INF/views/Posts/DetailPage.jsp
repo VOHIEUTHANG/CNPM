@@ -197,8 +197,8 @@
                                  <div class="card">
                                     <div class="card-body">
                                       <h5 class="card-title" style="font-size: 2rem;margin-bottom: 10px;">Thông tin liên hệ</h5>
-                                      <p class="card-text">Email: ${user.email}</p>
-                                      <p class="card-text">Số điện thoại liên hệ: ${user.sdt}</p>
+                                      <p class="card-text">Email: ${baiviet.nguoidung.email}</p>
+                                      <p class="card-text">Số điện thoại liên hệ: ${baiviet.nguoidung.sdt}</p>
                                     </div>
                                   </div>
                                 <div class="di-report" style="margin-top: 30px;">

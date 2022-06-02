@@ -296,14 +296,11 @@ const sendValue = (province) => {
     contentType: false,
     cache: false,
     success: function (res) {
-      console.log(res);
-      if (window.location.href.endsWith("/filter")) {
-        window.location.href = window.location.href + "-province";
-      } else if (window.location.href.endsWith("/filter-province")) {
-        window.location.reload();
-      } else {
-        window.location.href = window.location.href + "/filter-province";
-      }
+    if(window.location.href.includes("/index/filter")){
+    window.location.reload();
+    }else{
+    window.location.href = "./index/filter";
+    }
     },
     error: function () {
       toast({
@@ -315,3 +312,71 @@ const sendValue = (province) => {
     },
   });
 };
+
+const sendPriceValue = (priceFrom,priceTo) => {
+  const formData = new FormData();
+  formData.append("price", JSON.stringify({ priceFrom,priceTo }));
+  let URL = "./post-filter-by-price";
+  if (window.location.href.includes("/filter")) {
+    URL = "../post-filter-by-price";
+  }
+  $.ajax({
+    url: URL,
+    type: "POST",
+    data: formData,
+    enctype: "multipart/form-data",
+    processData: false,
+    contentType: false,
+    cache: false,
+    success: function (res) {
+    if(window.location.href.includes("/index/filter")){
+    window.location.reload();
+    }else{
+    window.location.href = "./index/filter";
+    }
+    },
+    error: function () {
+      toast({
+        title: "Có lỗi xảy ra khi gửi request về server !",
+        message: "Vui lòng liên hệ quản trị viên để giải quyết !",
+        type: "error",
+        duration: 5000,
+      });
+    },
+  });
+};
+
+const sendAreaValue = (areaFrom,areaTo) => {
+  const formData = new FormData();
+  formData.append("area", JSON.stringify({ areaFrom,areaTo }));
+  let URL = "./post-filter-by-area";
+  if (window.location.href.includes("/filter")) {
+    URL = "../post-filter-by-area";
+  }
+  $.ajax({
+    url: URL,
+    type: "POST",
+    data: formData,
+    enctype: "multipart/form-data",
+    processData: false,
+    contentType: false,
+    cache: false,
+    success: function (res) {
+    if(window.location.href.includes("/index/filter")){
+    window.location.reload();
+    }else{
+    window.location.href = "./index/filter";
+    }
+    },
+    error: function () {
+      toast({
+        title: "Có lỗi xảy ra khi gửi request về server !",
+        message: "Vui lòng liên hệ quản trị viên để giải quyết !",
+        type: "error",
+        duration: 5000,
+      });
+    },
+  });
+};
+
+

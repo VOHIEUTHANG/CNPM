@@ -22,8 +22,8 @@ import ptithcm.service.UserService;
 @Controller
 @RequestMapping("/baiviet")
 public class BaiVietController {
-    boolean isFilter = false,isFilterByProvince = false,isFilterByOption = false;
-    String provinceGl,districtGl,priceFromGl,priceToGl,areaFromGl,areaToGl,provinceIsoGl,filterOption;
+    boolean isFilter = false,isFilterByProvince = false,isFilterByOption = false,isFilterByPrice = false,isFilterByArea = false;
+    String provinceGl,districtGl,priceFromGl,priceToGl,areaFromGl,areaToGl,provinceIsoGl,filterOption,priceFromIsoGl,priceToIsoGl,areaFromIsoGl,areaToIsoGl;
     @Autowired
     private UserService userService;
     @RequestMapping("/chitiet/{id}")
@@ -101,6 +101,32 @@ public class BaiVietController {
         return "0";
     }
 
+    @RequestMapping(value = "/post-filter-by-price",method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
+    @ResponseBody
+    public String getFilterPriceValue(HttpServletRequest request)throws IOException {
+        JSONObject data= new JSONObject(request.getParameter("price"));
+        if(data!=null){
+            isFilterByPrice = true;
+            priceFromIsoGl = data.getString("priceFrom");
+            priceToIsoGl = data.getString("priceTo");
+            return "1";
+        }
+        return "0";
+    }
+
+    @RequestMapping(value = "/post-filter-by-area",method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
+    @ResponseBody
+    public String getFilterAreaValue(HttpServletRequest request)throws IOException {
+        JSONObject data= new JSONObject(request.getParameter("area"));
+        if(data!=null){
+            isFilterByArea = true;
+            areaFromIsoGl = data.getString("areaFrom");
+            areaToIsoGl = data.getString("areaTo");
+            return "1";
+        }
+        return "0";
+    }
+
     @RequestMapping(value = "/post-filter-by-option",method = RequestMethod.POST, produces = "text/html;charset=UTF-8;multipart/form-data")
     @ResponseBody
     public String getFilterOption(HttpServletRequest request)throws IOException {
@@ -108,7 +134,8 @@ public class BaiVietController {
         if(data!=null){
             isFilterByOption = true;
             filterOption = data.getString("data");
-            System.out.println(filterOption);
+            System.out.println("line 124"+filterOption);
+            System.out.println("line 125"+ isFilterByOption);
             return "1";
         }
         return "0";
@@ -116,6 +143,7 @@ public class BaiVietController {
 
     @RequestMapping("/index/filter")
     public String getFilterPage(ModelMap model,HttpServletRequest request){
+        System.out.println("=====================================================");
         BaiVietDao bVietDao =new BaiVietDao();
         NguoiDungDao userDao = new NguoiDungDao();
         List<BaiVietEntity> list = bVietDao.getAll();
@@ -123,34 +151,26 @@ public class BaiVietController {
         TaiKhoanEntity tk= userDao.findByUserName(username);
         if(tk != null) {
             model.addAttribute("user",tk.getNguoidung());
+        }
+        if(isFilterByOption){
+            list = bVietDao.sortPost(filterOption);
+            isFilterByOption =false;
         }
         if(isFilter){
             list = bVietDao.getFilterPost(provinceGl,districtGl,priceFromGl,priceToGl,areaFromGl,areaToGl);
-        }
-
-        int page= ServletRequestUtils.getIntParameter( request,"p",0);
-
-        PagedListHolder pagedListHolder =new PagedListHolder(list);
-        pagedListHolder.setPage(page);
-        pagedListHolder.setMaxLinkedPages(5);
-        pagedListHolder.setPageSize(5);
-
-        model.addAttribute("baiviet", pagedListHolder);
-        return "Posts/HomeFilter";
-    }
-
-    @RequestMapping("/index/filter-province")
-    public String getFilterPageByProvince(ModelMap model,HttpServletRequest request){
-        BaiVietDao bVietDao =new BaiVietDao();
-        NguoiDungDao userDao = new NguoiDungDao();
-        List<BaiVietEntity> list = bVietDao.getAll();
-        String username= userService.currentUserName();
-        TaiKhoanEntity tk= userDao.findByUserName(username);
-        if(tk != null) {
-            model.addAttribute("user",tk.getNguoidung());
+            isFilter = false;
         }
         if(isFilterByProvince){
             list = bVietDao.getFilterPostByProvince(provinceIsoGl);
+            isFilterByProvince  =false;
+        }
+        if(isFilterByPrice){
+            list = bVietDao.getFilterPostByPrice(priceFromIsoGl,priceToIsoGl);
+            isFilterByPrice = false;
+        }
+        if(isFilterByArea){
+            list = bVietDao.getFilterPostByArea(areaFromIsoGl,areaToIsoGl);
+            isFilterByArea = false;
         }
 
         int page= ServletRequestUtils.getIntParameter( request,"p",0);
@@ -163,5 +183,5 @@ public class BaiVietController {
         model.addAttribute("baiviet", pagedListHolder);
         return "Posts/HomeFilter";
     }
-    
+
 }

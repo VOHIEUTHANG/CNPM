@@ -32,6 +32,10 @@
        .toast__title{
        margin: 10px 0;
        }
+       .msp-item{
+       cursor:pointer;
+       color: var(--primary-color);
+       }
     </style>
     <title>Thuê nhà trọ</title>
 </head>
@@ -391,53 +395,53 @@
                             <h3 class="ms-title">Xem theo giá</h3>
                             <div class="ms-content">
                                 <ul class="msp-list">
-                                    <li class="msp-item">
-                                        <a href="#" class="msp-link">
+                                    <li class="msp-item" onclick="sendPriceValue('0','1')">
+                                        <div  class="msp-link">
                                             <i class="fa-solid fa-angle-right"></i>
                                             <span>Dưới 1 triệu</span>
-                                        </a>
+                                        </div>
                                     </li>
-                                    <li class="msp-item">
-                                        <a href="#" class="msp-link">
+                                    <li class="msp-item" onclick="sendPriceValue('1','2')">
+                                        <div class="msp-link">
                                             <i class="fa-solid fa-angle-right"></i>
                                             <span>Từ 1 - 2 triệu</span>
-                                        </a>
+                                        </div>
                                     </li>
-                                    <li class="msp-item">
-                                        <a href="#" class="msp-link">
+                                    <li class="msp-item" onclick="sendPriceValue('2','3')">
+                                        <div class="msp-link">
                                             <i class="fa-solid fa-angle-right"></i>
                                             <span>Từ 2 - 3 triệu</span>
-                                        </a>
+                                        </div>
                                     </li>
-                                    <li class="msp-item">
-                                        <a href="#" class="msp-link">
+                                    <li class="msp-item" onclick="sendPriceValue('3','5')">
+                                        <div class="msp-link">
                                             <i class="fa-solid fa-angle-right"></i>
                                             <span>Từ 3 - 5 triệu</span>
-                                        </a>
+                                        </div>
                                     </li>
-                                    <li class="msp-item">
-                                        <a href="#" class="msp-link">
+                                    <li class="msp-item" onclick="sendPriceValue('5','7')">
+                                        <div class="msp-link">
                                             <i class="fa-solid fa-angle-right"></i>
                                             <span>Từ 5 - 7 triệu</span>
-                                        </a>
+                                        </div>
                                     </li>
-                                    <li class="msp-item">
-                                        <a href="#" class="msp-link">
+                                    <li class="msp-item" onclick="sendPriceValue('7','10')">
+                                        <div class="msp-link">
                                             <i class="fa-solid fa-angle-right"></i>
                                             <span>Từ 7 - 10 triệu</span>
-                                        </a>
+                                        </div>
                                     </li>
-                                    <li class="msp-item">
-                                        <a href="#" class="msp-link">
+                                    <li class="msp-item" onclick="sendPriceValue('10','15')">
+                                        <div class="msp-link">
                                             <i class="fa-solid fa-angle-right"></i>
                                             <span>Từ 10 - 15 triệu</span>
-                                        </a>
+                                        </div>
                                     </li>
-                                    <li class="msp-item">
-                                        <a href="#" class="msp-link">
+                                    <li class="msp-item" onclick="sendPriceValue('15','200')">
+                                        <div class="msp-link">
                                             <i class="fa-solid fa-angle-right"></i>
                                             <span>Trên 15 triệu</span>
-                                        </a>
+                                        </div>
                                     </li>
                                 </ul>
                             </div>
@@ -446,43 +450,42 @@
                             <h3 class="ms-title">Xem theo diện tích</h3>
                             <div class="ms-content">
                                 <ul class="msp-list">
-                                    <li class="msp-item">
-                                        <a href="#" class="msp-link">
+                                    <li class="msp-item" onclick="sendAreaValue('0','20')">
+                                        <div class="msp-link">
                                             <i class="fa-solid fa-angle-right"></i>
                                             <span>Dưới 20 m2</span>
-                                        </a>
+                                        </div>
                                     </li>
-                                    <li class="msp-item">
-                                        <a href="#" class="msp-link">
+                                    <li class="msp-item" onclick="sendAreaValue('20','30')">
+                                        <div class="msp-link">
                                             <i class="fa-solid fa-angle-right"></i>
                                             <span>Từ 20 - 30 m2</span>
-                                        </a>
+                                        </div>
                                     </li>
-                                    <li class="msp-item">
-                                        <a href="#" class="msp-link">
+                                    <li class="msp-item" onclick="sendAreaValue('30','50')">
+                                        <div class="msp-link">
                                             <i class="fa-solid fa-angle-right"></i>
                                             <span>Từ 30 - 50 m2</span>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li class="msp-item">
-                                        <a href="#" class="msp-link">
+                                        <div class="msp-link" onclick="sendAreaValue('50','70')">
                                             <i class="fa-solid fa-angle-right"></i>
                                             <span>Từ 50 - 70 m2</span>
-                                        </a>
+                                        </div>
                                     </li>
-                                    <li class="msp-item">
-                                        <a href="#" class="msp-link">
+                                    <li class="msp-item" onclick="sendAreaValue('70','90')">
+                                        <div class="msp-link">
                                             <i class="fa-solid fa-angle-right"></i>
                                             <span>Từ 70 - 90 m2</span>
-                                        </a>
+                                        </div>
                                     </li>
-                                    <li class="msp-item">
-                                        <a href="#" class="msp-link">
+                                    <li class="msp-item" onclick="sendAreaValue('90','1000')">
+                                        <div class="msp-link">
                                             <i class="fa-solid fa-angle-right"></i>
                                             <span>Trên 90 m2</span>
-                                        </a>
+                                        </div>
                                     </li>
-
                                 </ul>
                             </div>
                         </div>
@@ -514,33 +517,34 @@
         const span = document.createElement('span');
         $(".post-list").text("Hiện tại không có bài viết nào để hiển thị !");
         }
-        const sendFilterValue = data =>{
-            const formData = new FormData();
-                formData.append("filter", JSON.stringify({ data:String(data) }));
-                let URL = "./post-filter-by-option";
-        $.ajax({
-                  url: URL,
-                  type: "POST",
-                  data: formData,
-                  enctype: "multipart/form-data",
-                  processData: false,
-                  contentType: false,
-                  cache: false,
-                  success: function (res) {
-                    if(res==1){
-                    window.location.reload();
-                    }
-                  },
-                  error: function () {
-                    toast({
-                      title: "Có lỗi xảy ra khi gửi request về server !",
-                      message: "Vui lòng liên hệ quản trị viên để giải quyết !",
-                      type: "error",
-                      duration: 5000,
-                    });
-                  },
-                });
-        }
+        const sendFilterValue = (data) => {
+          const formData = new FormData();
+          formData.append("filter", JSON.stringify({ data: String(data) }));
+          let URL = "./post-filter-by-option";
+          $.ajax({
+            url: URL,
+            type: "POST",
+            data: formData,
+            enctype: "multipart/form-data",
+            processData: false,
+            contentType: false,
+            cache: false,
+            success: function (res) {
+              if (res == 1) {
+                window.location.reload();
+              }
+            },
+            error: function () {
+              toast({
+                title: "Có lỗi xảy ra khi gửi request về server !",
+                message: "Vui lòng liên hệ quản trị viên để giải quyết !",
+                type: "error",
+                duration: 5000,
+              });
+            },
+          });
+        };
+
     </script>
 </body>
 </html>
